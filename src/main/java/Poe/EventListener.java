@@ -1,6 +1,5 @@
 package Poe;
 
-import Poe.Drawable.Drawable;
 import Poe.Engine.Renderer;
 import Poe.ResourceManager.ImageResource;
 import Poe.World.World;
@@ -12,13 +11,13 @@ import com.jogamp.opengl.GLEventListener;
 public class EventListener implements GLEventListener {
 
     public static GL2 gl = null;
-    public static ImageResource image = null;
+    //public static ImageResource image = null;
 
     public void init(GLAutoDrawable drawable) {
         gl = drawable.getGL().getGL2();
         gl.glClearColor(0, 0, 0, 1);
         gl.glEnable(GL2.GL_TEXTURE_2D);
-        image = new ImageResource("src/main/Resources/Images/playerShip.png");
+        //image = new ImageResource("src/main/Resources/Images/playerShip.png");
     }
 
     public void dispose(GLAutoDrawable drawable) {
