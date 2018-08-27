@@ -1,15 +1,24 @@
 package Poe;
 
-import com.jogamp.opengl.GL;
+import Poe.Drawable.Drawable;
+import Poe.Engine.Renderer;
+import Poe.ResourceManager.ImageResource;
+import Poe.World.World;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 
+
 public class EventListener implements GLEventListener {
 
+    public static GL2 gl = null;
+    public static ImageResource image = null;
+
     public void init(GLAutoDrawable drawable) {
-        GL gl = drawable.getGL().getGL2();
+        gl = drawable.getGL().getGL2();
         gl.glClearColor(0, 0, 0, 1);
+        gl.glEnable(GL2.GL_TEXTURE_2D);
+        image = new ImageResource("src/main/Resources/Images/playerShip.png");
     }
 
     public void dispose(GLAutoDrawable drawable) {
@@ -17,23 +26,19 @@ public class EventListener implements GLEventListener {
     }
 
     public void display(GLAutoDrawable drawable) {
-        GL gl = drawable.getGL().getGL2();
+        gl = drawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
-
-        ((GL2) gl).glColor3f(0.5f, 0, 0.5f);
-        ((GL2) gl).glBegin(GL2.GL_QUADS);
-        ((GL2) gl).glVertex2f(-0.5f, -0.5f);
-        ((GL2) gl).glVertex2f(0.5f, -0.5f);
-        ((GL2) gl).glVertex2f(0.5f, 0.5f);
-        ((GL2) gl).glVertex2f(-0.5f, 0.5f);
-
-        ((GL2) gl).glEnd();
+        World.render();
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-//        GL gl = drawable.getGL().getGL2();
-//        ((GL2) gl).glMatrixMode(GL2.GL_PROJECTION);
-//        ((GL2) gl).glLoadIdentity();
-//        ((GL2) gl).glOrtho();
+        gl = drawable.getGL().getGL2();
+        gl.glMatrixMode(GL2.GL_PROJECTION);
+        gl.glLoadIdentity();
+
+        float unitsTall = Renderer.getWindowHeight()/ (Renderer.getWindowWidth()/Renderer.unitsWide);
+
+        gl.glOrtho(-Renderer.unitsWide/2, Renderer.unitsWide/2, -unitsTall/2, unitsTall/2, -1, 1); //locations of Orthoscopic
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
     }
 }
