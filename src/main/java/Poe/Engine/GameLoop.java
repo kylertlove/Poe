@@ -29,6 +29,7 @@ public class GameLoop {
                 }
 
                 Renderer.render();
+                //To make updates seamless, take the remaining FPS time and thread sleep
                 long timeTake = System.nanoTime() - currentTime;
                 if(targetTime > timeTake) {
                     try {
@@ -44,7 +45,7 @@ public class GameLoop {
         thread.start();
     }
 
-    public static float updateDelta() {
+    public static float getDelta() {
         return 1.0f / 1000000000 * targetTime;
     }
 }

@@ -1,25 +1,22 @@
 package Poe.Models;
 
 import Poe.Drawable.Animation;
-import Poe.Drawable.Drawable;
 import Poe.Engine.GameLoop;
 import Poe.Input.KeyInput;
 import Poe.Input.MouseInput;
 import Poe.ResourceManager.ImageResource;
 import com.jogamp.newt.event.KeyEvent;
 
-import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
 
-
-public class Player extends GameObject {
+public class Player extends Entity {
 
     public Player() {
-        animations = new Animation[1];
-        animations[0] = new Animation();
-        animations[0].frames = new ImageResource[3];
-        animations[0].frames[0] = new ImageResource("src/main/Resources/Images/MC_Run_1.png");
-        animations[0].frames[1] = new ImageResource("src/main/Resources/Images/MC_Run_2.png");
-        animations[0].frames[2] = new ImageResource("src/main/Resources/Images/MC_Run_3.png");
+        animations = new ArrayList<>();
+        Animation walking = new Animation();
+        walking.frames = new ImageResource[1];
+        walking.frames[0] = new ImageResource("src/main/Resources/Images/Poe.png");
+        animations.add(walking);
     }
 
     @Override
@@ -40,9 +37,10 @@ public class Player extends GameObject {
             yInput -= 5;
         }
 
-        x += xInput * GameLoop.updateDelta();
-        y += yInput * GameLoop.updateDelta();
-
-        rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - x, MouseInput.getWorldY() - y));
+        X += xInput * GameLoop.getDelta();
+        Y += yInput * GameLoop.getDelta();
+        rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - X, MouseInput.getWorldY() - Y));
     }
+
 }
+

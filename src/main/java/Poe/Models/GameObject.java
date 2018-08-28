@@ -3,16 +3,18 @@ package Poe.Models;
 import Poe.Drawable.Animation;
 import Poe.Drawable.Drawable;
 
+import java.util.List;
+
 public class GameObject {
 
-    public float x = 0;
-    public float y = 0;
+    public float X = 0;
+    public float Y = 0;
 
-    public float width = 5;
-    public float height = 5;
+    public float width = 2;
+    public float height = 2;
 
     public float rotation = 0;
-    public Animation[] animations;
+    public List<Animation> animations = null;
     public int currentAnimation = 0;
 
     public void update() {
@@ -20,10 +22,11 @@ public class GameObject {
     }
 
     public void render() {
-        animations[currentAnimation].play();
-        Drawable.setRotation(rotation);
-        Drawable.drawImage(animations[currentAnimation].getImage(), x, y, width, height);
-        Drawable.setRotation(0);
+        if(animations != null) {
+            animations.get(currentAnimation).play();
+            Drawable.setRotation(rotation);
+            Drawable.drawImage(animations.get(currentAnimation).getImage(), X, Y, width, height);
+            Drawable.setRotation(0);
+        }
     }
-
 }

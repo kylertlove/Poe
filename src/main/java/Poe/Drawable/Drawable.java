@@ -16,7 +16,6 @@ public class Drawable {
 
     public static void fillRect(float x, float y, float width, float height) {
         GL2 gl = EventListener.gl;
-
         gl.glTranslatef(x, y, 0);
         gl.glRotatef(rotation,0, 0, 1);
         gl.glColor4f(0.5f, 0, 0.5f, alpha);
@@ -50,7 +49,6 @@ public class Drawable {
         if(texture != null) {
             gl.glBindTexture(GL2.GL_TEXTURE_2D, texture.getTextureObject());
         }
-
         gl.glTranslatef(x, y, 0);
         gl.glRotatef(rotation,0, 0, 1);
         gl.glColor4f(red, green, blue, alpha);
@@ -65,9 +63,7 @@ public class Drawable {
         gl.glVertex2f(- width/2, height/2);
         gl.glEnd();
         gl.glFlush();
-
         gl.glBindTexture(GL2.GL_TEXTURE_2D, 0);
-
         gl.glRotatef(-rotation, 0, 0, 1);
         gl.glTranslatef(-x, -y, 0);
     }
