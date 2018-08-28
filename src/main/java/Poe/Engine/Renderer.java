@@ -16,6 +16,8 @@ public class Renderer {
     public static int screenWidth = 1000;
     public static int screenHeight = 500;
     public static float unitsWide = 50;
+    public static float cameraX = 0;
+    public static float cameraY = 0;
 
     public static void init(){
         GLProfile.initSingleton();

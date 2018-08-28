@@ -2,7 +2,14 @@ package Poe.Models;
 
 import Poe.Drawable.Animation;
 import Poe.Drawable.Drawable;
+import Poe.Engine.GameLoop;
+import Poe.Input.KeyInput;
+import Poe.Input.MouseInput;
 import Poe.ResourceManager.ImageResource;
+import com.jogamp.newt.event.KeyEvent;
+
+import java.lang.management.ManagementFactory;
+
 
 public class Player extends GameObject {
 
@@ -17,6 +24,25 @@ public class Player extends GameObject {
 
     @Override
     public void update() {
+        float xInput = 0;
+        float yInput = 0;
 
+        if(KeyInput.getKey(KeyEvent.VK_A)) {
+            xInput -= 5;
+        }
+        if(KeyInput.getKey(KeyEvent.VK_D)) {
+            xInput += 5;
+        }
+        if(KeyInput.getKey(KeyEvent.VK_W)) {
+            yInput += 5;
+        }
+        if(KeyInput.getKey(KeyEvent.VK_S)) {
+            yInput -= 5;
+        }
+
+        x += xInput * GameLoop.updateDelta();
+        y += yInput * GameLoop.updateDelta();
+
+        rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - x, MouseInput.getWorldY() - y));
     }
 }
