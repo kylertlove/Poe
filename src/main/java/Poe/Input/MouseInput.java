@@ -2,6 +2,7 @@ package Poe.Input;
 
 import Poe.Drawable.Drawable;
 import Poe.Engine.Renderer;
+import Poe.World.World;
 import com.jogamp.newt.event.MouseEvent;
 import com.jogamp.newt.event.MouseListener;
 
@@ -11,7 +12,7 @@ public class MouseInput implements MouseListener {
     private static int y = 0;
 
     public void mouseClicked(MouseEvent mouseEvent) {
-
+        System.out.println("X: " + getWorldX() + ", Y: " + getWorldY());
     }
 
     public void mouseEntered(MouseEvent mouseEvent) {
@@ -54,12 +55,11 @@ public class MouseInput implements MouseListener {
 
     //X and Y as Unit values
     public static float getWorldX() {
-        return (Renderer.unitsWide / Renderer.getWindowWidth() * x - Renderer.unitsWide / 2) + Renderer.cameraX;
+        return (Renderer.getUnitsWide() / Renderer.getWindowWidth() * x - Renderer.getUnitsWide() / 2) + Renderer.cameraX;
     }
 
     public static float getWorldY() {
-        float unitsTall = Renderer.unitsWide * ((float) Renderer.getWindowHeight() / (float)Renderer.getWindowWidth());
-        return -(unitsTall / Renderer.getWindowHeight() * y - unitsTall / 2 + Renderer.cameraY);
+        return -(Renderer.getUnitsTall() / Renderer.getWindowHeight() * y - Renderer.getUnitsTall() / 2 + Renderer.cameraY);
     }
 
 }

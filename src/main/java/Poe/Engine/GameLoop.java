@@ -20,6 +20,8 @@ public class GameLoop {
                 long currentTime = System.nanoTime();
                 updates = 0;
                 while (currentTime - lastUpdateTime >= targetTime) {
+
+                    //Main Update Call
                     World.update();
                     lastUpdateTime += targetTime;
                     updates++;
@@ -27,7 +29,7 @@ public class GameLoop {
                         break;
                     }
                 }
-
+                //Render Call
                 Renderer.render();
                 //To make updates seamless, take the remaining FPS time and thread sleep
                 long timeTake = System.nanoTime() - currentTime;

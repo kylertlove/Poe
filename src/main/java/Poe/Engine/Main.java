@@ -1,17 +1,12 @@
 package Poe.Engine;
 
-import Poe.Models.GameObject;
-import Poe.Models.Player;
 import Poe.World.World;
 
 public class Main {
 
     public static void main(String[] args) {
-        Renderer.init();
-        GameLoop.start();
-
-
-        //Test
-        World.addObject(new Player());
+        World.init();  //Build the Objects
+        Renderer.init(); //Build the Window
+        GameLoop.start(); //Start the Game
     }
 }

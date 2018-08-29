@@ -1,23 +1,35 @@
 package Poe.World;
 
-import Poe.Models.GameObject;
+import Poe.Models.Entities.Player;
+import Poe.Models.Item.Weapons.Projectile;
+import Poe.Models.Item.Weapons.ThrowingStar;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class World {
 
-    private static List<GameObject> gameObjectList = new ArrayList<GameObject>();
+    public static Player player = null;
+    public static Projectile[] rangeWeapons = new Projectile[1];
 
     public static void update() {
-        gameObjectList.forEach(gameObject -> gameObject.update());
+        player.update();
+        for(int i = 0; i < rangeWeapons.length; i++) {
+            if(rangeWeapons[i].isActive) {
+                rangeWeapons[i].update();
+            }
+        }
     }
 
     public static void render() {
-        gameObjectList.forEach(gameObject -> gameObject.render());
+        player.render();
+        for(int i = 0; i < rangeWeapons.length; i++) {
+            if(rangeWeapons[i].isActive) {
+                rangeWeapons[i].render();
+            }
+        }
     }
 
-    public static void addObject(GameObject go) {
-        gameObjectList.add(go);
+    public static void init() {
+        player = new Player();
+        rangeWeapons[0] = new ThrowingStar();
     }
 }
