@@ -57,8 +57,8 @@ public class Player extends Entity {
     }
 
     public void rangeAttack() {
-        PoeLogger.logger.info(X+" : "+MouseInput.getWorldX());
-        PoeLogger.logger.info(-Y+" : "+MouseInput.getWorldY());
+//        PoeLogger.logger.info(X+" : "+MouseInput.getWorldX());
+//        PoeLogger.logger.info(-Y+" : "+MouseInput.getWorldY());
         this.currentlyRangeAttacking = true;
         //Eventually need to identify what range weapon is being held and activate that
         World.rangeWeapons[0].setInstanceLocation(this.X, this.Y);

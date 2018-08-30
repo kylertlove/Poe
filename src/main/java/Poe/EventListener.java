@@ -13,8 +13,11 @@ public class EventListener implements GLEventListener {
 
     public void init(GLAutoDrawable drawable) {
         gl = drawable.getGL().getGL2();
-        gl.glClearColor(0, 0, 0, 1);
+        gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         gl.glEnable(GL2.GL_TEXTURE_2D);
+        gl.glEnable(GL2.GL_BLEND);
+
+        gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
     }
 
     public void dispose(GLAutoDrawable drawable) {

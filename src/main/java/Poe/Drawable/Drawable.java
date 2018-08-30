@@ -18,7 +18,7 @@ public class Drawable {
         GL2 gl = EventListener.gl;
         gl.glTranslatef(x, y, 0);
         gl.glRotatef(rotation,0, 0, 1);
-        gl.glColor4f(0.5f, 0, 0.5f, alpha);
+        gl.glColor4f(red, green, blue, alpha);
         gl.glBegin(GL2.GL_QUADS);
         gl.glVertex2f(- width/2, - height/2);
         gl.glVertex2f(width/2, - height/2);
