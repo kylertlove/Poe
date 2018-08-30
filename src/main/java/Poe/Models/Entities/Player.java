@@ -6,6 +6,7 @@ import Poe.Input.KeyInput;
 import Poe.Input.MouseInput;
 import Poe.ResourceManager.ImageResource;
 import Poe.Utlities.GameUtils;
+import Poe.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class Player extends Entity {
 
         X += xInput * GameLoop.getDelta();
         Y += yInput * GameLoop.getDelta();
-        rotation = GameUtils.getAngle(MouseInput.getWorldX(), MouseInput.getWorldY(), X, Y);
+        rotation = GameUtils.getAngle(MouseInput.getWorldX(), MouseInput.getWorldY(), X, -Y);
 
         if(KeyInput.getKey(KeyEvent.VK_SPACE) && currentlyRangeAttacking == false) {
             this.rangeAttack();
@@ -56,6 +57,8 @@ public class Player extends Entity {
     }
 
     public void rangeAttack() {
+        PoeLogger.logger.info(X+" : "+MouseInput.getWorldX());
+        PoeLogger.logger.info(-Y+" : "+MouseInput.getWorldY());
         this.currentlyRangeAttacking = true;
         //Eventually need to identify what range weapon is being held and activate that
         World.rangeWeapons[0].setInstanceLocation(this.X, this.Y);

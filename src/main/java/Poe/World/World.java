@@ -13,7 +13,7 @@ public class World {
 
     public static void update() {
         player.update();
-        //Renderer.updateCamera(player.X, player.Y);
+        Renderer.updateCamera(player.X, player.Y);
         for(int i = 0; i < rangeWeapons.length; i++) {
             if(rangeWeapons[i].isActive) {
                 rangeWeapons[i].update();

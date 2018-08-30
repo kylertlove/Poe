@@ -16,11 +16,10 @@ public class Projectile extends Item {
      * @param y
      */
     public void setInstanceLocation(float x, float y) {
-        System.out.println("location: " + x + y);
         this.isActive = true;
         this.X = x;
         this.Y = y;
-        this.angleOfProjection = GameUtils.getAngle(x, y, MouseInput.getWorldX(), MouseInput.getWorldY());
+        this.angleOfProjection = GameUtils.getAngle(x, -y, MouseInput.getWorldX(), MouseInput.getWorldY());
     }
 
     /**
