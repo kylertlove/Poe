@@ -29,7 +29,7 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-        
+
         float xInput = 0;
         float yInput = 0;
 

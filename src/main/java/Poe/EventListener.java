@@ -24,7 +24,9 @@ public class EventListener implements GLEventListener {
     public void display(GLAutoDrawable drawable) {
         gl = drawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
+        gl.glTranslatef(-Renderer.cameraX, -Renderer.cameraY, 0);
         World.render();
+        gl.glTranslatef(Renderer.cameraX, Renderer.cameraY, 0);
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {

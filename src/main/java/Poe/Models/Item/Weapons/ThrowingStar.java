@@ -1,7 +1,6 @@
 package Poe.Models.Item.Weapons;
 
 import Poe.Drawable.Drawable;
-import Poe.Engine.GameLoop;
 import Poe.Utlities.GameUtils;
 import Poe.World.World;
 
@@ -13,7 +12,7 @@ public class ThrowingStar extends Projectile {
         this.Y = 0;
         this.width = 0.5f;
         this.height = 0.5f;
-        this.velocity = 15;
+        this.velocity = 25;
         this.rotation = 0;
         this.isActive = false;
     }
@@ -24,15 +23,6 @@ public class ThrowingStar extends Projectile {
         World.player.currentlyRangeAttacking = false;
     }
 
-    @Override
-    public void update() {
-        if(GameUtils.isInBounds(this)) {
-            this.X = this.X + ((this.velocity * GameLoop.getDelta()) * (float)Math.cos((double)rotation));
-            this.Y = this.Y + ((this.velocity * GameLoop.getDelta()) * (float)Math.sin((double)rotation));
-        } else {
-            this.destroy();
-        }
-    }
 
     @Override
     public void render() {

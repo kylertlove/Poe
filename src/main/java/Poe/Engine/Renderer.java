@@ -61,4 +61,9 @@ public class Renderer {
         return unitsWide * ((float) Renderer.getWindowHeight() / (float)Renderer.getWindowWidth());
     }
 
+    public static void updateCamera(float x, float y) {
+        cameraX = x;
+        cameraY = y;
+    }
+
 }

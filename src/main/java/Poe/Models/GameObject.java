@@ -2,12 +2,11 @@ package Poe.Models;
 
 import Poe.Drawable.Animation;
 import Poe.Drawable.Drawable;
-import Poe.Utlities.GameUtils;
 
 import java.util.List;
 
 /**
- * Base Object for everything on the board.  Parent class of Entity & Structures
+ * Base Object for everything on the board.  Parent class of Entity, Structures, And Item
  */
 public class GameObject {
 
