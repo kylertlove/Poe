@@ -9,6 +9,7 @@ import com.jogamp.opengl.GLEventListener;
 
 public class EventListener implements GLEventListener {
 
+    //The OpenGL render object
     public static GL2 gl = null;
 
     public void init(GLAutoDrawable drawable) {

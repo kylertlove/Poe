@@ -7,6 +7,11 @@ import Poe.Models.GameObject;
  */
 public class Entity extends GameObject {
 
-    public static int health = 0;
+    public int health = 0;
+    public boolean canMoveUp = true;
+    public boolean canMoveDown = true;
+    public boolean canMoveLeft = true;
+    public boolean canMoveRight = true;
+
 
 }

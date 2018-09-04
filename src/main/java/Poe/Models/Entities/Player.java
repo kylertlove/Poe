@@ -34,16 +34,16 @@ public class Player extends Entity {
         float xInput = 0;
         float yInput = 0;
 
-        if(KeyInput.getKey(KeyEvent.VK_A)) {
+        if(KeyInput.getKey(KeyEvent.VK_A) && canMoveLeft) {
             xInput -= velocity;
         }
-        if(KeyInput.getKey(KeyEvent.VK_D)) {
+        if(KeyInput.getKey(KeyEvent.VK_D) && canMoveRight) {
             xInput += velocity;
         }
-        if(KeyInput.getKey(KeyEvent.VK_W)) {
+        if(KeyInput.getKey(KeyEvent.VK_W) && canMoveUp) {
             yInput += velocity;
         }
-        if(KeyInput.getKey(KeyEvent.VK_S)) {
+        if(KeyInput.getKey(KeyEvent.VK_S) && canMoveDown) {
             yInput -= velocity;
         }
 
@@ -54,6 +54,10 @@ public class Player extends Entity {
         if(KeyInput.getKey(KeyEvent.VK_SPACE) && currentlyRangeAttacking == false) {
             this.rangeAttack();
         }
+        canMoveLeft = true;
+        canMoveUp = true;
+        canMoveDown = true;
+        canMoveRight = true;
     }
 
     public void rangeAttack() {
