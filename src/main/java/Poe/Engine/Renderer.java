@@ -5,6 +5,7 @@ import Poe.Drawable.Drawable;
 import Poe.EventListener;
 import Poe.Input.KeyInput;
 import Poe.Input.MouseInput;
+import Poe.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;

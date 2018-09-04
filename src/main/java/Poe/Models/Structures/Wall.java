@@ -10,7 +10,7 @@ public class Wall extends Structure {
         this.width = w;
         this.height = h;
     }
-    
+
     @Override
     public void render() {
         Drawable.setColor(0, 0, 0, 1);

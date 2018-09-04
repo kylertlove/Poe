@@ -11,7 +11,7 @@ public class MouseInput implements MouseListener {
     private static int y = 0;
 
     public void mouseClicked(MouseEvent mouseEvent) {
-        //System.out.println("X: " + getWorldX() + ", Y: " + getWorldY() + " Playerx" + World.player.X + " player y: " + World.player.Y);
+        System.out.println("Mouse Click: X: " + getWorldX() + ", Y: " + getWorldY() + " Playerx" + World.player.X + " player y: " + World.player.Y);
     }
 
     public void mouseEntered(MouseEvent mouseEvent) {
