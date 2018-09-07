@@ -60,7 +60,7 @@ public class World {
         walls[0] = new Wall(0, 10, 20, 2);
         walls[1] = new Wall(0, -10, 20, 2);
         walls[2] = new Wall(-10, 0, 2, 20);
-        walls[3] = new Wall(10, 0, 2, 20);
+        walls[3] = new Wall(20, 0, 2, 20);
         walls[4] = new Wall(-4, 3, 1, 3);
     }
 }

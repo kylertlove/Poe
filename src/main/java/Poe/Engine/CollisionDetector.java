@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class CollisionDetector {
 
-    public static float marginOfError = 0.2f;
+    public static float marginOfError = 0.3f;
 
     public static boolean isCollided(GameObject a, GameObject b) {
         return (a.X - a.width/2) < (b.X + b.width/2) &&
@@ -43,36 +43,32 @@ public class CollisionDetector {
     }
 
     private static boolean leftSideCollision(Entity a, GameObject b) {
-        boolean aa = getLeft(a) < getRight(b);//a left side is left of b right side
-        boolean bb = getRight(a) > getRight(b);//a right side is right of b right side
-        boolean cc = (getTop(a) + marginOfError) > getTop(b) && ((getTop(a) + marginOfError)) < getBottom(b);
-        boolean dd = (getBottom(a) - marginOfError) > getTop(b) && ((getBottom(a) - marginOfError) < getBottom(b));
-        boolean ee = (getTop(a) < getTop(b)) && (getBottom(a) > getBottom(b));
-        return aa && bb && (cc || dd || ee);
+        boolean aa = getLeft(a) < getRight(b);
+        boolean bb = getRight(a) > getRight(b);
+        boolean cc = (getTop(a) - marginOfError) > getBottom(b);
+        boolean dd = (getBottom(a) + marginOfError) < getTop(b);
+        return aa && bb && cc && dd;
     }
     private static boolean rightSideCollision(Entity a, GameObject b) {
-        boolean aa = (getRight(a) > getLeft(b));
-        boolean bb = getRight(a) < getRight(b);
-        boolean cc = ((getTop(a) + marginOfError) > getTop(b)) && ((getTop(a) + marginOfError) < getBottom(b));
-        boolean dd = ((getBottom(a) - marginOfError) > getTop(b)) && ((getBottom(a) - marginOfError) < getBottom(b));
-        boolean ee = (getTop(a) < getTop(b)) && (getBottom(a) > getBottom(b));
-        return aa && bb && (cc || dd || ee);
+        boolean aa = getRight(a) > getLeft(b);
+        boolean bb = getLeft(a) < getLeft(b);
+        boolean cc = (getTop(a) - marginOfError) > getBottom(b);
+        boolean dd = (getBottom(a) + marginOfError) < getTop(b);
+        return aa && bb && cc && dd;
     }
     private static boolean topCollision(Entity a, GameObject b){
-        boolean aa = (getTop(a) > getBottom(b));
-        boolean bb = (getBottom(a) < getBottom(b));
-        boolean cc = ((getLeft(a) + marginOfError) > getLeft(b)) && ((getLeft(a) + marginOfError) < getRight(b));
-        boolean dd = ((getRight(a) - marginOfError) > getLeft(b)) && ((getRight(a) - marginOfError) < getRight(b));
-        boolean ee = (getLeft(a) < getLeft(b)) && (getRight(a) > getRight(b));
-        return aa && bb && (cc || dd || ee);
+        boolean aa = getTop(a) > getBottom(b);
+        boolean bb = getBottom(a) < getBottom(b);
+        boolean cc = (getLeft(a) + marginOfError) < getRight(b);
+        boolean dd = (getRight(a) - marginOfError) > getLeft(b);
+        return aa && bb && cc && dd;
     }
     private static boolean bottomCollision(Entity a, GameObject b){
-        boolean aa = (getBottom(a) < getTop(b));
-        boolean bb = ((getBottom(a) - marginOfError) > getBottom(b));
-        boolean cc = ((getLeft(a) + marginOfError) > getLeft(b) && ((getLeft(a) + marginOfError) < getRight(b)));
-        boolean dd = ((getRight(a) - marginOfError) > getLeft(b)) && ((getRight(a) - marginOfError) < getRight(b));
-        boolean ee = (getLeft(a)< getLeft(b)) && (getRight(a) >getRight(b));
-        return aa && bb && (cc || dd || ee);
+        boolean aa = getBottom(a) < getTop(b);
+        boolean bb = getTop(a) > getTop(b);
+        boolean cc = (getLeft(a) + marginOfError) < getRight(b);
+        boolean dd = (getRight(a) - marginOfError) > getLeft(b);
+        return aa && bb && cc && dd;
     }
 
     private static float getBottom(GameObject a) {
