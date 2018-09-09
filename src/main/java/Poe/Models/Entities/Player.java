@@ -9,6 +9,10 @@ import Poe.Utlities.GameUtils;
 import Poe.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
+
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Player extends Entity {
@@ -24,7 +28,9 @@ public class Player extends Entity {
         animations = new ArrayList<>();
         Animation walking = new Animation();
         walking.frames = new ImageResource[1];
-        walking.frames[0] = new ImageResource("src/main/Resources/Images/Poe.png");
+        InputStream stream = this. getClass().getResourceAsStream(File.separator + "Images" + File.separator+ "Poe.png");
+        //URL url = this.getClass().getResource(File.separator + "Images" + File.separator+ "Poe.png");
+        walking.frames[0] = new ImageResource(stream);
         animations.add(walking);
     }
 

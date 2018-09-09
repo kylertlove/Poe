@@ -6,22 +6,19 @@ import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ImageResource {
 
     private Texture texture = null;
     private BufferedImage image = null;
 
-    public ImageResource(String path) {
+    public ImageResource(InputStream stream) {
         try {
-            File file = new File(path);
-            image = ImageIO.read(file);
-            if(image == null) {
-                throw new Error("Image Not Found");
-            }
+            image = ImageIO.read(stream);
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
         if(image != null) {
