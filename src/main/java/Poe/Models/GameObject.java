@@ -15,7 +15,7 @@ public class GameObject {
     public float velocity = 0;
     public boolean isActive = true;
     public static int id;
-
+    public float[] objectColor = new float[]{1, 1, 1, 1};
     public float width = 0;
     public float height = 0;
 
@@ -34,6 +34,10 @@ public class GameObject {
             Drawable.drawImage(animations.get(currentAnimation).getImage(), X, Y, width, height);
             Drawable.setRotation(0);
         }
+    }
+
+    public void setObjectColor(float r, float g, float b, float a) {
+        this.objectColor = new float[]{r, g, b, a};
     }
 
     public void destroy() {

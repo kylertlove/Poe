@@ -11,8 +11,6 @@ import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 
 import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Player extends Entity {
@@ -21,16 +19,19 @@ public class Player extends Entity {
 
     public Player() {
         this.id = GameUtils.getId();
-        this.width = 2;
-        this.height = 2;
-        this.velocity = 5;
+        this.width = 1.5f;
+        this.height = 1.5f;
+        this.velocity = 6;
 
         animations = new ArrayList<>();
         Animation walking = new Animation();
         walking.frames = new ImageResource[1];
-        InputStream stream = this. getClass().getResourceAsStream(File.separator + "Images" + File.separator+ "Poe.png");
-        //URL url = this.getClass().getResource(File.separator + "Images" + File.separator+ "Poe.png");
-        walking.frames[0] = new ImageResource(stream);
+
+        walking.frames[0] = new ImageResource(
+                this.getClass().getResourceAsStream(
+                        File.separator + "Images" +
+                              File.separator+ "Poe.png")
+                                              );
         animations.add(walking);
     }
 

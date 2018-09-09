@@ -11,7 +11,7 @@ public class Drawable {
     private static float green = 1;
     private static float blue = 1;
     private static float alpha = 1;
-
+    public static final float[] DEFAULT_COLOR = new float[]{1, 1, 1, 1};
     private static float rotation = 0;
 
     public static void fillRect(float x, float y, float width, float height) {
@@ -30,11 +30,11 @@ public class Drawable {
         gl.glTranslatef(-x, -y, 0);
     }
 
-    public static void setColor(float r, float g, float b, float a) {
-        red = Math.max(0, Math.min(1, r));
-        green = Math.max(0, Math.min(1, g));
-        blue = Math.max(0, Math.min(1, b));
-        alpha = Math.max(0, Math.min(1, a));
+    public static void setColor(float[] objectColor) {
+        red = Math.max(0, Math.min(1, objectColor[0]));
+        green = Math.max(0, Math.min(1, objectColor[1]));
+        blue = Math.max(0, Math.min(1, objectColor[2]));
+        alpha = Math.max(0, Math.min(1, objectColor[3]));
     }
 
     public static void setRotation(float r) {

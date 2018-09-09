@@ -9,12 +9,13 @@ public class Wall extends Structure {
         this.Y = y;
         this.width = w;
         this.height = h;
+        this.setObjectColor(0, 0, 0, 1);
     }
 
     @Override
     public void render() {
-        Drawable.setColor(0, 0, 0, 1);
+        Drawable.setColor(this.objectColor);
         Drawable.fillRect(X, Y, width, height);
-        Drawable.setColor(1, 1, 1, 1);
+        Drawable.setColor(Drawable.DEFAULT_COLOR);
     }
 }

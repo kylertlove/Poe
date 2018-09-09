@@ -15,6 +15,7 @@ public class ThrowingStar extends Projectile {
         this.velocity = 25;
         this.rotation = 0;
         this.isActive = false;
+        this.setObjectColor(0.5f, 0, 0.5f, 1);
     }
 
     @Override
@@ -26,9 +27,9 @@ public class ThrowingStar extends Projectile {
 
     @Override
     public void render() {
-        Drawable.setColor(0.5f, 0, 0.5f, 1);
+        Drawable.setColor(this.objectColor);
         Drawable.fillRect(this.X, this.Y, this.width, this.height);
-        Drawable.setColor(1, 1, 1, 1);
+        Drawable.setColor(Drawable.DEFAULT_COLOR);
     }
 
 }

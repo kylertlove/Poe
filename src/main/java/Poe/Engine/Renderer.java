@@ -1,15 +1,13 @@
 package Poe.Engine;
 
-
-import Poe.Drawable.Drawable;
 import Poe.EventListener;
 import Poe.Input.KeyInput;
 import Poe.Input.MouseInput;
-import Poe.Utlities.PoeLogger;
-import Poe.World.World;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
+import java.awt.*;
+import java.io.File;
 
 public class Renderer {
 
@@ -22,6 +20,10 @@ public class Renderer {
     private static float unitsWide = 50;
 
     public static void init(){
+        //System.setProperty("newt.window.icons", "null null");
+        //System.setProperty("newt.window.icons", "Images"+File.separator+"Poe.png Image"+File.separator+"Poe.png");
+        screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+        screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         GLProfile.initSingleton();
         glProfile = GLProfile.get(GLProfile.GL2);
         GLCapabilities glCapabilities = new GLCapabilities(glProfile);
@@ -32,7 +34,6 @@ public class Renderer {
         glWindow.addMouseListener(new MouseInput());
         glWindow.addKeyListener(new KeyInput());
         glWindow.addGLEventListener(new EventListener());
-
         glWindow.setVisible(true);
     }
 

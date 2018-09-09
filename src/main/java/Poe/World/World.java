@@ -38,7 +38,6 @@ public class World {
         CollisionDetector.updateMoveable(player, collidedObjects);
         collidedObjects = new ArrayList<>();
     }
-
     public static void render() {
         player.render();
         for(Projectile rangeWeapon : rangeWeapons) {
@@ -50,7 +49,6 @@ public class World {
             structure.render();
         }
     }
-
     //Initialize the gameboard
     public static void init() {
         player = new Player();
