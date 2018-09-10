@@ -11,13 +11,14 @@ import java.util.List;
 public class GameObject {
 
     public float X = 0;
+    public int id = 0;
     public float Y = 0;
     public float velocity = 0;
     public boolean isActive = true;
-    public static int id;
     public float[] objectColor = new float[]{1, 1, 1, 1};
     public float width = 0;
     public float height = 0;
+    public int health = 0;
 
     public float rotation = 0;
     public List<Animation> animations = null;
@@ -42,5 +43,12 @@ public class GameObject {
 
     public void destroy() {
         //Implementation Hook for Objects that can be destroyed
+    }
+
+    public void recieveHit(int hitAmount) {
+        this.health -= hitAmount;
+        if(this.health <= 0) {
+            this.destroy();
+        }
     }
 }

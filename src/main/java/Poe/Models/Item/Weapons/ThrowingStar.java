@@ -7,7 +7,6 @@ import Poe.World.World;
 public class ThrowingStar extends Projectile {
 
     public ThrowingStar() {
-        this.id = GameUtils.getId();
         this.X = 0;
         this.Y = 0;
         this.width = 0.5f;
@@ -16,6 +15,7 @@ public class ThrowingStar extends Projectile {
         this.rotation = 0;
         this.isActive = false;
         this.setObjectColor(0.5f, 0, 0.5f, 1);
+        damageAmount = 3;
     }
 
     @Override

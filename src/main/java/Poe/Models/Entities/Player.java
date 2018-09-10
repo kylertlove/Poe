@@ -16,22 +16,18 @@ import java.util.ArrayList;
 public class Player extends Entity {
 
     public boolean currentlyRangeAttacking = false;
+    public boolean rangeClick = false;
 
     public Player() {
-        this.id = GameUtils.getId();
         this.width = 1.5f;
         this.height = 1.5f;
         this.velocity = 6;
-
+        this.id = GameUtils.getId();
         animations = new ArrayList<>();
         Animation walking = new Animation();
         walking.frames = new ImageResource[1];
-
-        walking.frames[0] = new ImageResource(
-                this.getClass().getResourceAsStream(
-                        File.separator + "Images" +
-                              File.separator+ "Poe.png")
-                                              );
+        String uri =  "/Images/Poe.png";
+        walking.frames[0] = new ImageResource(this.getClass().getResourceAsStream(uri));
         animations.add(walking);
     }
 
@@ -58,7 +54,7 @@ public class Player extends Entity {
         Y += yInput * GameLoop.getDelta();
         rotation = GameUtils.getAngle(MouseInput.getWorldX(), MouseInput.getWorldY(), X, -Y);
 
-        if(KeyInput.getKey(KeyEvent.VK_SPACE) && currentlyRangeAttacking == false) {
+        if(rangeClick && !currentlyRangeAttacking) {
             this.rangeAttack();
         }
         canMoveLeft = true;
@@ -68,11 +64,13 @@ public class Player extends Entity {
     }
 
     public void rangeAttack() {
-//        PoeLogger.logger.info(X+" : "+MouseInput.getWorldX());
-//        PoeLogger.logger.info(-Y+" : "+MouseInput.getWorldY());
         this.currentlyRangeAttacking = true;
-        //Eventually need to identify what range weapon is being held and activate that
-        World.rangeWeapons[0].setInstanceLocation(this.X, this.Y);
+        World.activeRangeWeapon.setInstanceLocation(this.X, this.Y);
+    }
+
+    @Override
+    public void recieveHit(int hitAmount) {
+        this.health -= hitAmount;
     }
 
 }

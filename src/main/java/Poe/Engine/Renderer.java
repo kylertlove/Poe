@@ -22,8 +22,8 @@ public class Renderer {
     public static void init(){
         //System.setProperty("newt.window.icons", "null null");
         //System.setProperty("newt.window.icons", "Images"+File.separator+"Poe.png Image"+File.separator+"Poe.png");
-        screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-        screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+//        screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+//        screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         GLProfile.initSingleton();
         glProfile = GLProfile.get(GLProfile.GL2);
         GLCapabilities glCapabilities = new GLCapabilities(glProfile);

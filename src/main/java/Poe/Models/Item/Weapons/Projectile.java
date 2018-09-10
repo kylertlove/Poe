@@ -9,6 +9,7 @@ import Poe.Utlities.GameUtils;
 public class Projectile extends Item {
 
     public static float angleOfProjection = 0;
+    public static int damageAmount = 0;
 
     /**
      * When activating a Projectile, This sets the starting position and the rotation needed

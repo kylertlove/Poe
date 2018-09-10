@@ -11,7 +11,8 @@ public class MouseInput implements MouseListener {
     private static int y = 0;
 
     public void mouseClicked(MouseEvent mouseEvent) {
-        System.out.println("Mouse Click: X: " + getWorldX() + ", Y: " + getWorldY() + " Player x: " + World.player.X + " player y: " + World.player.Y);
+       // System.out.println("Mouse Click: X: " + getWorldX() + ", Y: " + getWorldY() + " Player x: " + World.player.X + " player y: " + World.player.Y);
+
     }
 
     public void mouseEntered(MouseEvent mouseEvent) {
@@ -23,11 +24,15 @@ public class MouseInput implements MouseListener {
     }
 
     public void mousePressed(MouseEvent mouseEvent) {
-
+        if(mouseEvent.getButton() == MouseEvent.BUTTON3) {
+            World.player.rangeClick = true;
+        }
     }
 
     public void mouseReleased(MouseEvent mouseEvent) {
-
+        if(mouseEvent.getButton() == MouseEvent.BUTTON3) {
+            World.player.rangeClick = false;
+        }
     }
 
     public void mouseMoved(MouseEvent mouseEvent) {
@@ -36,7 +41,8 @@ public class MouseInput implements MouseListener {
     }
 
     public void mouseDragged(MouseEvent mouseEvent) {
-
+        x = mouseEvent.getX();
+        y = mouseEvent.getY();
     }
 
     public void mouseWheelMoved(MouseEvent mouseEvent) {
