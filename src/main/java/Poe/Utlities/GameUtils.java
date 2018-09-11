@@ -1,7 +1,10 @@
 package Poe.Utlities;
 
 import Poe.Engine.Renderer;
+import Poe.Models.Entities.Entity;
 import Poe.Models.GameObject;
+
+import java.awt.*;
 
 public class GameUtils {
 
@@ -26,5 +29,16 @@ public class GameUtils {
 
     public static int getId() {
         return idCounter++;
+    }
+
+    /**
+     * Function That will check if Entity A is within passed radius of Entity B
+     * @return isWithinRadius
+     */
+    public static boolean entityNearEntity(Entity A, Entity B, float radius) {
+        double width = (A.X - B.X) * (A.X - B.X);
+        double height = (A.Y - B.Y) * (A.Y - B.Y);
+        float distance = (float)Math.sqrt(width + height);
+        return distance < radius;
     }
 }

@@ -12,6 +12,7 @@ import Poe.Models.Item.Weapons.ThrowingStar;
 import Poe.Models.Structures.Structure;
 import Poe.Models.Structures.Wall;
 import Poe.Utlities.GameUtils;
+import Poe.Utlities.PoeLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class World {
 
     public static Player player = null;
     public static Projectile activeRangeWeapon;
+    public static Map<Integer, Projectile> enemyProjectiles = new ConcurrentHashMap<>();
     public static Map<Integer, Structure> walls = new ConcurrentHashMap<>();
     public static Map<Integer, Entity> enemies = new ConcurrentHashMap<>();
     public static Random random = new Random();
@@ -41,6 +43,12 @@ public class World {
         }
         enemies.forEach((index, entity) -> {
             entity.update();
+            if(GameUtils.entityNearEntity(player, entity, entity.viewDistance)) {
+                entity.isTrackingEntity = true;
+                entity.trackingTarget(player);
+            } else {
+                entity.isTrackingEntity = false;
+            }
             if(CollisionDetector.isCollided(player, entity)) {
                 player.objectsCollidedWith.add(entity);
             }
@@ -84,7 +92,7 @@ public class World {
     //Initialize the gameboard
     public static void init() {
         player = new Player();
-        activeRangeWeapon = new ThrowingStar();
+        activeRangeWeapon = new ThrowingStar(3);
         //Test building walls
         walls.put(GameUtils.getId(), new Wall(0, 10, 20, 2));
         walls.put(GameUtils.getId(), new Wall(0, -10, 20, 2));

@@ -11,22 +11,21 @@ public class Grunt extends Entity {
         this.id = GameUtils.getId();
         this.X = x;
         this.Y = y;
+        this.velocity = 3;
         this.width = width;
         this.height = height;
         this.health = 10;
-        this.setObjectColor(0.5f, 0, 0, 1);
-    }
-
-    @Override
-    public void update() {
-
+        this.viewDistance = 12;
+        this.setObjectColor(0.5f, 0.5f, 0, 1);
     }
 
     @Override
     public void render() {
+        Drawable.setRotation(rotation);
         Drawable.setColor(this.objectColor);
         Drawable.fillRect(X, Y, width, height);
         Drawable.setColor(Drawable.DEFAULT_COLOR);
+        Drawable.setRotation(0);
     }
 
     @Override
