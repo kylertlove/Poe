@@ -5,10 +5,12 @@ import Poe.Models.Entities.Entity;
 import Poe.Models.GameObject;
 
 import java.awt.*;
+import java.util.Random;
 
 public class GameUtils {
 
     private static int idCounter = 0;
+    public static Random random = new Random();
 
     /**
      * @param x1

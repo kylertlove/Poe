@@ -3,6 +3,8 @@ package Poe.World;
 import Poe.Drawable.Drawable;
 import Poe.Engine.CollisionDetector;
 import Poe.Engine.Renderer;
+import Poe.Level.ILevelBuilder;
+import Poe.Level.Level1;
 import Poe.Models.Entities.Entity;
 import Poe.Models.Entities.Grunt;
 import Poe.Models.Entities.Player;
@@ -28,10 +30,10 @@ public class World {
     public static Map<Integer, Projectile> enemyProjectiles = new ConcurrentHashMap<>();
     public static Map<Integer, Structure> walls = new ConcurrentHashMap<>();
     public static Map<Integer, Entity> enemies = new ConcurrentHashMap<>();
-    public static Random random = new Random();
+    public static ILevelBuilder currentLevel;
 
     /**
-     * Update Function
+     * Game Update Function
      */
     public static void update() {
         //update player and camera position
@@ -74,7 +76,7 @@ public class World {
     }
 
     /**
-     * Render Function
+     * Game Render Function
      */
     public static void render() {
         player.render();
@@ -93,15 +95,8 @@ public class World {
     public static void init() {
         player = new Player();
         activeRangeWeapon = new ThrowingStar(3);
-        //Test building walls
-        walls.put(GameUtils.getId(), new Wall(0, 10, 20, 2));
-        walls.put(GameUtils.getId(), new Wall(0, -10, 20, 2));
-        walls.put(GameUtils.getId(), new Wall(-10, 0, 2, 20));
-        walls.put(GameUtils.getId(), new Wall(20, 0, 2, 20));
-        walls.put(GameUtils.getId(), new Wall(-4, 3, 1, 3));
-        for(int i = 0; i < 10; i++) {
-            Grunt g = new Grunt(random.nextInt(30), random.nextInt(30), 1, 1);
-            enemies.put(g.id, g);
-        }
+        currentLevel = new Level1();
+        walls = currentLevel.createWalls();
+        enemies = currentLevel.createEnemies();
     }
 }
