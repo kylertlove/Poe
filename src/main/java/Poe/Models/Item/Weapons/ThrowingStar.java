@@ -27,9 +27,11 @@ public class ThrowingStar extends Projectile {
 
     @Override
     public void render() {
+        Drawable.setRotation(rotation);
         Drawable.setColor(this.objectColor);
         Drawable.fillRect(this.X, this.Y, this.width, this.height);
         Drawable.setColor(Drawable.DEFAULT_COLOR);
+        Drawable.setRotation(0);
     }
 
 }

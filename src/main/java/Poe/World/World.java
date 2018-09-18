@@ -1,25 +1,18 @@
 package Poe.World;
 
-import Poe.Drawable.Drawable;
 import Poe.Engine.CollisionDetector;
 import Poe.Engine.Renderer;
 import Poe.Level.ILevelBuilder;
 import Poe.Level.Level1;
 import Poe.Models.Entities.Entity;
-import Poe.Models.Entities.Grunt;
 import Poe.Models.Entities.Player;
-import Poe.Models.GameObject;
 import Poe.Models.Item.Weapons.Projectile;
 import Poe.Models.Item.Weapons.ThrowingStar;
 import Poe.Models.Structures.Structure;
-import Poe.Models.Structures.Wall;
 import Poe.Utlities.GameUtils;
-import Poe.Utlities.PoeLogger;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 
