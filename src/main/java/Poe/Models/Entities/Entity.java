@@ -27,8 +27,8 @@ public class Entity extends GameObject {
      * @param entityToTrack
      */
     public void trackingTarget(Entity entityToTrack) {
-        this.destinationX = entityToTrack.X + 2;
-        this.destinationY = entityToTrack.Y + 2;
+        this.destinationX = entityToTrack.X;
+        this.destinationY = entityToTrack.Y;
     }
 
     @Override
@@ -36,23 +36,25 @@ public class Entity extends GameObject {
         if(this.isTrackingEntity) {
             float xVal = 0;
             float yVal = 0;
-            if(this.destinationX < X) {
+
+            if(this.destinationX < X && canMoveLeft) {
                 xVal -= this.velocity;
-            } else {
+            } else if(this.destinationX > X && canMoveRight) {
                 xVal += this.velocity;
             }
-            if(this.destinationY < Y) {
+            if(this.destinationY < Y && canMoveUp) {
                 yVal -= this.velocity;
-            }else {
+            }else if(this.destinationY > Y && canMoveDown){
                 yVal += this.velocity;
             }
+
             X += xVal * GameLoop.getDelta();
             Y += yVal * GameLoop.getDelta();
             rotation = GameUtils.getAngle(this.destinationX, this.destinationY, X, -Y);
-            canMoveLeft = true;
-            canMoveUp = true;
-            canMoveDown = true;
-            canMoveRight = true;
         }
+        canMoveLeft = true;
+        canMoveUp = true;
+        canMoveDown = true;
+        canMoveRight = true;
     }
 }
