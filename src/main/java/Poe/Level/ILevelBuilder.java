@@ -10,7 +10,7 @@ public interface ILevelBuilder {
 
     void createWalls();
 
-    Map<Integer, Entity> createEnemies();
+    void createEnemies();
 
     String getLevel();
 

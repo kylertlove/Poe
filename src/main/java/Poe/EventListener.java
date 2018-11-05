@@ -39,7 +39,8 @@ public class EventListener implements GLEventListener {
         gl.glTranslatef(Renderer.cameraX, Renderer.cameraY, 0);
         if(World.debug) {
             textRenderer.beginRendering(Renderer.getWindowWidth(), Renderer.getWindowHeight());
-            textRenderer.draw("Player: X:" + World.player.X + ", Y:" + World.player.Y, 0, 0);
+            textRenderer.draw("Player: X:" + Math.round(World.player.X) + ", Y:" + Math.round(World.player.Y), 0, Renderer.getWindowHeight() - 16);
+            textRenderer.draw(World.currentLevel.getLevel(), 0, Renderer.getWindowHeight() - 32);
             textRenderer.endRendering();
         }
     }

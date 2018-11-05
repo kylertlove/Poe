@@ -1,16 +1,10 @@
 package Poe.Level;
 
-import Poe.Models.Entities.Entity;
 import Poe.Models.Entities.Grunt;
-import Poe.Models.Structures.Building;
-import Poe.Models.Structures.Structure;
-import Poe.Models.Structures.StructureUtils;
-import Poe.Models.Structures.Wall;
+import Poe.Utlities.StructureUtils;
 import Poe.Utlities.GameUtils;
 import Poe.Utlities.PoeLogger;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import Poe.World.World;
 
 public class Level1 implements ILevelBuilder {
 
@@ -23,25 +17,24 @@ public class Level1 implements ILevelBuilder {
 
     @Override
     public void createWalls() {
-        PoeLogger.logger.info("Generating Map");
+        int count = 0;
         for(float i = maxWidth/2*(-1); i < maxWidth/2; i++) {
             for (float j = maxHeight/2*(-1); j < maxHeight/2; j++) {
                 if(GameUtils.random.nextInt(1000) < 1) {
-                    PoeLogger.logger.info("i: " + i + ", j: " + j);
-                    StructureUtils.tryToBuildStructure(i, j);
+                    StructureUtils.tryToBuildBuilding(i, j);
+                    count++;
                 }
             }
         }
+        PoeLogger.logger.info("Total Building Count: " + count);
     }
 
     @Override
-    public Map<Integer, Entity> createEnemies() {
-        Map<Integer, Entity> enemies = new ConcurrentHashMap<>();
+    public void createEnemies() {
         for(int i = 0; i < 10; i++) {
             Grunt g = new Grunt(GameUtils.random.nextInt(30), GameUtils.random.nextInt(30), 1, 1);
-            enemies.put(g.id, g);
+            World.enemies.put(g.id, g);
         }
-        return enemies;
     }
 
     @Override

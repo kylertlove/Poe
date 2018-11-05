@@ -10,7 +10,6 @@ import Poe.Models.Item.Weapons.Projectile;
 import Poe.Models.Item.Weapons.ThrowingStar;
 import Poe.Models.Structures.Structure;
 import Poe.Utlities.GameUtils;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,7 +19,6 @@ public class World {
 
     public static Player player = null;
     public static Projectile activeRangeWeapon;
-    public static Map<Integer, Projectile> enemyProjectiles = new ConcurrentHashMap<>();
     public static Map<Integer, Structure> walls = new ConcurrentHashMap<>();
     public static Map<Integer, Entity> enemies = new ConcurrentHashMap<>();
     public static ILevelBuilder currentLevel;
@@ -67,6 +65,7 @@ public class World {
         });
         CollisionDetector.updateMoveable(player, player.objectsCollidedWith);
         player.objectsCollidedWith = new ArrayList<>();
+
     }
 
     /**
@@ -77,12 +76,8 @@ public class World {
         if(activeRangeWeapon.isActive) {
             activeRangeWeapon.render();
         }
-        enemies.forEach((index, entity) -> {
-            entity.render();
-        });
-        walls.forEach((index, structure) -> {
-            structure.render();
-        });
+        enemies.forEach((index, entity) -> entity.render());
+        walls.forEach((index, structure) -> structure.render());
     }
 
     //Initialize the gameboard
@@ -91,6 +86,6 @@ public class World {
         activeRangeWeapon = new ThrowingStar(3);
         currentLevel = new Level1();
         currentLevel.createWalls();
-        enemies = currentLevel.createEnemies();
+        currentLevel.createEnemies();
     }
 }

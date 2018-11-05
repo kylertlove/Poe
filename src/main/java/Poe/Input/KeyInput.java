@@ -13,6 +13,10 @@ public class KeyInput implements KeyListener {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         keys[keyEvent.getKeyCode()] = true;
+
+        if(keyEvent.getKeyCode() == KeyEvent.VK_P) {
+            World.debug = !World.debug;
+        }
     }
 
     @Override
@@ -22,11 +26,6 @@ public class KeyInput implements KeyListener {
         }
 
         keys[keyEvent.getKeyCode()] = false;
-
-        //Debug switching
-        if(keyEvent.getKeyChar() == 'D') {
-            World.debug = !World.debug;
-        }
     }
 
     public static boolean getKey(int keyCode) {

@@ -3,8 +3,6 @@ package Poe.Utlities;
 import Poe.Engine.Renderer;
 import Poe.Models.Entities.Entity;
 import Poe.Models.GameObject;
-
-import java.awt.*;
 import java.util.Random;
 
 public class GameUtils {
@@ -23,6 +21,16 @@ public class GameUtils {
         return (float)Math.toDegrees(Math.atan2(x1 - x2, y1 - y2));
     }
 
+    /**
+     * Get the distance between two objects
+     * @param Gameobject a
+     * @param Gameobject b
+     * @return float - Distance between the objects
+     */
+    public static float getDistanceBetweenObjects(GameObject a, GameObject b) {
+        return (float)Math.sqrt(((a.X - b.X) * (a.X - b.X)) + ((a.Y - b.Y) * (a.Y - b.Y)));
+    }
+
     //check left -> right -> up -> down
     public static boolean isInBounds(GameObject gameObject) {
         return gameObject.X > -(Renderer.getUnitsWide()/2 - Renderer.cameraX) && gameObject.X < Renderer.getUnitsWide()/2 + Renderer.cameraX
@@ -38,9 +46,8 @@ public class GameUtils {
      * @return isWithinRadius
      */
     public static boolean entityNearEntity(Entity A, Entity B, float radius) {
-        double width = (A.X - B.X) * (A.X - B.X);
-        double height = (A.Y - B.Y) * (A.Y - B.Y);
-        float distance = (float)Math.sqrt(width + height);
+        float distance = getDistanceBetweenObjects(A, B);
         return distance < radius;
     }
+
 }
