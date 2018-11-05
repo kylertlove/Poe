@@ -4,6 +4,13 @@ import Poe.Drawable.Drawable;
 
 public class Wall extends Structure {
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
     public Wall(float x, float y, float w, float h) {
         this.X = x;
         this.Y = y;

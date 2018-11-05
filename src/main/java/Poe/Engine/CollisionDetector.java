@@ -2,9 +2,12 @@ package Poe.Engine;
 
 import Poe.Models.Entities.Entity;
 import Poe.Models.GameObject;
+import Poe.Models.Structures.Structure;
 import Poe.World.World;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -23,6 +26,10 @@ public class CollisionDetector {
                 (a.X + a.width/2) > (b.X - b.width/2) &&
                 (a.Y - a.height/2) < (b.Y + b.height/2) &&
                 (a.Y + a.height/2) > (b.Y - b.height/2);
+    }
+
+    public static boolean isCollidedWithList(GameObject a, Map<Integer, Structure> list) {
+        return list.entrySet().stream().filter(struct -> isCollided(struct.getValue(), a)).count() > 0;
     }
 
     public static void updateMoveable(Entity updateObject, List<GameObject> collidedObjects) {
@@ -83,16 +90,16 @@ public class CollisionDetector {
         return aa && bb && cc && dd;
     }
 
-    private static float getBottom(GameObject a) {
+    public static float getBottom(GameObject a) {
         return (a.Y - a.height/2);
     }
-    private static float getTop(GameObject a) {
+    public static float getTop(GameObject a) {
         return (a.Y + a.height/2);
     }
-    private static float getLeft(GameObject a) {
+    public static float getLeft(GameObject a) {
         return (a.X - a.width/2);
     }
-    private static float getRight(GameObject a) {
+    public static float getRight(GameObject a) {
         return (a.X + a.width/2);
     }
 }

@@ -2,28 +2,36 @@ package Poe.Level;
 
 import Poe.Models.Entities.Entity;
 import Poe.Models.Entities.Grunt;
+import Poe.Models.Structures.Building;
 import Poe.Models.Structures.Structure;
+import Poe.Models.Structures.StructureUtils;
 import Poe.Models.Structures.Wall;
 import Poe.Utlities.GameUtils;
+import Poe.Utlities.PoeLogger;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Level1 implements ILevelBuilder {
 
     private static final String levelName = "Level 1";
+    private static final float maxWidth = 100;
+    private static final float maxHeight = 100;
 
     public Level1() {
     }
 
     @Override
-    public Map<Integer, Structure> createWalls() {
-        Map<Integer, Structure> walls = new ConcurrentHashMap<>();
-        walls.put(GameUtils.getId(), new Wall(0, 10, 20, 2));
-        walls.put(GameUtils.getId(), new Wall(0, -10, 20, 2));
-        walls.put(GameUtils.getId(), new Wall(-10, 0, 2, 20));
-        walls.put(GameUtils.getId(), new Wall(20, 0, 2, 20));
-        walls.put(GameUtils.getId(), new Wall(-4, 3, 1, 3));
-        return walls;
+    public void createWalls() {
+        PoeLogger.logger.info("Generating Map");
+        for(float i = maxWidth/2*(-1); i < maxWidth/2; i++) {
+            for (float j = maxHeight/2*(-1); j < maxHeight/2; j++) {
+                if(GameUtils.random.nextInt(1000) < 1) {
+                    PoeLogger.logger.info("i: " + i + ", j: " + j);
+                    StructureUtils.tryToBuildStructure(i, j);
+                }
+            }
+        }
     }
 
     @Override

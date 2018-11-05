@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface ILevelBuilder {
 
-    Map<Integer, Structure> createWalls();
+    void createWalls();
 
     Map<Integer, Entity> createEnemies();
 

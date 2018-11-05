@@ -24,6 +24,7 @@ public class World {
     public static Map<Integer, Structure> walls = new ConcurrentHashMap<>();
     public static Map<Integer, Entity> enemies = new ConcurrentHashMap<>();
     public static ILevelBuilder currentLevel;
+    public static boolean debug = true;
 
     /**
      * Game Update Function
@@ -89,7 +90,7 @@ public class World {
         player = new Player();
         activeRangeWeapon = new ThrowingStar(3);
         currentLevel = new Level1();
-        walls = currentLevel.createWalls();
+        currentLevel.createWalls();
         enemies = currentLevel.createEnemies();
     }
 }

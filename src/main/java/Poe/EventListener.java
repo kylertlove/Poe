@@ -5,12 +5,16 @@ import Poe.World.World;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.util.awt.TextRenderer;
+
+import java.awt.*;
 
 
 public class EventListener implements GLEventListener {
 
     //The OpenGL render object
     public static GL2 gl = null;
+    public static TextRenderer textRenderer;
 
     public void init(GLAutoDrawable drawable) {
         gl = drawable.getGL().getGL2();
@@ -19,6 +23,8 @@ public class EventListener implements GLEventListener {
         gl.glEnable(GL2.GL_BLEND);
 
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
+
+        textRenderer = new TextRenderer(new Font("SansSerif", Font.BOLD, 16));
     }
 
     public void dispose(GLAutoDrawable drawable) {
@@ -31,6 +37,11 @@ public class EventListener implements GLEventListener {
         gl.glTranslatef(-Renderer.cameraX, -Renderer.cameraY, 0);
         World.render();
         gl.glTranslatef(Renderer.cameraX, Renderer.cameraY, 0);
+        if(World.debug) {
+            textRenderer.beginRendering(Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            textRenderer.draw("Player: X:" + World.player.X + ", Y:" + World.player.Y, 0, 0);
+            textRenderer.endRendering();
+        }
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {

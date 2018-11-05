@@ -15,7 +15,7 @@ public class Grunt extends Entity {
         this.width = width;
         this.height = height;
         this.health = 10;
-        this.viewDistance = 12;
+        this.viewDistance = 8;
         this.setObjectColor(0.5f, 0.5f, 0, 1);
     }
 
