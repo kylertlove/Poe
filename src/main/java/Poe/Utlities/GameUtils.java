@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class GameUtils {
 
-    private static int idCounter = 0;
+    private static long idCounter = 0;
     public static Random random = new Random();
 
     /**
@@ -37,7 +37,7 @@ public class GameUtils {
                     && gameObject.Y < Renderer.getUnitsTall()/2  + Renderer.cameraY && gameObject.Y > -(Renderer.getUnitsTall()/2 - Renderer.cameraY);
     }
 
-    public static int getId() {
+    public static long getId() {
         return idCounter++;
     }
 
@@ -48,6 +48,15 @@ public class GameUtils {
     public static boolean entityNearEntity(Entity A, Entity B, float radius) {
         float distance = getDistanceBetweenObjects(A, B);
         return distance < radius;
+    }
+
+    /**
+     * int a
+     * int b
+     * @return Random number between range
+     */
+    public static int getRandomNumberFromRange(int min, int max) {
+        return random.nextInt((max - min) + 1) + min;
     }
 
 }

@@ -28,8 +28,35 @@ public class CollisionDetector {
                 (a.Y + a.height/2) > (b.Y - b.height/2);
     }
 
-    public static boolean isCollidedWithList(GameObject a, Map<Integer, Structure> list) {
+    public static boolean isCollidedWithList(GameObject a, Map<Long, Structure> list) {
         return list.entrySet().stream().filter(struct -> isCollided(struct.getValue(), a)).count() > 0;
+    }
+
+    public static void updateMoveableSingle(Entity object1, GameObject object2) {
+        if(leftSideCollision(object1, object2)) {
+            object1.canMoveLeft = false;
+            if(object2 instanceof Entity) {
+                ((Entity) object2).canMoveRight = false;
+            }
+        }
+        if(rightSideCollision(object1, object2)) {
+            object1.canMoveRight = false;
+            if(object2 instanceof Entity) {
+                ((Entity) object2).canMoveLeft = false;
+            }
+        }
+        if(topCollision(object1, object2)) {
+            object1.canMoveUp = false;
+            if(object2 instanceof Entity) {
+                ((Entity) object2).canMoveDown = false;
+            }
+        }
+        if(bottomCollision(object1, object2)) {
+            object1.canMoveDown = false;
+            if(object2 instanceof Entity) {
+                ((Entity) object2).canMoveUp = false;
+            }
+        }
     }
 
     public static void updateMoveable(Entity updateObject, List<GameObject> collidedObjects) {

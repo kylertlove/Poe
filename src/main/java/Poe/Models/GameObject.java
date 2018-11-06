@@ -11,7 +11,7 @@ import java.util.List;
 public class GameObject {
 
     public float X = 0;
-    public int id = 0;
+    public long id = 0;
     public float Y = 0;
     public float velocity = 0;
     public boolean isActive = true;
