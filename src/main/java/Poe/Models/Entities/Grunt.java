@@ -1,14 +1,12 @@
 package Poe.Models.Entities;
 
 import Poe.Drawable.Drawable;
-import Poe.Utlities.GameUtils;
-import Poe.Utlities.PoeLogger;
 import Poe.World.World;
 
 public class Grunt extends Entity {
 
-    public Grunt(int x, int y, int width, int height) {
-        this.id = GameUtils.getId();
+    public Grunt(long id, int x, int y, int width, int height) {
+        this.id = id;
         this.X = x;
         this.Y = y;
         this.velocity = 3;

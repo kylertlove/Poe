@@ -23,7 +23,7 @@ public class Player extends Entity {
         this.width = 1.5f;
         this.height = 1.5f;
         this.velocity = 6;
-        this.id = GameUtils.getId();
+        this.id = World.currentLevel.generateId();
         animations = new ArrayList<>();
         Animation walking = new Animation();
         walking.frames = new ImageResource[1];

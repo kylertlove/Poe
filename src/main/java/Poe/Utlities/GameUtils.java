@@ -7,7 +7,6 @@ import java.util.Random;
 
 public class GameUtils {
 
-    private static long idCounter = 0;
     public static Random random = new Random();
 
     /**
@@ -23,8 +22,8 @@ public class GameUtils {
 
     /**
      * Get the distance between two objects
-     * @param Gameobject a
-     * @param Gameobject b
+     * @param a
+     * @param b
      * @return float - Distance between the objects
      */
     public static float getDistanceBetweenObjects(GameObject a, GameObject b) {
@@ -35,10 +34,6 @@ public class GameUtils {
     public static boolean isInBounds(GameObject gameObject) {
         return gameObject.X > -(Renderer.getUnitsWide()/2 - Renderer.cameraX) && gameObject.X < Renderer.getUnitsWide()/2 + Renderer.cameraX
                     && gameObject.Y < Renderer.getUnitsTall()/2  + Renderer.cameraY && gameObject.Y > -(Renderer.getUnitsTall()/2 - Renderer.cameraY);
-    }
-
-    public static long getId() {
-        return idCounter++;
     }
 
     /**

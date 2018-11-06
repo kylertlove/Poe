@@ -22,13 +22,13 @@ public class StructureUtils {
         if(World.walls.size() == 0) {
             Wall[] wallArray = building.buildStructure();
             for (int wallIndex = 0; wallIndex < wallArray.length; wallIndex++) {
-                World.walls.put(GameUtils.getId(), wallArray[wallIndex]);
+                World.walls.put(World.currentLevel.generateId(), wallArray[wallIndex]);
             }
         } else {
             if(!CollisionDetector.isCollidedWithList(building, World.walls)) {
                 Wall[] wallArray = building.buildStructure();
                 for (int wallIndex = 0; wallIndex < wallArray.length; wallIndex++) {
-                    World.walls.put(GameUtils.getId(), wallArray[wallIndex]);
+                    World.walls.put(World.currentLevel.generateId(), wallArray[wallIndex]);
                 }
             }
         }

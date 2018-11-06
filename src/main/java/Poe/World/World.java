@@ -2,7 +2,6 @@ package Poe.World;
 
 import Poe.Engine.CollisionDetector;
 import Poe.Engine.Renderer;
-import Poe.EventListener;
 import Poe.Level.ILevelBuilder;
 import Poe.Level.Level1;
 import Poe.Models.Entities.Entity;
@@ -12,19 +11,17 @@ import Poe.Models.Item.Weapons.ThrowingStar;
 import Poe.Models.Structures.Structure;
 import Poe.Utlities.DebuggerUtils;
 import Poe.Utlities.GameUtils;
-import Poe.Utlities.PoeLogger;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 public class World {
 
     public static Player player = null;
     public static Projectile activeRangeWeapon;
-    public static Map<Long, Structure> walls = new ConcurrentHashMap<>();
-    public static Map<Long, Entity> enemies = new ConcurrentHashMap<>();
+    public static Map<Long, Structure> walls;
+    public static Map<Long, Entity> enemies;
     public static ILevelBuilder currentLevel;
     public static boolean debug = true;
 
@@ -89,24 +86,32 @@ public class World {
         if(activeRangeWeapon.isActive) {
             activeRangeWeapon.render();
         }
-        enemies.forEach((index, entity) -> {
-            entity.render();
+        enemies.entrySet()
+                .stream()
+                .filter(entity -> GameUtils.isInBounds(entity.getValue()))
+                .forEach(inBoundsEnemy -> inBoundsEnemy.getValue().render());
+
+        walls.forEach((index, structure) -> {
+            /**
+             *TODO:
+             * IsInBounds breaks since structures can be larger than screen size.
+             * Need different Method to check for 'Any' part of GameObject inBounds
+             */
+            structure.render();
         });
-        walls.forEach((index, structure) -> structure.render());
         if(debug) {
-            DebuggerUtils.writeToScreen();//debugger
             DebuggerUtils.addDebugMessage("Player: X:" + Math.round(World.player.X) + ", Y:" + Math.round(World.player.Y));
             DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
             DebuggerUtils.addDebugMessage(Renderer.getWindowHeight() + ", units tall: " + Renderer.getUnitsTall());
+            DebuggerUtils.writeToScreen();//debugger
         }
     }
 
     //Initialize the gameboard
     public static void init() {
+        currentLevel = new Level1();
+        currentLevel.init();
         player = new Player();
         activeRangeWeapon = new ThrowingStar(Player.DEFAULT_DAMAGE);
-        currentLevel = new Level1();
-        currentLevel.createWalls();
-        currentLevel.createEnemies();
     }
 }

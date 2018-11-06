@@ -1,9 +1,8 @@
 package Poe.Utlities;
 
 import Poe.Engine.Renderer;
-import Poe.EventListener;
+import Poe.Engine.EventListener;
 import Poe.World.World;
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
 
 import java.util.HashMap;
 import java.util.Map;

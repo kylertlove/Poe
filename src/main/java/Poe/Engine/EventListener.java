@@ -1,4 +1,4 @@
-package Poe;
+package Poe.Engine;
 
 import Poe.Engine.Renderer;
 import Poe.World.World;

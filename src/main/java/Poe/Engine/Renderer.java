@@ -1,13 +1,10 @@
 package Poe.Engine;
 
-import Poe.EventListener;
 import Poe.Input.KeyInput;
 import Poe.Input.MouseInput;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
-import java.awt.*;
-import java.io.File;
 
 public class Renderer {
 

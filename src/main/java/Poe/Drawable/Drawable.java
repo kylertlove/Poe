@@ -1,6 +1,6 @@
 package Poe.Drawable;
 
-import Poe.EventListener;
+import Poe.Engine.EventListener;
 import Poe.ResourceManager.ImageResource;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.texture.Texture;
