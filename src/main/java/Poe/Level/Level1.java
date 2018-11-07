@@ -50,8 +50,7 @@ public class Level1 implements ILevelBuilder {
         World.enemies = new ConcurrentHashMap<>();
         for(int i = 0; i < 50; i++) {
             Grunt g = new Grunt(generateId(), GameUtils.getRandomNumberFromRange((int)maxWidth/2*(-1), (int)maxWidth/2),
-                    GameUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2),
-                    1, 1);
+                    GameUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
             World.enemies.put(g.id, g);
         }
     }

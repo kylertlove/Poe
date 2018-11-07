@@ -1,29 +1,28 @@
 package Poe.Models.Entities;
 
-import Poe.Drawable.Drawable;
+import Poe.Drawable.Animation;
+import Poe.ResourceManager.ImageResource;
 import Poe.World.World;
+
+import java.util.ArrayList;
 
 public class Grunt extends Entity {
 
-    public Grunt(long id, int x, int y, int width, int height) {
+    public Grunt(long id, int x, int y) {
         this.id = id;
         this.X = x;
         this.Y = y;
         this.velocity = 3;
-        this.width = width;
-        this.height = height;
+        this.width = 1.5f;
+        this.height = 1.5f;
         this.health = 10;
         this.viewDistance = 8;
-        this.setObjectColor(0.5f, 0.5f, 0, 1);
-    }
-
-    @Override
-    public void render() {
-        Drawable.setRotation(rotation);
-        Drawable.setColor(this.objectColor);
-        Drawable.fillRect(X, Y, width, height);
-        Drawable.setColor(Drawable.DEFAULT_COLOR);
-        Drawable.setRotation(0);
+        animations = new ArrayList<>();
+        Animation walking = new Animation();
+        walking.frames = new ImageResource[1];
+        String uri =  "/Images/Grunt.png";
+        walking.frames[0] = new ImageResource(this.getClass().getResourceAsStream(uri));
+        animations.add(walking);
     }
 
     @Override
