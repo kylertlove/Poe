@@ -1,7 +1,10 @@
 package Poe.World;
 
+import Poe.Drawable.Drawable;
 import Poe.Engine.CollisionDetector;
+import Poe.Engine.EventListener;
 import Poe.Engine.Renderer;
+import Poe.Input.MouseInput;
 import Poe.Level.ILevelBuilder;
 import Poe.Level.Level1;
 import Poe.Models.Entities.Entity;
@@ -12,6 +15,7 @@ import Poe.Models.Structures.Structure;
 import Poe.Utlities.DebuggerUtils;
 import Poe.Utlities.GameUtils;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -102,7 +106,8 @@ public class World {
         if(debug) {
             DebuggerUtils.addDebugMessage("Player: X:" + Math.round(World.player.X) + ", Y:" + Math.round(World.player.Y));
             DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
-            DebuggerUtils.addDebugMessage(Renderer.getWindowHeight() + ", units tall: " + Renderer.getUnitsTall());
+            DebuggerUtils.addDebugMessage("Window Height" + Renderer.getWindowHeight() +
+                                               ", Units Tall: " + Renderer.getUnitsTall());
             DebuggerUtils.writeToScreen();//debugger
         }
     }

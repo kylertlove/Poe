@@ -1,7 +1,9 @@
 package Poe.Drawable;
 
 import Poe.Engine.EventListener;
+import Poe.Engine.Renderer;
 import Poe.ResourceManager.ImageResource;
+import Poe.Utlities.GameUtils;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.texture.Texture;
 
@@ -28,6 +30,15 @@ public class Drawable {
         gl.glFlush();
         gl.glRotatef(-rotation, 0, 0, 1);
         gl.glTranslatef(-x, -y, 0);
+    }
+
+    public static void drawVector(float startX, float startY, float endX, float endY) {
+        GL2 gl = EventListener.gl;
+        gl.glBegin(GL2.GL_LINES);
+        gl.glVertex2f(startX, startY);
+        gl.glVertex2f(endX, endY);
+        gl.glEnd();
+        gl.glFlush();
     }
 
     public static void setColor(float[] objectColor) {

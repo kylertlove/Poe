@@ -1,6 +1,7 @@
 package Poe.Engine;
 
 import Poe.Engine.Renderer;
+import Poe.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
@@ -21,14 +22,12 @@ public class EventListener implements GLEventListener {
         gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
         gl.glEnable(GL2.GL_TEXTURE_2D);
         gl.glEnable(GL2.GL_BLEND);
-
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
-
-        textRenderer = new TextRenderer(new Font("Sarif", Font.BOLD, 16));
+        textRenderer = new TextRenderer(new Font(Font.DIALOG, Font.BOLD, 16));
     }
 
     public void dispose(GLAutoDrawable drawable) {
-        System.out.println("Dispose");
+        PoeLogger.logger.info("Dispose");
     }
 
     public void display(GLAutoDrawable drawable) {

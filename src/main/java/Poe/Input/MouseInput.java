@@ -1,6 +1,8 @@
 package Poe.Input;
 
 import Poe.Engine.Renderer;
+import Poe.Models.Entities.Grunt;
+import Poe.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.MouseEvent;
 import com.jogamp.newt.event.MouseListener;
@@ -11,8 +13,7 @@ public class MouseInput implements MouseListener {
     private static int y = 0;
 
     public void mouseClicked(MouseEvent mouseEvent) {
-       // System.out.println("Mouse Click: X: " + getWorldX() + ", Y: " + getWorldY() + " Player x: " + World.player.X + " player y: " + World.player.Y);
-
+        //PoeLogger.logger.info("Mouse Click: X: " + getWorldX() + ", Y: " + getWorldY() + " Player x: " + World.player.X + " player y: " + World.player.Y);
     }
 
     public void mouseEntered(MouseEvent mouseEvent) {
