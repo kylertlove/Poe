@@ -1,4 +1,4 @@
-package Poe.Models.Item.Weapons;
+package Poe.Models.Item.Weapons.Projectile;
 
 import Poe.Engine.GameLoop;
 import Poe.Input.MouseInput;

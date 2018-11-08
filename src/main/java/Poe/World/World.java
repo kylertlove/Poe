@@ -1,21 +1,17 @@
 package Poe.World;
 
-import Poe.Drawable.Drawable;
 import Poe.Engine.CollisionDetector;
-import Poe.Engine.EventListener;
 import Poe.Engine.Renderer;
-import Poe.Input.MouseInput;
 import Poe.Level.ILevelBuilder;
 import Poe.Level.Level1;
 import Poe.Models.Entities.Entity;
 import Poe.Models.Entities.Player;
-import Poe.Models.Item.Weapons.Projectile;
-import Poe.Models.Item.Weapons.ThrowingStar;
+import Poe.Models.Item.Weapons.Projectile.Projectile;
+import Poe.Models.Item.Weapons.Projectile.ThrowingStar;
 import Poe.Models.Structures.Structure;
 import Poe.Utlities.DebuggerUtils;
 import Poe.Utlities.GameUtils;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -117,6 +113,6 @@ public class World {
         currentLevel = new Level1();
         currentLevel.init();
         player = new Player();
-        activeRangeWeapon = new ThrowingStar(Player.DEFAULT_DAMAGE);
+        activeRangeWeapon = new ThrowingStar();
     }
 }

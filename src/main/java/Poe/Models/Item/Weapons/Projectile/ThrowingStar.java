@@ -1,12 +1,14 @@
-package Poe.Models.Item.Weapons;
+package Poe.Models.Item.Weapons.Projectile;
 
 import Poe.Drawable.Drawable;
-import Poe.Utlities.GameUtils;
+import Poe.Models.Item.Weapons.Projectile.Projectile;
 import Poe.World.World;
 
 public class ThrowingStar extends Projectile {
 
-    public ThrowingStar(int damage) {
+    public static final int DEFAULT_DAMAGE = 3;
+
+    public ThrowingStar() {
         this.X = 0;
         this.Y = 0;
         this.width = 0.5f;
@@ -15,7 +17,7 @@ public class ThrowingStar extends Projectile {
         this.rotation = 0;
         this.isActive = false;
         this.setObjectColor(0.5f, 0, 0.5f, 1);
-        damageAmount = damage;
+        damageAmount = DEFAULT_DAMAGE;
     }
 
     @Override

@@ -17,7 +17,6 @@ public class Player extends Entity {
 
     public boolean currentlyRangeAttacking = false;
     public boolean rangeClick = false;
-    public static final int DEFAULT_DAMAGE = 3;
 
     public Player() {
         this.width = 1.5f;
