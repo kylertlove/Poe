@@ -18,6 +18,9 @@ public class Player extends Entity {
     public boolean currentlyRangeAttacking = false;
     public boolean rangeClick = false;
 
+    public boolean currentlyMeleeAttacking = false;
+    public boolean meleeClick = false;
+
     public Player() {
         this.width = 1.5f;
         this.height = 1.5f;
@@ -69,7 +72,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public void recieveHit(int hitAmount) {
+    public void recieveHit(float hitAmount) {
         this.health -= hitAmount;
     }
 

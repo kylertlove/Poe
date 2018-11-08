@@ -6,6 +6,8 @@ import Poe.Level.ILevelBuilder;
 import Poe.Level.Level1;
 import Poe.Models.Entities.Entity;
 import Poe.Models.Entities.Player;
+import Poe.Models.Item.Weapons.Melee.Melee;
+import Poe.Models.Item.Weapons.Melee.ShortSword;
 import Poe.Models.Item.Weapons.Projectile.Projectile;
 import Poe.Models.Item.Weapons.Projectile.ThrowingStar;
 import Poe.Models.Structures.Structure;
@@ -20,6 +22,7 @@ public class World {
 
     public static Player player = null;
     public static Projectile activeRangeWeapon;
+    public static Melee activeMeleeWeapon;
     public static Map<Long, Structure> walls;
     public static Map<Long, Entity> enemies;
     public static ILevelBuilder currentLevel;
@@ -31,11 +34,18 @@ public class World {
     public static void update() {
         //update player and camera position
         player.update();
+        activeMeleeWeapon.update();
         Renderer.updateCamera(player.X, player.Y);
         //update range weapons
         if(activeRangeWeapon.isActive) {
             activeRangeWeapon.update();
         }
+        //melee attacking
+        if(player.meleeClick && !player.currentlyMeleeAttacking) {
+            player.currentlyMeleeAttacking = true;
+            enemies.forEach((aLong, entity) -> activeMeleeWeapon.attack(entity));
+        }
+
         enemies.forEach((index, entity) -> {
             entity.update();
             if(GameUtils.entityNearEntity(player, entity, entity.viewDistance)) {
@@ -50,7 +60,7 @@ public class World {
             if(activeRangeWeapon.isActive) {
                 if(CollisionDetector.isCollided(activeRangeWeapon, entity)) {
                     activeRangeWeapon.destroy();
-                    entity.recieveHit(activeRangeWeapon.damageAmount);
+                    entity.recieveHit(activeRangeWeapon.getDamageAmount());
                 }
             }
         });
@@ -86,6 +96,9 @@ public class World {
         if(activeRangeWeapon.isActive) {
             activeRangeWeapon.render();
         }
+        if(player.currentlyMeleeAttacking) {
+            activeMeleeWeapon.render();
+        }
         enemies.entrySet()
                 .stream()
                 .filter(entity -> GameUtils.isInBounds(entity.getValue()))
@@ -104,6 +117,7 @@ public class World {
             DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
             DebuggerUtils.addDebugMessage("Window Height" + Renderer.getWindowHeight() +
                                                ", Units Tall: " + Renderer.getUnitsTall());
+            DebuggerUtils.addDebugMessage("Currently Attacking: " + player.currentlyMeleeAttacking);
             DebuggerUtils.writeToScreen();//debugger
         }
     }
@@ -114,5 +128,6 @@ public class World {
         currentLevel.init();
         player = new Player();
         activeRangeWeapon = new ThrowingStar();
+        activeMeleeWeapon = new ShortSword();
     }
 }

@@ -28,11 +28,17 @@ public class MouseInput implements MouseListener {
         if(mouseEvent.getButton() == MouseEvent.BUTTON3) {
             World.player.rangeClick = true;
         }
+        if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
+            World.player.meleeClick = true;
+        }
     }
 
     public void mouseReleased(MouseEvent mouseEvent) {
         if(mouseEvent.getButton() == MouseEvent.BUTTON3) {
             World.player.rangeClick = false;
+        }
+        if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
+            World.player.meleeClick = false;
         }
     }
 

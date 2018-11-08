@@ -45,7 +45,7 @@ public class GameObject {
         //Implementation Hook for Objects that can be destroyed
     }
 
-    public void recieveHit(int hitAmount) {
+    public void recieveHit(float hitAmount) {
         this.health -= hitAmount;
         if(this.health <= 0) {
             this.destroy();

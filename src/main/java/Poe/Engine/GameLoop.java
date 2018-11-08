@@ -18,6 +18,7 @@ public class GameLoop {
             lastUpdateTime = System.nanoTime();
             while (running) {
                 long currentTime = System.nanoTime();
+                //Attempt to throttle update count prior to render.  trying to avoid rubberbanding
                 updates = 0;
                 while (currentTime - lastUpdateTime >= targetTime) {
 

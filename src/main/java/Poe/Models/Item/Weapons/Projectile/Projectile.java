@@ -3,13 +3,13 @@ package Poe.Models.Item.Weapons.Projectile;
 import Poe.Engine.GameLoop;
 import Poe.Input.MouseInput;
 import Poe.Models.Item.Item;
+import Poe.Models.Item.Weapons.IAttackItems;
 import Poe.Utlities.GameUtils;
 
 
-public class Projectile extends Item {
+public class Projectile extends Item implements IAttackItems {
 
     public float angleOfProjection = 0;
-    public int damageAmount = 0;
 
     /**
      * When activating a Projectile, This sets the starting position and the rotation needed
@@ -34,5 +34,10 @@ public class Projectile extends Item {
         } else {
             this.destroy();
         }
+    }
+
+    @Override
+    public float getDamageAmount() {
+        return this.damageAmount;
     }
 }
