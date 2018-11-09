@@ -14,7 +14,6 @@ public class ThrowingStar extends Projectile {
         this.height = 0.5f;
         this.velocity = 25;
         this.rotation = 0;
-        this.isActive = false;
         this.setObjectColor(0.5f, 0, 0.5f, 1);
         this.damageAmount = 3.0f;
     }

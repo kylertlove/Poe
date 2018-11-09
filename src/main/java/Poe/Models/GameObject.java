@@ -14,7 +14,7 @@ public class GameObject {
     public long id = 0;
     public float Y = 0;
     public float velocity = 0;
-    public boolean isActive = true;
+    public boolean isActive = false;
     public float[] objectColor = new float[]{1, 1, 1, 1};
     public float width = 0;
     public float height = 0;

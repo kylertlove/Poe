@@ -18,11 +18,8 @@ public class Melee extends Item implements IAttackItems {
     public void attack(Entity entity) {
         if(CollisionDetector.isCollided(this, entity)) {
             entity.recieveHit(this.getDamageAmount());
-            PoeLogger.logger.info("Hit Entity " + entity.id);
         }
-        GameUtils.setTimeout(() -> {
-            World.player.currentlyMeleeAttacking = false;
-        }, 100);
+
     }
 
     @Override

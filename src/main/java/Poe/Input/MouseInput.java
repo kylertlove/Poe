@@ -39,6 +39,8 @@ public class MouseInput implements MouseListener {
         }
         if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
             World.player.meleeClick = false;
+            World.player.currentlyMeleeAttacking = false;
+            World.activeMeleeWeapon.isActive = false;
         }
     }
 

@@ -41,8 +41,9 @@ public class World {
             activeRangeWeapon.update();
         }
         //melee attacking
-        if(player.meleeClick && !player.currentlyMeleeAttacking) {
+        if(player.meleeClick && !player.currentlyMeleeAttacking && !activeMeleeWeapon.isActive) {
             player.currentlyMeleeAttacking = true;
+            activeMeleeWeapon.isActive = true;
             enemies.forEach((aLong, entity) -> activeMeleeWeapon.attack(entity));
         }
 
@@ -96,9 +97,6 @@ public class World {
         if(activeRangeWeapon.isActive) {
             activeRangeWeapon.render();
         }
-        if(player.currentlyMeleeAttacking) {
-            activeMeleeWeapon.render();
-        }
         enemies.entrySet()
                 .stream()
                 .filter(entity -> GameUtils.isInBounds(entity.getValue()))
@@ -113,11 +111,14 @@ public class World {
             structure.render();
         });
         if(debug) {
+            if(player.currentlyMeleeAttacking) {
+                activeMeleeWeapon.render();
+            }
             DebuggerUtils.addDebugMessage("Player: X:" + Math.round(World.player.X) + ", Y:" + Math.round(World.player.Y));
             DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
             DebuggerUtils.addDebugMessage("Window Height" + Renderer.getWindowHeight() +
                                                ", Units Tall: " + Renderer.getUnitsTall());
-            DebuggerUtils.addDebugMessage("Currently Attacking: " + player.currentlyMeleeAttacking);
+            DebuggerUtils.addDebugMessage("Able to Melee : " + !player.currentlyMeleeAttacking);
             DebuggerUtils.writeToScreen();//debugger
         }
     }
