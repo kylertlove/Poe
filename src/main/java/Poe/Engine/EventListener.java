@@ -1,7 +1,6 @@
 package Poe.Engine;
 
-import Poe.Engine.Renderer;
-import Poe.Utlities.PoeLogger;
+import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
@@ -43,7 +42,8 @@ public class EventListener implements GLEventListener {
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
         gl.glOrtho(-Renderer.getUnitsWide()/2, Renderer.getUnitsWide()/2,
-                -Renderer.getUnitsTall()/2, Renderer.getUnitsTall()/2, -1, 1); //Orthoscopic
+                   -Renderer.getUnitsTall()/2, Renderer.getUnitsTall()/2,
+                   -1, 1); //Orthoscopic
         gl.glMatrixMode(GL2.GL_MODELVIEW);
     }
 }

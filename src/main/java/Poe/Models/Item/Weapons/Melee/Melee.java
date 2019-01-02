@@ -1,13 +1,11 @@
 package Poe.Models.Item.Weapons.Melee;
 
-import Poe.Engine.CollisionDetector;
-import Poe.Input.MouseInput;
+import Poe.Engine.Utlities.CollisionDetector;
+import Poe.Engine.Input.MouseInput;
 import Poe.Models.Entities.Entity;
 import Poe.Models.Item.Item;
 import Poe.Models.Item.Weapons.IAttackItems;
-import Poe.Utlities.DebuggerUtils;
-import Poe.Utlities.GameUtils;
-import Poe.Utlities.PoeLogger;
+import Poe.Engine.Utlities.GameUtils;
 import Poe.World.World;
 
 public class Melee extends Item implements IAttackItems {

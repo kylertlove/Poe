@@ -1,5 +1,6 @@
 package Poe.Engine;
 
+import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 
 public class GameLoop {
@@ -10,10 +11,10 @@ public class GameLoop {
     private static int updates = 0;
     private static final int MAX_UPDATES = 5;
     private static long lastUpdateTime = 0;
-
+    public static Thread thread;
 
     public static void start() {
-        Thread thread = new Thread(() -> {
+        thread = new Thread(() -> {
             running = true;
             lastUpdateTime = System.nanoTime();
             while (running) {

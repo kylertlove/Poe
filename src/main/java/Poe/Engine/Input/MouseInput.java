@@ -1,8 +1,7 @@
-package Poe.Input;
+package Poe.Engine.Input;
 
 import Poe.Engine.Renderer;
-import Poe.Models.Entities.Grunt;
-import Poe.Utlities.PoeLogger;
+import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.MouseEvent;
 import com.jogamp.newt.event.MouseListener;
@@ -55,7 +54,8 @@ public class MouseInput implements MouseListener {
     }
 
     public void mouseWheelMoved(MouseEvent mouseEvent) {
-
+        World.player.scrollRangeWeapons();
+        World.activeRangeWeapon = World.player.getRangeWeapon();
     }
 
     //X and Y values as pixels

@@ -1,7 +1,7 @@
-package Poe.Input;
+package Poe.Engine.Input;
 
 
-import Poe.Utlities.PoeLogger;
+import Poe.Engine.GameLoop;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;

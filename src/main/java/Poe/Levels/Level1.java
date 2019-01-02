@@ -1,17 +1,17 @@
-package Poe.Level;
+package Poe.Levels;
 
 import Poe.Models.Entities.Grunt;
 import Poe.Models.Structures.Wall;
-import Poe.Utlities.StructureUtils;
-import Poe.Utlities.GameUtils;
-import Poe.Utlities.PoeLogger;
+import Poe.Engine.Utlities.StructureUtils;
+import Poe.Engine.Utlities.GameUtils;
+import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Level1 implements ILevelBuilder {
 
-    private static final String levelName = "Level 1";
+    private static final String levelName = "Levels 1";
     private static final float maxWidth = 100;
     private static final float maxHeight = 100;
     private static long objectId = 0;

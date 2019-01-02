@@ -1,4 +1,4 @@
-package Poe.Utlities;
+package Poe.Engine.Utlities;
 
 import Poe.Engine.Renderer;
 import Poe.Models.Entities.Entity;

@@ -2,15 +2,16 @@ package Poe.Models.Entities;
 
 import Poe.Drawable.Animation;
 import Poe.Engine.GameLoop;
-import Poe.Input.KeyInput;
-import Poe.Input.MouseInput;
+import Poe.Engine.Input.KeyInput;
+import Poe.Engine.Input.MouseInput;
+import Poe.Models.Item.Weapons.Projectile.Bow;
+import Poe.Models.Item.Weapons.Projectile.Projectile;
+import Poe.Models.Item.Weapons.Projectile.ThrowingStar;
 import Poe.ResourceManager.ImageResource;
-import Poe.Utlities.GameUtils;
-import Poe.Utlities.PoeLogger;
+import Poe.Engine.Utlities.GameUtils;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class Player extends Entity {
@@ -20,6 +21,9 @@ public class Player extends Entity {
 
     public boolean currentlyMeleeAttacking = false;
     public boolean meleeClick = false;
+
+    private Projectile[] rangeWeapons = new Projectile[2];
+    private int rangeWeaponIndex = 0;
 
     public Player() {
         this.width = 1.5f;
@@ -32,6 +36,8 @@ public class Player extends Entity {
         String uri =  "/Images/Poe.png";
         walking.frames[0] = new ImageResource(this.getClass().getResourceAsStream(uri));
         animations.add(walking);
+        rangeWeapons[0] = new ThrowingStar();
+        rangeWeapons[1] = new Bow();
     }
 
     @Override
@@ -69,6 +75,18 @@ public class Player extends Entity {
     public void rangeAttack() {
         this.currentlyRangeAttacking = true;
         World.activeRangeWeapon.setInstanceLocation(this.X, this.Y);
+        World.activeRangeWeapon.rotation = rotation;
+    }
+
+    public Projectile getRangeWeapon() {
+        return rangeWeapons[rangeWeaponIndex];
+    }
+
+    public void scrollRangeWeapons() {
+        rangeWeaponIndex++;
+        if(rangeWeaponIndex > rangeWeapons.length - 1) {
+            rangeWeaponIndex = 0;
+        }
     }
 
     @Override

@@ -1,18 +1,17 @@
 package Poe.World;
 
-import Poe.Engine.CollisionDetector;
+import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Renderer;
-import Poe.Level.ILevelBuilder;
-import Poe.Level.Level1;
+import Poe.Levels.ILevelBuilder;
+import Poe.Levels.Level1;
 import Poe.Models.Entities.Entity;
 import Poe.Models.Entities.Player;
 import Poe.Models.Item.Weapons.Melee.Melee;
 import Poe.Models.Item.Weapons.Melee.ShortSword;
 import Poe.Models.Item.Weapons.Projectile.Projectile;
-import Poe.Models.Item.Weapons.Projectile.ThrowingStar;
 import Poe.Models.Structures.Structure;
-import Poe.Utlities.DebuggerUtils;
-import Poe.Utlities.GameUtils;
+import Poe.Engine.Utlities.DebuggerUtils;
+import Poe.Engine.Utlities.GameUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -27,6 +26,15 @@ public class World {
     public static Map<Long, Entity> enemies;
     public static ILevelBuilder currentLevel;
     public static boolean debug = true;
+
+    /** Game Initialization */
+    public static void init() {
+        currentLevel = new Level1();
+        currentLevel.init();
+        player = new Player();
+        activeRangeWeapon = player.getRangeWeapon();
+        activeMeleeWeapon = new ShortSword();
+    }
 
     /**
      * Game Update Function
@@ -119,16 +127,9 @@ public class World {
             DebuggerUtils.addDebugMessage("Window Height" + Renderer.getWindowHeight() +
                                                ", Units Tall: " + Renderer.getUnitsTall());
             DebuggerUtils.addDebugMessage("Able to Melee : " + !player.currentlyMeleeAttacking);
+            DebuggerUtils.addDebugMessage("Range Weapon: " + activeRangeWeapon.getClass().getName());
             DebuggerUtils.writeToScreen();//debugger
         }
     }
 
-    //Initialize the gameboard
-    public static void init() {
-        currentLevel = new Level1();
-        currentLevel.init();
-        player = new Player();
-        activeRangeWeapon = new ThrowingStar();
-        activeMeleeWeapon = new ShortSword();
-    }
 }

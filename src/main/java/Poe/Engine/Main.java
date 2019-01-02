@@ -1,6 +1,6 @@
 package Poe.Engine;
 
-import Poe.Utlities.PoeLogger;
+import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 
 public class Main {

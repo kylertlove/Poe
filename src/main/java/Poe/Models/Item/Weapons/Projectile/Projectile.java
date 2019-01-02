@@ -1,10 +1,10 @@
 package Poe.Models.Item.Weapons.Projectile;
 
 import Poe.Engine.GameLoop;
-import Poe.Input.MouseInput;
+import Poe.Engine.Input.MouseInput;
 import Poe.Models.Item.Item;
 import Poe.Models.Item.Weapons.IAttackItems;
-import Poe.Utlities.GameUtils;
+import Poe.Engine.Utlities.GameUtils;
 
 
 public class Projectile extends Item implements IAttackItems {

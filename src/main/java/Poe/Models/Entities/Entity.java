@@ -2,7 +2,7 @@ package Poe.Models.Entities;
 
 import Poe.Engine.GameLoop;
 import Poe.Models.GameObject;
-import Poe.Utlities.GameUtils;
+import Poe.Engine.Utlities.GameUtils;
 
 import java.util.ArrayList;
 import java.util.List;

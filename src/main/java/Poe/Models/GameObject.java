@@ -2,7 +2,6 @@ package Poe.Models;
 
 import Poe.Drawable.Animation;
 import Poe.Drawable.Drawable;
-
 import java.util.List;
 
 /**
