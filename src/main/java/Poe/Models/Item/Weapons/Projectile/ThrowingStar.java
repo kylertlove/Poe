@@ -1,7 +1,6 @@
 package Poe.Models.Item.Weapons.Projectile;
 
 import Poe.Drawable.Drawable;
-import Poe.Models.Item.Weapons.IAttackItems;
 import Poe.Models.Item.Weapons.Projectile.Projectile;
 import Poe.World.World;
 
@@ -15,7 +14,7 @@ public class ThrowingStar extends Projectile {
         this.velocity = 25;
         this.rotation = 0;
         this.setObjectColor(0.5f, 0, 0.5f, 1);
-        this.damageAmount = 3.0f;
+        this.damageAmount = 6.0f;
     }
 
     @Override

@@ -7,7 +7,7 @@ import Poe.Models.Item.Weapons.IAttackItems;
 import Poe.Engine.Utlities.GameUtils;
 
 
-public class Projectile extends Item implements IAttackItems {
+public abstract class Projectile extends Item implements IAttackItems {
 
     public float angleOfProjection = 0;
 

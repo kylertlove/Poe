@@ -39,6 +39,7 @@ public class GameLoop {
                     try {
                         Thread.sleep((targetTime - timeTake) / 1000000);
                     } catch (InterruptedException e) {
+                        PoeLogger.logger.info(e.getMessage());
                         e.printStackTrace();
                     }
                 }
