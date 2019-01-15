@@ -1,21 +1,18 @@
 package Poe.Engine.Utlities;
 
-import Poe.Models.Entities.Entity;
-import Poe.Models.GameObject;
-import Poe.Models.Structures.Structure;
-import Poe.World.World;
-
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import Poe.Models.GameObject;
+import Poe.Models.Entities.Entity;
+import Poe.Models.Structures.Structure;
 
 /**
- *  --------------
- * | (-,+) | (+,+) |
- * |---------------|
+ * -------------- 
+ * | (-,+) | (+,+) | 
+ * |---------------| 
  * | (-,-) | (+,-) |
- *  ---------------
+ * ---------------
  */
 public class CollisionDetector {
 

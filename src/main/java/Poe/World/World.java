@@ -124,10 +124,10 @@ public class World {
             }
             DebuggerUtils.addDebugMessage("Player: X:" + Math.round(World.player.X) + ", Y:" + Math.round(World.player.Y));
             DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
-            DebuggerUtils.addDebugMessage("Window Height" + Renderer.getWindowHeight() +
+            DebuggerUtils.addDebugMessage("Window Height: " + Renderer.getWindowHeight() +
                                                ", Units Tall: " + Renderer.getUnitsTall());
             DebuggerUtils.addDebugMessage("Able to Melee : " + !player.currentlyMeleeAttacking);
-            DebuggerUtils.addDebugMessage("Range Weapon: " + activeRangeWeapon.getClass().getName());
+            DebuggerUtils.addDebugMessage("Range Weapon: " + activeRangeWeapon.getClass().getSimpleName());
             DebuggerUtils.writeToScreen();//debugger
         }
     }

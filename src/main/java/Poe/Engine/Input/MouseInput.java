@@ -1,7 +1,6 @@
 package Poe.Engine.Input;
 
 import Poe.Engine.Renderer;
-import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.MouseEvent;
 import com.jogamp.newt.event.MouseListener;

@@ -62,6 +62,6 @@ public class Level1 implements ILevelBuilder {
 
     @Override
     public String getLevel() {
-        return this.levelName;
+        return levelName;
     }
 }
