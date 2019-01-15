@@ -9,6 +9,7 @@ import Poe.Models.Item.Weapons.Projectile.Projectile;
 import Poe.Models.Item.Weapons.Projectile.ThrowingStar;
 import Poe.ResourceManager.ImageResource;
 import Poe.Engine.Utlities.GameUtils;
+import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 
@@ -16,12 +17,13 @@ import java.util.ArrayList;
 
 public class Player extends Entity {
 
-    public boolean currentlyRangeAttacking = false;
     public boolean rangeClick = false;
+    public boolean canRangeAttack = true;
 
     public boolean currentlyMeleeAttacking = false;
     public boolean meleeClick = false;
 
+    public Projectile activeRangeWeapon;
     private Projectile[] rangeWeapons = new Projectile[2];
     private int rangeWeaponIndex = 0;
 
@@ -38,6 +40,7 @@ public class Player extends Entity {
         animations.add(walking);
         rangeWeapons[0] = new ThrowingStar();
         rangeWeapons[1] = new Bow();
+        activeRangeWeapon = rangeWeapons[0];
     }
 
     @Override
@@ -63,7 +66,7 @@ public class Player extends Entity {
         Y += yInput * GameLoop.getDelta();
         rotation = GameUtils.getAngle(MouseInput.getWorldX(), MouseInput.getWorldY(), X, -Y);
 
-        if(rangeClick && !currentlyRangeAttacking) {
+        if(rangeClick && this.canRangeAttack) {
             this.rangeAttack();
         }
         canMoveLeft = true;
@@ -73,13 +76,30 @@ public class Player extends Entity {
     }
 
     public void rangeAttack() {
-        this.currentlyRangeAttacking = true;
-        World.activeRangeWeapon.setInstanceLocation(this.X, this.Y);
-        World.activeRangeWeapon.rotation = rotation;
+        this.canRangeAttack = false;
+        for (int i = 0; i < World.projectiles.length; i++) {
+            if(World.projectiles[i] == null || !World.projectiles[i].isActive) {
+                World.projectiles[i] = getRangeWeapon();
+                World.projectiles[i].setInstanceLocation(this.X, this.Y);
+                World.projectiles[i].rotation = rotation;
+                break;
+            }
+        }
+        GameUtils.setTimeout(() -> {
+            canRangeAttack = true;
+         }, rangeWeapons[rangeWeaponIndex].projectileCooldown);
     }
 
     public Projectile getRangeWeapon() {
-        return rangeWeapons[rangeWeaponIndex];
+        switch (rangeWeaponIndex) {
+            case 0:
+                return new ThrowingStar();
+            case 1:
+                return new Bow();
+            default:
+                PoeLogger.logger.info("No active range weapon available");
+                return null;
+        }
     }
 
     public void scrollRangeWeapons() {
@@ -87,6 +107,7 @@ public class Player extends Entity {
         if(rangeWeaponIndex > rangeWeapons.length - 1) {
             rangeWeaponIndex = 0;
         }
+        this.activeRangeWeapon = rangeWeapons[rangeWeaponIndex];
     }
 
     @Override

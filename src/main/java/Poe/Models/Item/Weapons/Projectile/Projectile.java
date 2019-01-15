@@ -10,6 +10,7 @@ import Poe.Engine.Utlities.GameUtils;
 public abstract class Projectile extends Item implements IAttackItems {
 
     public float angleOfProjection = 0;
+    public int projectileCooldown = 500;
 
     /**
      * When activating a Projectile, This sets the starting position and the rotation needed

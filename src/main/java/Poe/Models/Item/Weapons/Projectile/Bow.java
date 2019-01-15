@@ -1,7 +1,6 @@
 package Poe.Models.Item.Weapons.Projectile;
 
 import Poe.Drawable.Drawable;
-import Poe.World.World;
 
 public class Bow extends Projectile {
 
@@ -14,12 +13,12 @@ public class Bow extends Projectile {
         this.rotation = 0;
         this.setObjectColor(0.5f, 0, 0.5f, 1);
         this.damageAmount = 10.0f;
+        this.projectileCooldown = 1000;
     }
 
     @Override
     public void destroy() {
         this.isActive = false;
-        World.player.currentlyRangeAttacking = false;
     }
 
 

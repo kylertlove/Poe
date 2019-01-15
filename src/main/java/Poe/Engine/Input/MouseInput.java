@@ -54,7 +54,6 @@ public class MouseInput implements MouseListener {
 
     public void mouseWheelMoved(MouseEvent mouseEvent) {
         World.player.scrollRangeWeapons();
-        World.activeRangeWeapon = World.player.getRangeWeapon();
     }
 
     //X and Y values as pixels

@@ -20,7 +20,7 @@ import java.util.Map;
 public class World {
 
     public static Player player = null;
-    public static Projectile activeRangeWeapon;
+    public static Projectile[] projectiles = new Projectile[5];
     public static Melee activeMeleeWeapon;
     public static Map<Long, Structure> walls;
     public static Map<Long, Entity> enemies;
@@ -32,7 +32,6 @@ public class World {
         currentLevel = new Level1();
         currentLevel.init();
         player = new Player();
-        activeRangeWeapon = player.getRangeWeapon();
         activeMeleeWeapon = new ShortSword();
     }
 
@@ -45,8 +44,10 @@ public class World {
         activeMeleeWeapon.update();
         Renderer.updateCamera(player.X, player.Y);
         //update range weapons
-        if(activeRangeWeapon.isActive) {
-            activeRangeWeapon.update();
+        for (int i = 0; i < projectiles.length; i++) {
+            if(projectiles[i] != null && projectiles[i].isActive){
+                projectiles[i].update();
+            }
         }
         //melee attacking
         if(player.meleeClick && !player.currentlyMeleeAttacking && !activeMeleeWeapon.isActive) {
@@ -66,10 +67,12 @@ public class World {
             if(CollisionDetector.isCollided(player, entity)) {
                 player.objectsCollidedWith.add(entity);
             }
-            if(activeRangeWeapon.isActive) {
-                if(CollisionDetector.isCollided(activeRangeWeapon, entity)) {
-                    activeRangeWeapon.destroy();
-                    entity.recieveHit(activeRangeWeapon.getDamageAmount());
+            for (int i = 0; i < projectiles.length; i++) {
+                if(projectiles[i] != null && projectiles[i].isActive){
+                    if(CollisionDetector.isCollided(projectiles[i], entity)) {
+                        projectiles[i].destroy();
+                        entity.recieveHit(projectiles[i].getDamageAmount());
+                    }
                 }
             }
         });
@@ -77,9 +80,11 @@ public class World {
             if(CollisionDetector.isCollided(player, structure)) {
                 player.objectsCollidedWith.add(structure);
             }
-            if(activeRangeWeapon.isActive) {
-                if(CollisionDetector.isCollided(activeRangeWeapon, structure)) {
-                    activeRangeWeapon.destroy();
+            for (int i = 0; i < projectiles.length; i++) {
+                if(projectiles[i] != null && projectiles[i].isActive){
+                    if(CollisionDetector.isCollided(projectiles[i], structure)) {
+                        projectiles[i].destroy();
+                    }
                 }
             }
             //Make sure Entities cant run through walls
@@ -102,8 +107,12 @@ public class World {
      */
     public static void render() {
         player.render();
-        if(activeRangeWeapon.isActive) {
-            activeRangeWeapon.render();
+        for (int i = 0; i < projectiles.length; i++) {
+            if(projectiles[i] != null && projectiles[i].isActive){
+                if(projectiles[i].isActive) {
+                    projectiles[i].render();
+                }
+            }
         }
         enemies.entrySet()
                 .stream()
@@ -127,7 +136,8 @@ public class World {
             DebuggerUtils.addDebugMessage("Window Height: " + Renderer.getWindowHeight() +
                                                ", Units Tall: " + Renderer.getUnitsTall());
             DebuggerUtils.addDebugMessage("Able to Melee : " + !player.currentlyMeleeAttacking);
-            DebuggerUtils.addDebugMessage("Range Weapon: " + activeRangeWeapon.getClass().getSimpleName());
+            DebuggerUtils.addDebugMessage("Range Weapon: " + player.activeRangeWeapon.getClass().getSimpleName());
+            DebuggerUtils.addDebugMessage("Can Range Attack: " + player.canRangeAttack);
             DebuggerUtils.writeToScreen();//debugger
         }
     }

@@ -67,7 +67,8 @@ public class GameUtils {
                 runnable.run();
             }
             catch (Exception e){
-                System.err.println(e);
+                PoeLogger.logger.info("Set Timeout error");
+                PoeLogger.logger.severe(e.getMessage());
             }
         }).start();
     }
