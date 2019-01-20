@@ -50,7 +50,7 @@ public class Entity extends GameObject {
 
             X += xVal * GameLoop.getDelta();
             Y += yVal * GameLoop.getDelta();
-            rotation = GameUtils.getAngle(this.destinationX, this.destinationY, X, -Y);
+            rotation = GameUtils.getAngle(this.destinationX, this.destinationY, X, Y);
         }
         canMoveLeft = true;
         canMoveUp = true;

@@ -53,7 +53,10 @@ public class World {
         if(player.meleeClick && !player.currentlyMeleeAttacking && !activeMeleeWeapon.isActive) {
             player.currentlyMeleeAttacking = true;
             activeMeleeWeapon.isActive = true;
-            enemies.forEach((aLong, entity) -> activeMeleeWeapon.attack(entity));
+            enemies
+                .entrySet().stream()
+                .filter(set -> GameUtils.entityNearEntity(set.getValue(), player, 5))
+                .forEach(entry -> activeMeleeWeapon.attack(entry.getValue()));
         }
 
         enemies.forEach((index, entity) -> {

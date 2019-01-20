@@ -13,7 +13,7 @@ public class ShortSword extends Melee {
         this.Y = World.player.Y;
         this.height = 1.0f;
         this.width = 1.0f;
-        this.damageAmount = 4.0f;
+        this.damageAmount = 5.0f;
     }
 
     @Override
