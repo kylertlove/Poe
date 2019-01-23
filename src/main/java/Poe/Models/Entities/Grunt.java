@@ -16,6 +16,7 @@ public class Grunt extends Entity {
         this.width = 1.5f;
         this.height = 1.5f;
         this.health = 10;
+        this.attackDamage = 4;
         this.viewDistance = 8;
         animations = new ArrayList<>();
         Animation walking = new Animation();

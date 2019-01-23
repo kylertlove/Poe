@@ -2,7 +2,9 @@ package Poe.Models.Entities;
 
 import Poe.Engine.GameLoop;
 import Poe.Models.GameObject;
+import Poe.World.World;
 import Poe.Engine.Utlities.GameUtils;
+import Poe.Engine.Utlities.PoeLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,10 @@ public class Entity extends GameObject {
     public float viewDistance = 5;
     public float destinationX = 0;
     public float destinationY = 0;
+    public float attackDamage = 1;
     public boolean isTrackingEntity = false;
+    public boolean isAttackingPlayer = false;
+    public boolean attackCooldownFinished = true;
     public List<GameObject> objectsCollidedWith = new ArrayList<>();
 
     /**
@@ -51,6 +56,15 @@ public class Entity extends GameObject {
             X += xVal * GameLoop.getDelta();
             Y += yVal * GameLoop.getDelta();
             rotation = GameUtils.getAngle(this.destinationX, this.destinationY, X, Y);
+            if((!canMoveDown || !canMoveLeft || !canMoveRight || !canMoveUp) 
+            && isAttackingPlayer
+            && attackCooldownFinished) {
+                attackCooldownFinished = false;
+                World.player.recieveHit(this.attackDamage);
+                GameUtils.setTimeout(() -> {
+                    attackCooldownFinished = true;
+                }, 1200);
+            }
         }
         canMoveLeft = true;
         canMoveUp = true;

@@ -69,6 +69,9 @@ public class World {
             }
             if(CollisionDetector.isCollided(player, entity)) {
                 player.objectsCollidedWith.add(entity);
+                entity.isAttackingPlayer = true;
+            }else {
+                entity.isAttackingPlayer = false;
             }
             for (int i = 0; i < projectiles.length; i++) {
                 if(projectiles[i] != null && projectiles[i].isActive){
@@ -135,6 +138,7 @@ public class World {
                 activeMeleeWeapon.render();
             }
             DebuggerUtils.addDebugMessage("Player: X:" + Math.round(World.player.X) + ", Y:" + Math.round(World.player.Y));
+            DebuggerUtils.addDebugMessage("Player Health: " + player.health);
             DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
             DebuggerUtils.addDebugMessage("Window Height: " + Renderer.getWindowHeight() +
                                                ", Units Tall: " + Renderer.getUnitsTall());
