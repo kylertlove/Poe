@@ -44,12 +44,14 @@ public class Entity extends GameObject {
 
             if(this.destinationX < X && canMoveLeft) {
                 xVal -= this.velocity;
-            } else if(this.destinationX > X && canMoveRight) {
+            } 
+            if(this.destinationX > X && canMoveRight) {
                 xVal += this.velocity;
             }
-            if(this.destinationY < Y && canMoveUp) {
+            if(this.destinationY < Y && canMoveDown) {
                 yVal -= this.velocity;
-            }else if(this.destinationY > Y && canMoveDown){
+            }
+            if(this.destinationY > Y && canMoveUp){
                 yVal += this.velocity;
             }
 
