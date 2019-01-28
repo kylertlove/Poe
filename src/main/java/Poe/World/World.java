@@ -55,7 +55,7 @@ public class World {
             activeMeleeWeapon.isActive = true;
             enemies
                 .entrySet().stream()
-                .filter(set -> GameUtils.entityNearEntity(set.getValue(), player, 5))
+                .filter(set -> set.getValue().isTrackingEntity)
                 .forEach(entry -> activeMeleeWeapon.attack(entry.getValue()));
         }
 
