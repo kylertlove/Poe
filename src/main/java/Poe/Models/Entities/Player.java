@@ -9,6 +9,7 @@ import Poe.Models.Item.Weapons.Projectile.Projectile;
 import Poe.Models.Item.Weapons.Projectile.ThrowingStar;
 import Poe.ResourceManager.ImageResource;
 import Poe.Engine.Utlities.GameUtils;
+import Poe.Engine.Utlities.MathUtils;
 import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
@@ -65,7 +66,7 @@ public class Player extends Entity {
 
         X += xInput * GameLoop.getDelta();
         Y += yInput * GameLoop.getDelta();
-        rotation = GameUtils.getAngle(MouseInput.getWorldX(), MouseInput.getWorldY(), X, -Y);
+        rotation = MathUtils.getAngle(MouseInput.getWorldX(), MouseInput.getWorldY(), X, -Y);
 
         if(rangeClick && this.canRangeAttack) {
             this.rangeAttack();

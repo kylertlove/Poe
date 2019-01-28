@@ -4,7 +4,7 @@ import Poe.Engine.GameLoop;
 import Poe.Models.GameObject;
 import Poe.World.World;
 import Poe.Engine.Utlities.GameUtils;
-import Poe.Engine.Utlities.PoeLogger;
+import Poe.Engine.Utlities.MathUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class Entity extends GameObject {
 
             X += xVal * GameLoop.getDelta();
             Y += yVal * GameLoop.getDelta();
-            rotation = GameUtils.getAngle(this.destinationX, this.destinationY, X, Y);
+            rotation = MathUtils.getAngle(this.destinationX, this.destinationY, X, Y);
             if((!canMoveDown || !canMoveLeft || !canMoveRight || !canMoveUp) 
             && isAttackingPlayer
             && attackCooldownFinished) {

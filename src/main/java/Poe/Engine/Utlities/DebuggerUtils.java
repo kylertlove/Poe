@@ -7,6 +7,9 @@ import Poe.World.World;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Debugging Utility Class
+ */
 public class DebuggerUtils {
 
     private static int totalDebugMsgs = 1;

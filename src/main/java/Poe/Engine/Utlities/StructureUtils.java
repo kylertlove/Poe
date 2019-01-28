@@ -4,6 +4,9 @@ import Poe.Models.Structures.Building;
 import Poe.Models.Structures.Wall;
 import Poe.World.World;
 
+/**
+ * Structure Utility Class
+ */
 public class StructureUtils {
 
     /**
@@ -11,7 +14,7 @@ public class StructureUtils {
      * @return boolean
      */
     public static void tryToBuildBuilding(float x, float y) {
-        Building building = new Building(x, y, GameUtils.getRandomNumberFromRange(3, 10), GameUtils.getRandomNumberFromRange(3, 10));
+        Building building = new Building(x, y, MathUtils.getRandomNumberFromRange(3, 10), MathUtils.getRandomNumberFromRange(3, 10));
         PoeLogger.logger.info("Generating Building @ X:" + x + ", Y:" + y);
         if(World.walls.size() == 0) {
             Wall[] wallArray = building.buildStructure();
