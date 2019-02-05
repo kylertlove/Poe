@@ -112,6 +112,17 @@ public class Player extends Entity {
         this.activeRangeWeapon = rangeWeapons[rangeWeaponIndex];
     }
 
+    public void setRangeWeapon(int inputRangeWeaponIndex) {
+        try{
+            rangeWeaponIndex = inputRangeWeaponIndex;
+            this.activeRangeWeapon = rangeWeapons[inputRangeWeaponIndex];
+        } catch(Exception ex) {
+            rangeWeaponIndex = 0;
+            this.activeRangeWeapon = rangeWeapons[0];
+            PoeLogger.logger.warning("Range weapon out of bounds index");
+        }
+    }
+
     @Override
     public void recieveHit(float hitAmount) {
         this.health -= hitAmount;

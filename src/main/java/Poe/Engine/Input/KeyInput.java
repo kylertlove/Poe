@@ -1,5 +1,6 @@
 package Poe.Engine.Input;
 
+import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;
@@ -12,8 +13,18 @@ public class KeyInput implements KeyListener {
     public void keyPressed(KeyEvent keyEvent) {
         keys[keyEvent.getKeyCode()] = true;
 
-        if(keyEvent.getKeyCode() == KeyEvent.VK_P) {
-            World.debug = !World.debug;
+        switch (keyEvent.getKeyCode()) {
+            case KeyEvent.VK_P:
+                World.debug = !World.debug;
+                break;
+            case KeyEvent.VK_1:
+                World.player.setRangeWeapon(0);
+                break;
+            case KeyEvent.VK_2:
+                World.player.setRangeWeapon(1);
+                break;
+            default:
+                break;
         }
     }
 
