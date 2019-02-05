@@ -8,7 +8,7 @@ import Poe.Models.Item.Weapons.IAttackItems;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.World.World;
 
-public class Melee extends Item implements IAttackItems {
+public abstract class Melee extends Item implements IAttackItems {
 
     public float strikingDistance = 0.5f;
     float angleOfProjection;
