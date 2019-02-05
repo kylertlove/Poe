@@ -4,7 +4,7 @@ import Poe.Engine.GameLoop;
 import Poe.Models.GameObject;
 import Poe.World.World;
 import Poe.Engine.Utlities.GameUtils;
-import Poe.Engine.Utlities.PoeLogger;
+import Poe.Engine.Utlities.MathUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,18 +44,20 @@ public class Entity extends GameObject {
 
             if(this.destinationX < X && canMoveLeft) {
                 xVal -= this.velocity;
-            } else if(this.destinationX > X && canMoveRight) {
+            } 
+            if(this.destinationX > X && canMoveRight) {
                 xVal += this.velocity;
             }
-            if(this.destinationY < Y && canMoveUp) {
+            if(this.destinationY < Y && canMoveDown) {
                 yVal -= this.velocity;
-            }else if(this.destinationY > Y && canMoveDown){
+            }
+            if(this.destinationY > Y && canMoveUp){
                 yVal += this.velocity;
             }
 
             X += xVal * GameLoop.getDelta();
             Y += yVal * GameLoop.getDelta();
-            rotation = GameUtils.getAngle(this.destinationX, this.destinationY, X, Y);
+            rotation = MathUtils.getAngle(this.destinationX, this.destinationY, X, Y);
             if((!canMoveDown || !canMoveLeft || !canMoveRight || !canMoveUp) 
             && isAttackingPlayer
             && attackCooldownFinished) {

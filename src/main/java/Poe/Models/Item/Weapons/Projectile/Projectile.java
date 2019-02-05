@@ -5,8 +5,11 @@ import Poe.Engine.Input.MouseInput;
 import Poe.Models.Item.Item;
 import Poe.Models.Item.Weapons.IAttackItems;
 import Poe.Engine.Utlities.GameUtils;
+import Poe.Engine.Utlities.MathUtils;
 
-
+/**
+ * Base Projectile Class
+ */
 public abstract class Projectile extends Item implements IAttackItems {
 
     public float angleOfProjection = 0;
@@ -21,22 +24,27 @@ public abstract class Projectile extends Item implements IAttackItems {
         this.isActive = true;
         this.X = x;
         this.Y = y;
-        this.angleOfProjection = GameUtils.getAngle(x, -y, MouseInput.getWorldX(), MouseInput.getWorldY());
+        this.angleOfProjection = MathUtils.getAngle(x, -y, MouseInput.getWorldX(), MouseInput.getWorldY());
     }
 
     /**
-     * Update
+     * Projectile Update
      */
     @Override
     public void update() {
         if(GameUtils.isInBounds(this)) {
-            this.X = this.X + (float)((this.velocity * GameLoop.getDelta()) * -Math.cos(Math.toRadians((double)angleOfProjection - 90)));
-            this.Y = this.Y + (float)((this.velocity * GameLoop.getDelta()) * Math.sin(Math.toRadians((double)angleOfProjection - 90)));
+            this.X = this.X + (this.velocity * GameLoop.getDelta() 
+            * (float)(-Math.cos(Math.toRadians((double)angleOfProjection - 90))));
+            this.Y = this.Y + (this.velocity * GameLoop.getDelta() 
+            * (float)(Math.sin(Math.toRadians((double)angleOfProjection - 90))));
         } else {
             this.destroy();
         }
     }
 
+    /**
+     * Return Damage Amount of Projectile
+     */
     @Override
     public float getDamageAmount() {
         return this.damageAmount;

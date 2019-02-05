@@ -55,7 +55,7 @@ public class World {
             activeMeleeWeapon.isActive = true;
             enemies
                 .entrySet().stream()
-                .filter(set -> GameUtils.entityNearEntity(set.getValue(), player, 5))
+                .filter(set -> set.getValue().isTrackingEntity)
                 .forEach(entry -> activeMeleeWeapon.attack(entry.getValue()));
         }
 
@@ -70,7 +70,7 @@ public class World {
             if(CollisionDetector.isCollided(player, entity)) {
                 player.objectsCollidedWith.add(entity);
                 entity.isAttackingPlayer = true;
-            }else {
+            } else {
                 entity.isAttackingPlayer = false;
             }
             for (int i = 0; i < projectiles.length; i++) {
@@ -105,7 +105,6 @@ public class World {
         });
         CollisionDetector.updateMoveable(player, player.objectsCollidedWith);
         player.objectsCollidedWith = new ArrayList<>();
-
     }
 
     /**
@@ -137,13 +136,21 @@ public class World {
             if(player.currentlyMeleeAttacking) {
                 activeMeleeWeapon.render();
             }
-            DebuggerUtils.addDebugMessage("Player: X:" + Math.round(World.player.X) + ", Y:" + Math.round(World.player.Y));
+            DebuggerUtils.addDebugMessage("Player: X:" + 
+                                        Math.round(World.player.X) + ", Y:" + 
+                                        Math.round(World.player.Y));
             DebuggerUtils.addDebugMessage("Player Health: " + player.health);
             DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
-            DebuggerUtils.addDebugMessage("Window Height: " + Renderer.getWindowHeight() +
-                                               ", Units Tall: " + Renderer.getUnitsTall());
-            DebuggerUtils.addDebugMessage("Able to Melee : " + !player.currentlyMeleeAttacking);
-            DebuggerUtils.addDebugMessage("Range Weapon: " + player.activeRangeWeapon.getClass().getSimpleName());
+            DebuggerUtils.addDebugMessage("Window Height: " + 
+                                        Renderer.getWindowHeight() +
+                                        ", Units Tall: " + 
+                                        Renderer.getUnitsTall());
+            DebuggerUtils.addDebugMessage("Able to Melee: " + 
+                                        !player.currentlyMeleeAttacking);
+            DebuggerUtils.addDebugMessage("Range Weapon: " + 
+                                        player.activeRangeWeapon
+                                        .getClass()
+                                        .getSimpleName());
             DebuggerUtils.addDebugMessage("Can Range Attack: " + player.canRangeAttack);
             DebuggerUtils.writeToScreen();//debugger
         }

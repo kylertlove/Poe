@@ -3,6 +3,9 @@ package Poe.Engine;
 import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 
+/**
+ * GameLoop Class to handle Game Thread
+ */
 public class GameLoop {
 
     private static boolean running = false;

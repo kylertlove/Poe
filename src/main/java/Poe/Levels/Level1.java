@@ -4,11 +4,15 @@ import Poe.Models.Entities.Grunt;
 import Poe.Models.Structures.Wall;
 import Poe.Engine.Utlities.StructureUtils;
 import Poe.Engine.Utlities.GameUtils;
+import Poe.Engine.Utlities.MathUtils;
 import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Level 1
+ */
 public class Level1 implements ILevelBuilder {
 
     private static final String levelName = "Levels 1";
@@ -49,8 +53,8 @@ public class Level1 implements ILevelBuilder {
     public void createEnemies() {
         World.enemies = new ConcurrentHashMap<>();
         for(int i = 0; i < 50; i++) {
-            Grunt g = new Grunt(generateId(), GameUtils.getRandomNumberFromRange((int)maxWidth/2*(-1), (int)maxWidth/2),
-                    GameUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
+            Grunt g = new Grunt(generateId(), MathUtils.getRandomNumberFromRange((int)maxWidth/2*(-1), (int)maxWidth/2),
+            MathUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
             World.enemies.put(g.id, g);
         }
     }

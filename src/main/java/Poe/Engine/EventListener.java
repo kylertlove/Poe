@@ -9,7 +9,9 @@ import com.jogamp.opengl.util.awt.TextRenderer;
 
 import java.awt.*;
 
-
+/**
+ * GLEventListener implementation Class
+ */
 public class EventListener implements GLEventListener {
 
     //The OpenGL render object

@@ -58,30 +58,7 @@ public class CollisionDetector {
 
     public static void updateMoveable(Entity updateObject, List<GameObject> collidedObjects) {
         collidedObjects.forEach((collidedObject) -> {
-            if(leftSideCollision(updateObject, collidedObject)) {
-                updateObject.canMoveLeft = false;
-                if(collidedObject instanceof Entity) {
-                    ((Entity) collidedObject).canMoveRight = false;
-                }
-            }
-            if(rightSideCollision(updateObject, collidedObject)) {
-                updateObject.canMoveRight = false;
-                if(collidedObject instanceof Entity) {
-                    ((Entity) collidedObject).canMoveLeft = false;
-                }
-            }
-            if(topCollision(updateObject, collidedObject)) {
-                updateObject.canMoveUp = false;
-                if(collidedObject instanceof Entity) {
-                    ((Entity) collidedObject).canMoveDown = false;
-                }
-            }
-            if(bottomCollision(updateObject, collidedObject)) {
-                updateObject.canMoveDown = false;
-                if(collidedObject instanceof Entity) {
-                    ((Entity) collidedObject).canMoveUp = false;
-                }
-            }
+            updateMoveableSingle(updateObject, collidedObject);
         });
     }
 

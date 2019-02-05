@@ -6,6 +6,9 @@ import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 
+/**
+ * Poe Renderer Class
+ */
 public class Renderer {
 
     private static GLWindow glWindow = null;

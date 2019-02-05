@@ -2,6 +2,8 @@ package Poe.Models;
 
 import Poe.Drawable.Animation;
 import Poe.Drawable.Drawable;
+import Poe.Engine.Utlities.PoeLogger;
+
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class GameObject {
     }
 
     public void destroy() {
-        //Implementation Hook for Objects that can be destroyed
+        PoeLogger.logger.info("Game Object Instance has no Destroy Implementation");
     }
 
     public void recieveHit(float hitAmount) {
