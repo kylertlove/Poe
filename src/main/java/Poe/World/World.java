@@ -6,6 +6,7 @@ import Poe.Levels.ILevelBuilder;
 import Poe.Levels.Level1;
 import Poe.Models.Entities.Entity;
 import Poe.Models.Entities.Player;
+import Poe.Models.Gui.ItemDisplay;
 import Poe.Models.Item.Weapons.Melee.Melee;
 import Poe.Models.Item.Weapons.Melee.ShortSword;
 import Poe.Models.Item.Weapons.Projectile.Projectile;
@@ -26,6 +27,7 @@ public class World {
     public static Map<Long, Entity> enemies;
     public static ILevelBuilder currentLevel;
     public static boolean debug = true;
+    public static ItemDisplay itemDisplay;
 
     /** Game Initialization */
     public static void init() {
@@ -33,12 +35,14 @@ public class World {
         currentLevel.init();
         player = new Player();
         activeMeleeWeapon = new ShortSword();
+        itemDisplay = new ItemDisplay();
     }
 
     /**
      * Game Update Function
      */
     public static void update() {
+        itemDisplay.update();
         //update player and camera position
         player.update();
         activeMeleeWeapon.update();
@@ -111,6 +115,7 @@ public class World {
      * Game Render Function
      */
     public static void render() {
+        itemDisplay.render();
         player.render();
         for (int i = 0; i < projectiles.length; i++) {
             if(projectiles[i] != null && projectiles[i].isActive){
@@ -132,6 +137,7 @@ public class World {
              */
             structure.render();
         });
+
         if(debug) {
             if(player.currentlyMeleeAttacking) {
                 activeMeleeWeapon.render();

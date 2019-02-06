@@ -2,6 +2,7 @@ package Poe.Engine;
 
 import Poe.Engine.Input.KeyInput;
 import Poe.Engine.Input.MouseInput;
+
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
