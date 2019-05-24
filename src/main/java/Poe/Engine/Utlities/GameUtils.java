@@ -4,11 +4,14 @@ import Poe.Engine.Renderer;
 import Poe.Models.Entities.Entity;
 import Poe.Models.GameObject;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  *  Game Utility Class
  */
 public class GameUtils {
+
+    private static final Logger logger = Logger.getLogger(GameUtils.class.getName());
 
     public static Random random = new Random();
 
@@ -46,8 +49,7 @@ public class GameUtils {
                 runnable.run();
             }
             catch (Exception e){
-                PoeLogger.logger.info("Set Timeout error");
-                PoeLogger.logger.severe(e.getMessage());
+                logger.severe(e.getMessage());
             }
         }).start();
     }

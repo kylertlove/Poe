@@ -1,4 +1,4 @@
-package Poe.Levels;
+package Poe.World.Levels;
 
 public interface ILevelBuilder {
 

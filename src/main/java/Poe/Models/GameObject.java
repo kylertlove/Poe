@@ -2,14 +2,16 @@ package Poe.Models;
 
 import Poe.Drawable.Animation;
 import Poe.Drawable.Drawable;
-import Poe.Engine.Utlities.PoeLogger;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Base Object for everything on the board.  Parent class of Entity, Structures, And Item
  */
 public class GameObject {
+
+    private static final Logger logger = Logger.getLogger(GameObject.class.getName());
 
     public float X = 0;
     public long id = 0;
@@ -43,7 +45,7 @@ public class GameObject {
     }
 
     public void destroy() {
-        PoeLogger.logger.info("Game Object Instance has no Destroy Implementation");
+        logger.info("Game Object Instance has no Destroy Implementation");
     }
 
     public void recieveHit(float hitAmount) {

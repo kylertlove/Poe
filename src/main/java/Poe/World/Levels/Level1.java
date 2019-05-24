@@ -1,19 +1,21 @@
-package Poe.Levels;
+package Poe.World.Levels;
 
 import Poe.Models.Entities.Grunt;
 import Poe.Models.Structures.Wall;
 import Poe.Engine.Utlities.StructureUtils;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
-import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 
 /**
  * Level 1
  */
 public class Level1 implements ILevelBuilder {
+
+    private static final Logger logger = Logger.getLogger(Level1.class.getName());
 
     private static final String levelName = "Levels 1";
     private static final float maxWidth = 100;
@@ -46,7 +48,7 @@ public class Level1 implements ILevelBuilder {
                 }
             }
         }
-        PoeLogger.logger.info("Total Building Count: " + count);
+        logger.info("Total Building Count: " + count);
     }
 
     @Override

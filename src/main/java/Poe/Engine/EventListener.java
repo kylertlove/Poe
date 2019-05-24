@@ -1,6 +1,6 @@
 package Poe.Engine;
 
-import Poe.Engine.Utlities.PoeLogger;
+import Poe.Engine.Menu.PauseMenu;
 import Poe.World.World;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
@@ -8,11 +8,14 @@ import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.util.awt.TextRenderer;
 
 import java.awt.*;
+import java.util.logging.Logger;
 
 /**
  * GLEventListener implementation Class
  */
 public class EventListener implements GLEventListener {
+
+    private static final Logger logger = Logger.getLogger(EventListener.class.getName());
 
     //The OpenGL render object
     public static GL2 gl = null;
@@ -28,7 +31,7 @@ public class EventListener implements GLEventListener {
     }
 
     public void dispose(GLAutoDrawable drawable) {
-        PoeLogger.logger.info("Dispose");
+        logger.info("Dispose");
     }
 
     public void display(GLAutoDrawable drawable) {
@@ -36,6 +39,9 @@ public class EventListener implements GLEventListener {
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
         gl.glTranslatef(-Renderer.cameraX, -Renderer.cameraY, 0);
         World.render();
+        if(GameLoop.paused) {
+            PauseMenu.renderPauseMenu();
+        }
         gl.glTranslatef(Renderer.cameraX, Renderer.cameraY, 0);
     }
 

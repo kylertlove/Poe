@@ -10,13 +10,15 @@ import Poe.Models.Item.Weapons.Projectile.ThrowingStar;
 import Poe.ResourceManager.ImageResource;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
-import Poe.Engine.Utlities.PoeLogger;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Player extends Entity {
+
+    private static final Logger logger = Logger.getLogger(Player.class.getName());
 
     public boolean rangeClick = false;
     public boolean canRangeAttack = true;
@@ -87,9 +89,7 @@ public class Player extends Entity {
                 break;
             }
         }
-        GameUtils.setTimeout(() -> {
-            canRangeAttack = true;
-         }, rangeWeapons[rangeWeaponIndex].projectileCooldown);
+        GameUtils.setTimeout(() -> canRangeAttack = true, rangeWeapons[rangeWeaponIndex].projectileCooldown);
     }
 
     public Projectile getRangeWeapon() {
@@ -99,7 +99,7 @@ public class Player extends Entity {
             case 1:
                 return new Bow();
             default:
-                PoeLogger.logger.info("No active range weapon available");
+                logger.info("No active range weapon available");
                 return null;
         }
     }
@@ -119,7 +119,7 @@ public class Player extends Entity {
         } catch(Exception ex) {
             rangeWeaponIndex = 0;
             this.activeRangeWeapon = rangeWeapons[0];
-            PoeLogger.logger.warning("Range weapon out of bounds index");
+            logger.warning("Range weapon out of bounds index");
         }
     }
 
@@ -127,7 +127,7 @@ public class Player extends Entity {
     public void recieveHit(float hitAmount) {
         this.health -= hitAmount;
         if(this.health <= 0) {
-            PoeLogger.logger.info("GAME OVER");
+            logger.info("GAME OVER");
         }
     }
 

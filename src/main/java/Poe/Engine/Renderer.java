@@ -21,8 +21,8 @@ public class Renderer {
     private static float unitsWide = 50;
 
     public static void init(){
-        //System.setProperty("newt.window.icons", "null null");
-        //System.setProperty("newt.window.icons", "Images"+File.separator+"Poe.png Image"+File.separator+"Poe.png");
+//        System.setProperty("newt.window.icons", "null null");
+//        System.setProperty("newt.window.icons", "Images"+File.separator+"Poe.png Image"+File.separator+"Poe.png");
 //        screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 //        screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         GLProfile.initSingleton();

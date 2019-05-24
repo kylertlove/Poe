@@ -1,6 +1,6 @@
 package Poe.Engine.Input;
 
-import Poe.Engine.Utlities.PoeLogger;
+import Poe.Engine.GameLoop;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;
@@ -23,6 +23,8 @@ public class KeyInput implements KeyListener {
             case KeyEvent.VK_2:
                 World.player.setRangeWeapon(1);
                 break;
+            case KeyEvent.VK_ENTER:
+                GameLoop.paused = !GameLoop.paused;
             default:
                 break;
         }

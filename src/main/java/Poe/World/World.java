@@ -2,8 +2,8 @@ package Poe.World;
 
 import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Renderer;
-import Poe.Levels.ILevelBuilder;
-import Poe.Levels.Level1;
+import Poe.World.Levels.ILevelBuilder;
+import Poe.World.Levels.Level1;
 import Poe.Models.Entities.Entity;
 import Poe.Models.Entities.Player;
 import Poe.Models.Gui.ItemDisplay;
