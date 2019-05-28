@@ -24,7 +24,7 @@ public class GameObject {
     public int health = 0;
 
     public float rotation = 0;
-    public List<Animation> animations = null;
+    public Animation[] animations = null;
     public int currentAnimation = 0;
 
     public void update() {
@@ -33,9 +33,9 @@ public class GameObject {
 
     public void render() {
         if(animations != null) {
-            animations.get(currentAnimation).play();
+            animations[currentAnimation].play();
             Drawable.setRotation(rotation);
-            Drawable.drawImage(animations.get(currentAnimation).getImage(), X, Y, width, height);
+            Drawable.drawImage(animations[currentAnimation].getImage(), X, Y, width, height);
             Drawable.setRotation(0);
         }
     }

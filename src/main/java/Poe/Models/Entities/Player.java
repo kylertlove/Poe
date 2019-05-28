@@ -36,12 +36,7 @@ public class Player extends Entity {
         this.velocity = 6;
         this.health = 50;
         this.id = World.currentLevel.generateId();
-        animations = new ArrayList<>();
-        Animation walking = new Animation();
-        walking.frames = new ImageResource[1];
-        String uri =  "/Images/Poe.png";
-        walking.frames[0] = new ImageResource(this.getClass().getResourceAsStream(uri));
-        animations.add(walking);
+        this.buildPlayerAnimation();
         rangeWeapons[0] = new ThrowingStar();
         rangeWeapons[1] = new Bow();
         activeRangeWeapon = rangeWeapons[0];
@@ -129,6 +124,22 @@ public class Player extends Entity {
         if(this.health <= 0) {
             logger.info("GAME OVER");
         }
+    }
+
+    private void buildPlayerAnimation() {
+        animations = new Animation[1];
+        Animation walking = new Animation();
+        walking.frames = new ImageResource[4];
+        walking.fps = 6;
+        String uri1 =  "/Images/Poe_test_1.png";
+        String uri2 =  "/Images/Poe_test_2.png";
+        String uri3 =  "/Images/Poe_test_3.png";
+        String uri4 =  "/Images/Poe_test_4.png";
+        walking.frames[0] = new ImageResource(this.getClass().getResourceAsStream(uri1));
+        walking.frames[1] = new ImageResource(this.getClass().getResourceAsStream(uri2));
+        walking.frames[2] = new ImageResource(this.getClass().getResourceAsStream(uri3));
+        walking.frames[3] = new ImageResource(this.getClass().getResourceAsStream(uri4));
+        animations[0] = walking;
     }
 
 }

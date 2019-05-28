@@ -18,12 +18,12 @@ public class Grunt extends Entity {
         this.health = 10;
         this.attackDamage = 4;
         this.viewDistance = 8;
-        animations = new ArrayList<>();
+        animations = new Animation[1];
         Animation walking = new Animation();
         walking.frames = new ImageResource[1];
         String uri =  "/Images/Grunt.png";
         walking.frames[0] = new ImageResource(this.getClass().getResourceAsStream(uri));
-        animations.add(walking);
+        animations[0] = walking;
     }
 
     @Override
