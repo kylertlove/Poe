@@ -1,6 +1,6 @@
-package Poe.Models.Structures;
+package Poe.GameObjects.Structures;
 
-import Poe.Models.GameObject;
+import Poe.GameObjects.GameObject;
 
 /**
  * Base Class for all "Non-Living" GameObjects that are present in the world

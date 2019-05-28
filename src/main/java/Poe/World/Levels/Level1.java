@@ -1,9 +1,8 @@
 package Poe.World.Levels;
 
-import Poe.Models.Entities.Grunt;
-import Poe.Models.Structures.Wall;
+import Poe.GameObjects.Entities.Grunt;
+import Poe.GameObjects.Structures.Wall;
 import Poe.Engine.Utlities.StructureUtils;
-import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
 import Poe.World.World;
 
@@ -42,7 +41,7 @@ public class Level1 implements ILevelBuilder {
         int count = 0; //Identify how many structures are being generated
         for(float i = maxWidth/2*(-1); i < maxWidth/2; i++) {
             for (float j = maxHeight/2*(-1); j < maxHeight/2; j++) {
-                if(GameUtils.random.nextInt(1000) < 1) {
+                if(MathUtils.getRandomNumberFromRange(0, 1000) < 1) {
                     StructureUtils.tryToBuildBuilding(i, j);
                     count++;
                 }

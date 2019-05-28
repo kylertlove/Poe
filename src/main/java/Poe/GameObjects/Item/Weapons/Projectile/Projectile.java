@@ -1,9 +1,9 @@
-package Poe.Models.Item.Weapons.Projectile;
+package Poe.GameObjects.Item.Weapons.Projectile;
 
 import Poe.Engine.GameLoop;
 import Poe.Engine.Input.MouseInput;
-import Poe.Models.Item.Item;
-import Poe.Models.Item.Weapons.IAttackItems;
+import Poe.GameObjects.Item.Item;
+import Poe.GameObjects.Item.Weapons.IAttackItems;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
 
@@ -13,7 +13,8 @@ import Poe.Engine.Utlities.MathUtils;
 public abstract class Projectile extends Item implements IAttackItems {
 
     public float angleOfProjection = 0;
-    public int projectileCooldown = 500;
+    protected int defaultProjectileCooldown = 500;
+    protected int BASE_PROJECTILE_VELOCITY = 25;
 
     /**
      * When activating a Projectile, This sets the starting position and the rotation needed
@@ -40,6 +41,11 @@ public abstract class Projectile extends Item implements IAttackItems {
         } else {
             this.destroy();
         }
+    }
+
+    @Override
+    public int getActionCooldown() {
+        return this.defaultProjectileCooldown;
     }
 
     /**

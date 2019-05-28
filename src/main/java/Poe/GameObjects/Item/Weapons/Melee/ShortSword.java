@@ -1,4 +1,4 @@
-package Poe.Models.Item.Weapons.Melee;
+package Poe.GameObjects.Item.Weapons.Melee;
 
 import Poe.Drawable.Drawable;
 import Poe.World.World;
@@ -12,6 +12,7 @@ public class ShortSword extends Melee {
         this.height = 1.0f;
         this.width = 1.0f;
         this.damageAmount = 5.0f;
+        this.meleeActionCooldown = 400;
     }
 
     @Override

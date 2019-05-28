@@ -1,30 +1,27 @@
-package Poe.Models.Entities;
+package Poe.GameObjects.Entities;
 
 import Poe.Drawable.Animation;
 import Poe.Engine.GameLoop;
 import Poe.Engine.Input.KeyInput;
 import Poe.Engine.Input.MouseInput;
-import Poe.Models.Item.Weapons.Projectile.Bow;
-import Poe.Models.Item.Weapons.Projectile.Projectile;
-import Poe.Models.Item.Weapons.Projectile.ThrowingStar;
+import Poe.GameObjects.Item.Weapons.Projectile.Bow;
+import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
+import Poe.GameObjects.Item.Weapons.Projectile.ThrowingStar;
 import Poe.ResourceManager.ImageResource;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
 import Poe.World.World;
 import com.jogamp.newt.event.KeyEvent;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Player extends Entity {
 
     private static final Logger logger = Logger.getLogger(Player.class.getName());
 
-    public boolean rangeClick = false;
-    public boolean canRangeAttack = true;
-
-    public boolean currentlyMeleeAttacking = false;
-    public boolean meleeClick = false;
+    //left/right click boolean.  activated/Deactivated in MouseInput class
+    public boolean rightClick = false;
+    public boolean leftClick = false;
 
     public Projectile activeRangeWeapon;
     private Projectile[] rangeWeapons = new Projectile[2];
@@ -65,8 +62,11 @@ public class Player extends Entity {
         Y += yInput * GameLoop.getDelta();
         rotation = MathUtils.getAngle(MouseInput.getWorldX(), MouseInput.getWorldY(), X, -Y);
 
-        if(rangeClick && this.canRangeAttack) {
+        if(rightClick && this.canRangeAttack) {
             this.rangeAttack();
+        }
+        if(leftClick && !this.isMeleeAttacking) {
+            this.meleeAttack();
         }
         canMoveLeft = true;
         canMoveUp = true;
@@ -74,20 +74,26 @@ public class Player extends Entity {
         canMoveRight = true;
     }
 
-    public void rangeAttack() {
+    private void rangeAttack() {
         this.canRangeAttack = false;
         for (int i = 0; i < World.projectiles.length; i++) {
             if(World.projectiles[i] == null || !World.projectiles[i].isActive) {
-                World.projectiles[i] = getRangeWeapon();
+                World.projectiles[i] = getNewRangeWeaponProjectile();
                 World.projectiles[i].setInstanceLocation(this.X, this.Y);
                 World.projectiles[i].rotation = rotation;
                 break;
             }
         }
-        GameUtils.setTimeout(() -> canRangeAttack = true, rangeWeapons[rangeWeaponIndex].projectileCooldown);
+        GameUtils.setTimeout(() -> canRangeAttack = true, rangeWeapons[rangeWeaponIndex].getActionCooldown());
     }
 
-    public Projectile getRangeWeapon() {
+    private void meleeAttack() {
+        this.isMeleeAttacking = true;
+        World.activeMeleeWeapon.isActive = true;
+        GameUtils.setTimeout(() -> this.isMeleeAttacking = false, World.activeMeleeWeapon.getActionCooldown());
+    }
+
+    public Projectile getNewRangeWeaponProjectile() {
         switch (rangeWeaponIndex) {
             case 0:
                 return new ThrowingStar();

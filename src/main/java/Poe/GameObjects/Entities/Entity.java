@@ -1,7 +1,7 @@
-package Poe.Models.Entities;
+package Poe.GameObjects.Entities;
 
 import Poe.Engine.GameLoop;
-import Poe.Models.GameObject;
+import Poe.GameObjects.GameObject;
 import Poe.World.World;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
@@ -19,13 +19,16 @@ public class Entity extends GameObject {
     public boolean canMoveLeft = true;
     public boolean canMoveRight = true;
     public float viewDistance = 5;
-    public float destinationX = 0;
-    public float destinationY = 0;
-    public float attackDamage = 1;
     public boolean isTrackingEntity = false;
     public boolean isAttackingEntity = false;
     public boolean attackCooldownFinished = true;
     public List<GameObject> objectsCollidedWith = new ArrayList<>();
+    protected float destinationX = 0;
+    protected float destinationY = 0;
+    protected float attackDamage = 1;
+    //identifier for player object
+    protected boolean canRangeAttack = true;
+    protected boolean isMeleeAttacking = false;
 
     /**
      * Set Entity to start Tracking passed Entity
@@ -74,4 +77,10 @@ public class Entity extends GameObject {
         canMoveDown = true;
         canMoveRight = true;
     }
+
+    public boolean isCanRangeAttack() {
+        return this.canRangeAttack;
+    }
+
+    public boolean isMeleeAttacking() { return this.isMeleeAttacking; }
 }

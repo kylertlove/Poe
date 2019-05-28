@@ -1,7 +1,7 @@
 package Poe.Engine.Utlities;
 
-import Poe.Models.Structures.Building;
-import Poe.Models.Structures.Wall;
+import Poe.GameObjects.Structures.Building;
+import Poe.GameObjects.Structures.Wall;
 import Poe.World.World;
 
 import java.util.logging.Logger;

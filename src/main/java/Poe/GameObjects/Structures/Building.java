@@ -1,4 +1,4 @@
-package Poe.Models.Structures;
+package Poe.GameObjects.Structures;
 
 import Poe.Drawable.Drawable;
 

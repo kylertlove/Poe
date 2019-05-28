@@ -1,6 +1,6 @@
-package Poe.Models.Item;
+package Poe.GameObjects.Item;
 
-import Poe.Models.GameObject;
+import Poe.GameObjects.GameObject;
 
 /**
  * Base Item Class

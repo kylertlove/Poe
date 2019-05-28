@@ -1,11 +1,15 @@
 package Poe.Engine.Utlities;
 
-import Poe.Models.GameObject;
+import Poe.GameObjects.GameObject;
+
+import java.util.Random;
 
 /**
  * Math Utility Class
  */
 public class MathUtils {
+
+    private static Random random = new Random();
 
     /**
      * @param double x1
@@ -34,6 +38,6 @@ public class MathUtils {
      * @return Random number between range
      */
     public static int getRandomNumberFromRange(int min, int max) {
-        return GameUtils.random.nextInt((max - min) + 1) + min;
+        return random.nextInt((max - min) + 1) + min;
     }
 }

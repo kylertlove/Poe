@@ -1,10 +1,8 @@
-package Poe.Models.Entities;
+package Poe.GameObjects.Entities;
 
 import Poe.Drawable.Animation;
 import Poe.ResourceManager.ImageResource;
 import Poe.World.World;
-
-import java.util.ArrayList;
 
 public class Grunt extends Entity {
 

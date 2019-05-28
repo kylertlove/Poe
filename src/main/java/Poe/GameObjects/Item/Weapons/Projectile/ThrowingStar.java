@@ -1,19 +1,19 @@
-package Poe.Models.Item.Weapons.Projectile;
+package Poe.GameObjects.Item.Weapons.Projectile;
 
 import Poe.Drawable.Drawable;
 
-public class Bow extends Projectile {
+public class ThrowingStar extends Projectile {
 
-    public Bow() {
+    public ThrowingStar() {
         this.X = 0;
         this.Y = 0;
-        this.width = 0.25f;
-        this.height = 1.0f;
-        this.velocity = 25;
+        this.width = 0.5f;
+        this.height = 0.5f;
+        this.velocity = BASE_PROJECTILE_VELOCITY + 10;
         this.rotation = 0;
         this.setObjectColor(0.5f, 0, 0.5f, 1);
-        this.damageAmount = 10.0f;
-        this.projectileCooldown = 1000;
+        this.damageAmount = 6.0f;
+        this.defaultProjectileCooldown = 600;
     }
 
     @Override
@@ -30,4 +30,5 @@ public class Bow extends Projectile {
         Drawable.setColor(Drawable.DEFAULT_COLOR);
         Drawable.setRotation(0);
     }
+
 }

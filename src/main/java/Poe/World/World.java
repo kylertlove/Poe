@@ -4,13 +4,12 @@ import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Renderer;
 import Poe.World.Levels.ILevelBuilder;
 import Poe.World.Levels.Level1;
-import Poe.Models.Entities.Entity;
-import Poe.Models.Entities.Player;
-import Poe.Models.Gui.ItemDisplay;
-import Poe.Models.Item.Weapons.Melee.Melee;
-import Poe.Models.Item.Weapons.Melee.ShortSword;
-import Poe.Models.Item.Weapons.Projectile.Projectile;
-import Poe.Models.Structures.Structure;
+import Poe.GameObjects.Entities.Entity;
+import Poe.GameObjects.Entities.Player;
+import Poe.GameObjects.Item.Weapons.Melee.Melee;
+import Poe.GameObjects.Item.Weapons.Melee.ShortSword;
+import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
+import Poe.GameObjects.Structures.Structure;
 import Poe.Engine.Utlities.DebuggerUtils;
 import Poe.Engine.Utlities.GameUtils;
 
@@ -27,7 +26,6 @@ public class World {
     public static Map<Long, Entity> enemies;
     public static ILevelBuilder currentLevel;
     public static boolean debug = true;
-    public static ItemDisplay itemDisplay;
 
     /** Game Initialization */
     public static void init() {
@@ -35,17 +33,15 @@ public class World {
         currentLevel.init();
         player = new Player();
         activeMeleeWeapon = new ShortSword();
-        itemDisplay = new ItemDisplay();
     }
 
     /**
      * Game Update Function
      */
     public static void update() {
-        itemDisplay.update();
         //update player and camera position
         player.update();
-        activeMeleeWeapon.update();
+
         Renderer.updateCamera(player.X, player.Y);
         //update range weapons
         for (int i = 0; i < projectiles.length; i++) {
@@ -53,14 +49,21 @@ public class World {
                 projectiles[i].update();
             }
         }
-        //melee attacking
-        if(player.meleeClick && !player.currentlyMeleeAttacking && !activeMeleeWeapon.isActive) {
-            player.currentlyMeleeAttacking = true;
-            activeMeleeWeapon.isActive = true;
+        /**
+         * Melee Attack.
+         * isMeleeAttacking = Entity Value to update and render the attack.
+         * isActive = Melee instance value if attack should provide damage to collided Entities
+         * different so that long attacks dont hit on each tick
+         */
+        if(player.isMeleeAttacking()) {
+            activeMeleeWeapon.update();
+        }
+        if(activeMeleeWeapon.isActive) {
             enemies
-                .entrySet().stream()
-                .filter(set -> set.getValue().isTrackingEntity)
-                .forEach(entry -> activeMeleeWeapon.attack(entry.getValue()));
+                    .entrySet().stream()
+                    .filter(set -> set.getValue().isTrackingEntity)
+                    .forEach(entry -> activeMeleeWeapon.attack(entry.getValue()));
+            activeMeleeWeapon.isActive = false;
         }
 
         enemies.forEach((index, entity) -> {
@@ -115,7 +118,6 @@ public class World {
      * Game Render Function
      */
     public static void render() {
-        itemDisplay.render();
         player.render();
         for (int i = 0; i < projectiles.length; i++) {
             if(projectiles[i] != null && projectiles[i].isActive){
@@ -139,7 +141,7 @@ public class World {
         });
 
         if(debug) {
-            if(player.currentlyMeleeAttacking) {
+            if(player.isMeleeAttacking()) {
                 activeMeleeWeapon.render();
             }
             DebuggerUtils.addDebugMessage("Player: X:" + 
@@ -151,13 +153,13 @@ public class World {
                                         Renderer.getWindowHeight() +
                                         ", Units Tall: " + 
                                         Renderer.getUnitsTall());
-            DebuggerUtils.addDebugMessage("Able to Melee: " + 
-                                        !player.currentlyMeleeAttacking);
+            DebuggerUtils.addDebugMessage("Attacking: " +
+                                        player.isMeleeAttacking());
             DebuggerUtils.addDebugMessage("Range Weapon: " + 
                                         player.activeRangeWeapon
                                         .getClass()
                                         .getSimpleName());
-            DebuggerUtils.addDebugMessage("Can Range Attack: " + player.canRangeAttack);
+            DebuggerUtils.addDebugMessage("Can Range Attack: " + player.isCanRangeAttack());
             DebuggerUtils.writeToScreen();//debugger
         }
     }

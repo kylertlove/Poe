@@ -24,21 +24,19 @@ public class MouseInput implements MouseListener {
 
     public void mousePressed(MouseEvent mouseEvent) {
         if(mouseEvent.getButton() == MouseEvent.BUTTON3) {
-            World.player.rangeClick = true;
+            World.player.rightClick = true;
         }
         if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
-            World.player.meleeClick = true;
+            World.player.leftClick = true;
         }
     }
 
     public void mouseReleased(MouseEvent mouseEvent) {
         if(mouseEvent.getButton() == MouseEvent.BUTTON3) {
-            World.player.rangeClick = false;
+            World.player.rightClick = false;
         }
         if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
-            World.player.meleeClick = false;
-            World.player.currentlyMeleeAttacking = false;
-            World.activeMeleeWeapon.isActive = false;
+            World.player.leftClick = false;
         }
     }
 

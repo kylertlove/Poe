@@ -1,9 +1,8 @@
-package Poe.Models;
+package Poe.GameObjects;
 
 import Poe.Drawable.Animation;
 import Poe.Drawable.Drawable;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 /**

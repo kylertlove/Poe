@@ -13,7 +13,7 @@ import java.util.Map;
 public class DebuggerUtils {
 
     private static int totalDebugMsgs = 1;
-    private static Map<Integer, String> debugMap = new HashMap<Integer, String>();
+    private static Map<Integer, String> debugMap = new HashMap<>();
 
     public static void addDebugMessage(String msg) {
         totalDebugMsgs++;
@@ -23,12 +23,10 @@ public class DebuggerUtils {
     public static void writeToScreen() {
         if(World.debug){
             EventListener.textRenderer.beginRendering(Renderer.getWindowWidth(), Renderer.getWindowHeight());
-            debugMap.forEach((index, message) -> {
-                EventListener.textRenderer.draw(message, 10, Renderer.getWindowHeight() - (16 * index));
-            });
+            debugMap.forEach((index, message) -> EventListener.textRenderer.draw(message, 10, Renderer.getWindowHeight() - (16 * index)));
             EventListener.textRenderer.endRendering();
         }
         totalDebugMsgs = 1;
-        debugMap = new HashMap<Integer, String>();
+        debugMap = new HashMap<>();
     }
 }

@@ -1,9 +1,9 @@
 package Poe.Engine.Utlities;
 
 import Poe.Engine.Renderer;
-import Poe.Models.Entities.Entity;
-import Poe.Models.GameObject;
-import java.util.Random;
+import Poe.GameObjects.Entities.Entity;
+import Poe.GameObjects.GameObject;
+
 import java.util.logging.Logger;
 
 /**
@@ -12,8 +12,6 @@ import java.util.logging.Logger;
 public class GameUtils {
 
     private static final Logger logger = Logger.getLogger(GameUtils.class.getName());
-
-    public static Random random = new Random();
 
     /**
      * 
@@ -28,8 +26,8 @@ public class GameUtils {
     }
 
     /**
-     * @param Entity A 
-     * @param Entity B  
+     * @param Entity A
+     * @param Entity B
      * @param float radius 
      * @return will check if Entity A is within passed radius of Entity B
      */
