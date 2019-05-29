@@ -1,5 +1,7 @@
 package Poe.Engine.Input;
 
+import Poe.Engine.GameLoop;
+import Poe.Engine.Menu.PauseMenu;
 import Poe.Engine.Renderer;
 import Poe.World.World;
 import com.jogamp.newt.event.MouseEvent;
@@ -11,7 +13,7 @@ public class MouseInput implements MouseListener {
     private static int y = 0;
 
     public void mouseClicked(MouseEvent mouseEvent) {
-        //PoeLogger.logger.info("Mouse Click: X: " + getWorldX() + ", Y: " + getWorldY() + " Player x: " + World.player.X + " player y: " + World.player.Y);
+
     }
 
     public void mouseEntered(MouseEvent mouseEvent) {
@@ -27,7 +29,11 @@ public class MouseInput implements MouseListener {
             World.player.rightClick = true;
         }
         if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
-            World.player.leftClick = true;
+            if(GameLoop.paused) {
+                PauseMenu.clickHandler();
+            } else {
+                World.player.leftClick = true;
+            }
         }
     }
 

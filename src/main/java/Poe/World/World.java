@@ -1,5 +1,6 @@
 package Poe.World;
 
+import Poe.Engine.GameLoop;
 import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Renderer;
 import Poe.World.Levels.ILevelBuilder;
@@ -59,8 +60,7 @@ public class World {
             activeMeleeWeapon.update();
         }
         if(activeMeleeWeapon.isActive) {
-            enemies
-                    .entrySet().stream()
+            enemies.entrySet().stream()
                     .filter(set -> set.getValue().isTrackingEntity)
                     .forEach(entry -> activeMeleeWeapon.attack(entry.getValue()));
             activeMeleeWeapon.isActive = false;
@@ -154,12 +154,13 @@ public class World {
                                         ", Units Tall: " + 
                                         Renderer.getUnitsTall());
             DebuggerUtils.addDebugMessage("Attacking: " +
-                                        player.isMeleeAttacking());
+                                        player.isMeleeAttacking() + " with " + activeMeleeWeapon.getClass().getSimpleName());
             DebuggerUtils.addDebugMessage("Range Weapon: " + 
                                         player.activeRangeWeapon
                                         .getClass()
                                         .getSimpleName());
             DebuggerUtils.addDebugMessage("Can Range Attack: " + player.isCanRangeAttack());
+            DebuggerUtils.addDebugMessage("FPS: " + GameLoop.framesPerSecond);
             DebuggerUtils.writeToScreen();//debugger
         }
     }

@@ -12,7 +12,7 @@ public class ShortSword extends Melee {
         this.height = 1.0f;
         this.width = 1.0f;
         this.damageAmount = 5.0f;
-        this.meleeActionCooldown = 400;
+        this.meleeActionCooldown = 200;
     }
 
     @Override

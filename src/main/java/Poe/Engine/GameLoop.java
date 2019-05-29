@@ -13,9 +13,10 @@ public class GameLoop {
     private static final Logger logger = Logger.getLogger(GameLoop.class.getName());
 
     public static boolean paused = false;
+    public static int framesPerSecond = 0;
+    private static int fps = 60;
     private static boolean running = false;
     private static Thread thread;
-    private static int fps = 60;
     private static int targetTime = 1000000000 / fps;
     private static int updates = 0;
     private static final int MAX_UPDATES = 5;
@@ -25,6 +26,10 @@ public class GameLoop {
         thread = new Thread(() -> {
             running = true;
             lastUpdateTime = System.nanoTime();
+            //fps counter variables
+            long lastFps = System.nanoTime();
+            int internalFps = 0;
+
             while (running) {
                     long currentTime = System.nanoTime();
                     //Attempt to throttle update count prior to render.  trying to avoid rubberbanding
@@ -43,6 +48,14 @@ public class GameLoop {
                     }
                     //Render Call
                     Renderer.render();
+
+                internalFps++;
+                    if(System.nanoTime() >= lastFps + 1000000000) {
+                        framesPerSecond = internalFps;
+                        internalFps = 0;
+                        lastFps = System.nanoTime();
+                    }
+
                     //To make updates seamless, take the remaining FPS time and thread sleep
                     long timeTake = System.nanoTime() - currentTime;
                     if(targetTime > timeTake) {
