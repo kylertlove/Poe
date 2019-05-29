@@ -1,6 +1,6 @@
 package Poe.World;
 
-import Poe.Engine.GameLoop;
+import Poe.Engine.Gui.DebugScreen;
 import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Renderer;
 import Poe.World.Levels.ILevelBuilder;
@@ -11,7 +11,6 @@ import Poe.GameObjects.Item.Weapons.Melee.Melee;
 import Poe.GameObjects.Item.Weapons.Melee.ShortSword;
 import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
 import Poe.GameObjects.Structures.Structure;
-import Poe.Engine.Utlities.DebuggerUtils;
 import Poe.Engine.Utlities.GameUtils;
 
 import java.util.ArrayList;
@@ -141,27 +140,7 @@ public class World {
         });
 
         if(debug) {
-            if(player.isMeleeAttacking()) {
-                activeMeleeWeapon.render();
-            }
-            DebuggerUtils.addDebugMessage("Player: X:" + 
-                                        Math.round(World.player.X) + ", Y:" + 
-                                        Math.round(World.player.Y));
-            DebuggerUtils.addDebugMessage("Player Health: " + player.health);
-            DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
-            DebuggerUtils.addDebugMessage("Window Height: " + 
-                                        Renderer.getWindowHeight() +
-                                        ", Units Tall: " + 
-                                        Renderer.getUnitsTall());
-            DebuggerUtils.addDebugMessage("Attacking: " +
-                                        player.isMeleeAttacking() + " with " + activeMeleeWeapon.getClass().getSimpleName());
-            DebuggerUtils.addDebugMessage("Range Weapon: " + 
-                                        player.activeRangeWeapon
-                                        .getClass()
-                                        .getSimpleName());
-            DebuggerUtils.addDebugMessage("Can Range Attack: " + player.isCanRangeAttack());
-            DebuggerUtils.addDebugMessage("FPS: " + GameLoop.framesPerSecond);
-            DebuggerUtils.writeToScreen();//debugger
+            DebugScreen.writeToScreen();
         }
     }
 

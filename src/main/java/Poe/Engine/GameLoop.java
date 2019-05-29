@@ -1,6 +1,5 @@
 package Poe.Engine;
 
-import Poe.Engine.Menu.PauseMenu;
 import Poe.World.World;
 
 import java.util.logging.Logger;
@@ -13,7 +12,7 @@ public class GameLoop {
     private static final Logger logger = Logger.getLogger(GameLoop.class.getName());
 
     public static boolean paused = false;
-    public static int framesPerSecond = 0;
+    private static int framesPerSecond = 0;
     private static int fps = 60;
     private static boolean running = false;
     private static Thread thread;
@@ -74,5 +73,9 @@ public class GameLoop {
 
     public static float getDelta() {
         return 1.0f / 1000000000 * targetTime;
+    }
+
+    public static int getFps() {
+        return framesPerSecond;
     }
 }

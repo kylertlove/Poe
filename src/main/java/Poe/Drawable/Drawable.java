@@ -5,6 +5,10 @@ import Poe.ResourceManager.ImageResource;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.texture.Texture;
 
+import java.awt.*;
+import java.awt.font.FontRenderContext;
+
+
 public class Drawable {
 
     private static float red = 1;
@@ -75,5 +79,19 @@ public class Drawable {
         gl.glBindTexture(GL2.GL_TEXTURE_2D, 0);
         gl.glRotatef(-rotation, 0, 0, 1);
         gl.glTranslatef(-x, -y, 0);
+    }
+
+    public static int getTextWidth(String text) {
+        return (int)EventListener
+                .textRenderer.getFont()
+                .getStringBounds(text, EventListener.textRenderer.getFontRenderContext())
+                .getWidth();
+    }
+
+    public static int getTextHeight(String text) {
+        return (int)EventListener
+                .textRenderer.getFont()
+                .getStringBounds(text, EventListener.textRenderer.getFontRenderContext())
+                .getHeight();
     }
 }

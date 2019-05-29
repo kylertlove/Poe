@@ -1,7 +1,7 @@
 package Poe.Engine.Input;
 
 import Poe.Engine.GameLoop;
-import Poe.Engine.Menu.PauseMenu;
+import Poe.Engine.Gui.PauseMenu;
 import Poe.Engine.Renderer;
 import Poe.World.World;
 import com.jogamp.newt.event.MouseEvent;
