@@ -1,6 +1,8 @@
 package Poe.World;
 
+import Poe.Engine.GameLoop;
 import Poe.Engine.Gui.DebugScreen;
+import Poe.Engine.Gui.PauseMenu;
 import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Renderer;
 import Poe.World.Levels.ILevelBuilder;
@@ -117,6 +119,7 @@ public class World {
      * Game Render Function
      */
     public static void render() {
+
         player.render();
         for (int i = 0; i < projectiles.length; i++) {
             if(projectiles[i] != null && projectiles[i].isActive){
@@ -141,6 +144,9 @@ public class World {
 
         if(debug) {
             DebugScreen.writeToScreen();
+        }
+        if(GameLoop.paused) {
+            PauseMenu.renderPauseMenu();
         }
     }
 

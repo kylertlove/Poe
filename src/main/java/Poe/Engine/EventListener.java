@@ -39,9 +39,6 @@ public class EventListener implements GLEventListener {
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
         gl.glTranslatef(-Renderer.cameraX, -Renderer.cameraY, 0);
         World.render();
-        if(GameLoop.paused) {
-            PauseMenu.renderPauseMenu();
-        }
         gl.glTranslatef(Renderer.cameraX, Renderer.cameraY, 0);
     }
 

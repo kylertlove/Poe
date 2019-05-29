@@ -9,6 +9,8 @@ import com.jogamp.opengl.GLProfile;
 
 /**
  * Poe Renderer Class
+ * Widow Instance
+ * Width/Height Units/Pixel
  */
 public class Renderer {
 

@@ -16,6 +16,10 @@ public class DebugScreen {
 				Math.round(World.player.Y));
 		DebuggerUtils.addDebugMessage("Player Health: " + World.player.health);
 		DebuggerUtils.addDebugMessage(World.currentLevel.getLevel());
+		DebuggerUtils.addDebugMessage("Window Width: " +
+				Renderer.getWindowWidth() +
+				", Units Tall: " +
+				Renderer.getUnitsWide());
 		DebuggerUtils.addDebugMessage("Window Height: " +
 				Renderer.getWindowHeight() +
 				", Units Tall: " +
@@ -28,6 +32,6 @@ public class DebugScreen {
 						.getSimpleName());
 		DebuggerUtils.addDebugMessage("Can Range Attack: " + World.player.isCanRangeAttack());
 		DebuggerUtils.addDebugMessage("FPS: " + GameLoop.getFps());
-		DebuggerUtils.writeToScreen();//debugger
+		DebuggerUtils.writeToScreen();
 	}
 }
