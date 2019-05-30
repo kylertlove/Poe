@@ -7,5 +7,8 @@ public interface IAttackItems {
 
     float getDamageAmount();
 
+    float getAngleOfProjection();
+
     int getActionCooldown();
+
 }

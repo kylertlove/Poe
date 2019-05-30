@@ -9,7 +9,7 @@ public class DebugScreen {
 
 	public static void writeToScreen() {
 		if(World.player.isMeleeAttacking()) {
-			World.activeMeleeWeapon.render();
+			World.player.activeMeleeWeapon.render();
 		}
 		DebuggerUtils.addDebugMessage("Player: X:" +
 				Math.round(World.player.X) + ", Y:" +
@@ -25,7 +25,7 @@ public class DebugScreen {
 				", Units Tall: " +
 				Renderer.getUnitsTall());
 		DebuggerUtils.addDebugMessage("Attacking: " +
-				World.player.isMeleeAttacking() + " with " + World.activeMeleeWeapon.getClass().getSimpleName());
+				World.player.isMeleeAttacking() + " with " + World.player.activeMeleeWeapon.getClass().getSimpleName());
 		DebuggerUtils.addDebugMessage("Range Weapon: " +
 				World.player.activeRangeWeapon
 						.getClass()

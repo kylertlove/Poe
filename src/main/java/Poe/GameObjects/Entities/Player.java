@@ -4,6 +4,8 @@ import Poe.Drawable.Animation;
 import Poe.Engine.GameLoop;
 import Poe.Engine.Input.KeyInput;
 import Poe.Engine.Input.MouseInput;
+import Poe.GameObjects.Item.Weapons.Melee.Melee;
+import Poe.GameObjects.Item.Weapons.Melee.ShortSword;
 import Poe.GameObjects.Item.Weapons.Projectile.Bow;
 import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
 import Poe.GameObjects.Item.Weapons.Projectile.ThrowingStar;
@@ -24,8 +26,10 @@ public class Player extends Entity {
     public boolean leftClick = false;
 
     public Projectile activeRangeWeapon;
-    private Projectile[] rangeWeapons = new Projectile[2];
+    public Projectile[] projectiles = new Projectile[15];
+    public Melee activeMeleeWeapon;
     private int rangeWeaponIndex = 0;
+    private Projectile[] rangeWeapons = new Projectile[2];
 
     public Player() {
         this.width = 1.5f;
@@ -37,14 +41,13 @@ public class Player extends Entity {
         rangeWeapons[0] = new ThrowingStar();
         rangeWeapons[1] = new Bow();
         activeRangeWeapon = rangeWeapons[0];
+        this.activeMeleeWeapon = new ShortSword();
     }
 
     @Override
     public void update() {
-
         float xInput = 0;
         float yInput = 0;
-
         if(KeyInput.getKey(KeyEvent.VK_A) && canMoveLeft) {
             xInput -= velocity;
         }
@@ -76,11 +79,11 @@ public class Player extends Entity {
 
     private void rangeAttack() {
         this.canRangeAttack = false;
-        for (int i = 0; i < World.projectiles.length; i++) {
-            if(World.projectiles[i] == null || !World.projectiles[i].isActive) {
-                World.projectiles[i] = getNewRangeWeaponProjectile();
-                World.projectiles[i].setInstanceLocation(this.X, this.Y);
-                World.projectiles[i].rotation = rotation;
+        for (int i = 0; i < projectiles.length; i++) {
+            if(projectiles[i] == null || !projectiles[i].isActive) {
+                projectiles[i] = getNewRangeWeaponProjectile();
+                projectiles[i].setInstanceLocation(this.X, this.Y);
+                projectiles[i].rotation = rotation;
                 break;
             }
         }
@@ -89,11 +92,11 @@ public class Player extends Entity {
 
     private void meleeAttack() {
         this.isMeleeAttacking = true;
-        World.activeMeleeWeapon.isActive = true;
-        GameUtils.setTimeout(() -> this.isMeleeAttacking = false, World.activeMeleeWeapon.getActionCooldown());
+        activeMeleeWeapon.isActive = true;
+        GameUtils.setTimeout(() -> this.isMeleeAttacking = false, activeMeleeWeapon.getActionCooldown());
     }
 
-    public Projectile getNewRangeWeaponProjectile() {
+    private Projectile getNewRangeWeaponProjectile() {
         switch (rangeWeaponIndex) {
             case 0:
                 return new ThrowingStar();

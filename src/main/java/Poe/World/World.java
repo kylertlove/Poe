@@ -3,27 +3,21 @@ package Poe.World;
 import Poe.Engine.GameLoop;
 import Poe.Engine.Gui.DebugScreen;
 import Poe.Engine.Gui.PauseMenu;
-import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Renderer;
-import Poe.World.Levels.ILevelBuilder;
-import Poe.World.Levels.Level1;
+import Poe.Engine.Utlities.CollisionDetector;
+import Poe.Engine.Utlities.GameUtils;
 import Poe.GameObjects.Entities.Entity;
 import Poe.GameObjects.Entities.Player;
-import Poe.GameObjects.Item.Weapons.Melee.Melee;
-import Poe.GameObjects.Item.Weapons.Melee.ShortSword;
-import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
 import Poe.GameObjects.Structures.Structure;
-import Poe.Engine.Utlities.GameUtils;
+import Poe.World.Levels.ILevelBuilder;
+import Poe.World.Levels.Level1;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-
 public class World {
 
     public static Player player = null;
-    public static Projectile[] projectiles = new Projectile[5];
-    public static Melee activeMeleeWeapon;
     public static Map<Long, Structure> walls;
     public static Map<Long, Entity> enemies;
     public static ILevelBuilder currentLevel;
@@ -34,7 +28,6 @@ public class World {
         currentLevel = new Level1();
         currentLevel.init();
         player = new Player();
-        activeMeleeWeapon = new ShortSword();
     }
 
     /**
@@ -43,12 +36,11 @@ public class World {
     public static void update() {
         //update player and camera position
         player.update();
-
         Renderer.updateCamera(player.X, player.Y);
         //update range weapons
-        for (int i = 0; i < projectiles.length; i++) {
-            if(projectiles[i] != null && projectiles[i].isActive){
-                projectiles[i].update();
+        for (int i = 0; i < player.projectiles.length; i++) {
+            if(player.projectiles[i] != null && player.projectiles[i].isActive){
+                player.projectiles[i].update();
             }
         }
         /**
@@ -58,15 +50,14 @@ public class World {
          * different so that long attacks dont hit on each tick
          */
         if(player.isMeleeAttacking()) {
-            activeMeleeWeapon.update();
+            player.activeMeleeWeapon.update();
         }
-        if(activeMeleeWeapon.isActive) {
+        if(player.activeMeleeWeapon.isActive) {
             enemies.entrySet().stream()
                     .filter(set -> set.getValue().isTrackingEntity)
-                    .forEach(entry -> activeMeleeWeapon.attack(entry.getValue()));
-            activeMeleeWeapon.isActive = false;
+                    .forEach(entry -> player.activeMeleeWeapon.attack(entry.getValue()));
+            player.activeMeleeWeapon.isActive = false;
         }
-
         enemies.forEach((index, entity) -> {
             entity.update();
             if(GameUtils.entityNearEntity(player, entity, entity.viewDistance)) {
@@ -81,11 +72,11 @@ public class World {
             } else {
                 entity.isAttackingEntity = false;
             }
-            for (int i = 0; i < projectiles.length; i++) {
-                if(projectiles[i] != null && projectiles[i].isActive){
-                    if(CollisionDetector.isCollided(projectiles[i], entity)) {
-                        projectiles[i].destroy();
-                        entity.recieveHit(projectiles[i].getDamageAmount());
+            for (int i = 0; i < player.projectiles.length; i++) {
+                if(player.projectiles[i] != null && player.projectiles[i].isActive){
+                    if(CollisionDetector.isCollided(player.projectiles[i], entity)) {
+                        player.projectiles[i].destroy();
+                        entity.recieveHit(player.projectiles[i].getDamageAmount());
                     }
                 }
             }
@@ -94,10 +85,10 @@ public class World {
             if(CollisionDetector.isCollided(player, structure)) {
                 player.objectsCollidedWith.add(structure);
             }
-            for (int i = 0; i < projectiles.length; i++) {
-                if(projectiles[i] != null && projectiles[i].isActive){
-                    if(CollisionDetector.isCollided(projectiles[i], structure)) {
-                        projectiles[i].destroy();
+            for (int i = 0; i < player.projectiles.length; i++) {
+                if(player.projectiles[i] != null && player.projectiles[i].isActive){
+                    if(CollisionDetector.isCollided(player.projectiles[i], structure)) {
+                        player.projectiles[i].destroy();
                     }
                 }
             }
@@ -119,12 +110,11 @@ public class World {
      * Game Render Function
      */
     public static void render() {
-
         player.render();
-        for (int i = 0; i < projectiles.length; i++) {
-            if(projectiles[i] != null && projectiles[i].isActive){
-                if(projectiles[i].isActive) {
-                    projectiles[i].render();
+        for (int i = 0; i < player.projectiles.length; i++) {
+            if(player.projectiles[i] != null && player.projectiles[i].isActive){
+                if(player.projectiles[i].isActive) {
+                    player.projectiles[i].render();
                 }
             }
         }
@@ -141,7 +131,6 @@ public class World {
              */
             structure.render();
         });
-
         if(debug) {
             DebugScreen.writeToScreen();
         }
@@ -149,5 +138,4 @@ public class World {
             PauseMenu.renderPauseMenu();
         }
     }
-
 }

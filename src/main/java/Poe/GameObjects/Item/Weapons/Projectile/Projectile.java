@@ -25,7 +25,7 @@ public abstract class Projectile extends Item implements IAttackItems {
         this.isActive = true;
         this.X = x;
         this.Y = y;
-        this.angleOfProjection = MathUtils.getAngle(x, -y, MouseInput.getWorldX(), MouseInput.getWorldY());
+        this.angleOfProjection = this.getAngleOfProjection();
     }
 
     /**
@@ -54,5 +54,10 @@ public abstract class Projectile extends Item implements IAttackItems {
     @Override
     public float getDamageAmount() {
         return this.damageAmount;
+    }
+
+    @Override
+    public float getAngleOfProjection() {
+        return MathUtils.getAngle(this.X, -this.Y, MouseInput.getWorldX(), MouseInput.getWorldY());
     }
 }

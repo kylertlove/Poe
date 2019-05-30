@@ -7,8 +7,6 @@ public class ShortSword extends Melee {
 
     public ShortSword() {
         this.strikingDistance = 0.2f;
-        this.X = World.player.X;
-        this.Y = World.player.Y;
         this.height = 1.0f;
         this.width = 1.0f;
         this.damageAmount = 5.0f;

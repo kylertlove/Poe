@@ -20,14 +20,14 @@ public class PauseMenu {
 		EventListener.textRenderer.endRendering();
 		Drawable.setColor(buttonColor);
 		Drawable.setRotation(0);
-		Drawable.fillRect((float)(World.player.X - 5),
-						  (float)(World.player.Y - 4),
+		Drawable.fillRect(World.player.X - 5,
+						  World.player.Y - 4,
 						  6,
 						  2);
 		Drawable.setColor(Drawable.DEFAULT_COLOR);
 	}
 
-	public static void clickHandler() {
-
+	public static void clickHandler(float x, float y) {
+		
 	}
 }

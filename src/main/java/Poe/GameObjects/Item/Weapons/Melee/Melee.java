@@ -22,7 +22,7 @@ public abstract class Melee extends Item implements IAttackItems {
 
     @Override
     public void update() {
-        angleOfProjection = MathUtils.getAngle(World.player.X, -World.player.Y, MouseInput.getWorldX(), MouseInput.getWorldY());
+        angleOfProjection = this.getAngleOfProjection();
         this.X = World.player.X + (this.width + this.strikingDistance)  
                 * (float)(-Math.cos(Math.toRadians((double)angleOfProjection - 90)));
         this.Y = World.player.Y + (this.height + this.strikingDistance)
@@ -37,5 +37,10 @@ public abstract class Melee extends Item implements IAttackItems {
     @Override
     public int getActionCooldown() {
         return this.meleeActionCooldown;
+    }
+
+    @Override
+    public float getAngleOfProjection() {
+        return MathUtils.getAngle(World.player.X, -World.player.Y, MouseInput.getWorldX(), MouseInput.getWorldY());
     }
 }

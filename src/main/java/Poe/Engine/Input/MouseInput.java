@@ -30,7 +30,7 @@ public class MouseInput implements MouseListener {
         }
         if(mouseEvent.getButton() == MouseEvent.BUTTON1) {
             if(GameLoop.paused) {
-                PauseMenu.clickHandler();
+                PauseMenu.clickHandler(getWorldX(), getWorldY());
             } else {
                 World.player.leftClick = true;
             }
