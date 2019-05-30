@@ -20,8 +20,8 @@ public class PauseMenu {
 		EventListener.textRenderer.endRendering();
 		Drawable.setColor(buttonColor);
 		Drawable.setRotation(0);
-		Drawable.fillRect(World.player.X - 5,
-						  World.player.Y - 4,
+		Drawable.fillRect((World.player.X - 5),
+						  (World.player.Y - 4),
 						  6,
 						  2);
 		Drawable.setColor(Drawable.DEFAULT_COLOR);
