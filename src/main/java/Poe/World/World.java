@@ -8,11 +8,14 @@ import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.GameObjects.Entities.Entity;
 import Poe.GameObjects.Entities.Player;
+import Poe.GameObjects.GameObject;
+import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
 import Poe.GameObjects.Structures.Structure;
 import Poe.World.Levels.ILevelBuilder;
 import Poe.World.Levels.Level1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class World {
@@ -38,11 +41,10 @@ public class World {
         player.update();
         Renderer.updateCamera(player.X, player.Y);
         //update range weapons
-        for (int i = 0; i < player.projectiles.length; i++) {
-            if(player.projectiles[i] != null && player.projectiles[i].isActive){
-                player.projectiles[i].update();
-            }
-        }
+        Arrays.stream(player.projectiles)
+                .filter(Projectile.isProjectileActive)
+                .forEach(Projectile::update);
+
         /**
          * Melee Attack.
          * isMeleeAttacking = Entity Value to update and render the attack.
@@ -72,26 +74,23 @@ public class World {
             } else {
                 entity.isAttackingEntity = false;
             }
-            for (int i = 0; i < player.projectiles.length; i++) {
-                if(player.projectiles[i] != null && player.projectiles[i].isActive){
-                    if(CollisionDetector.isCollided(player.projectiles[i], entity)) {
-                        player.projectiles[i].destroy();
-                        entity.recieveHit(player.projectiles[i].getDamageAmount());
-                    }
-                }
-            }
+            Arrays.stream(player.projectiles)
+                    .filter(Projectile.isProjectileActive)
+                    .filter(projectile -> CollisionDetector.isCollided(projectile, entity))
+                    .forEach(projectile -> {
+                        projectile.destroy();
+                        entity.recieveHit(projectile.getDamageAmount());
+                    });
         });
         walls.forEach((index, structure) -> {
             if(CollisionDetector.isCollided(player, structure)) {
                 player.objectsCollidedWith.add(structure);
             }
-            for (int i = 0; i < player.projectiles.length; i++) {
-                if(player.projectiles[i] != null && player.projectiles[i].isActive){
-                    if(CollisionDetector.isCollided(player.projectiles[i], structure)) {
-                        player.projectiles[i].destroy();
-                    }
-                }
-            }
+            Arrays.stream(player.projectiles)
+                    .filter(Projectile.isProjectileActive)
+                    .filter(projectile -> CollisionDetector.isCollided(projectile, structure))
+                    .forEach(Projectile::destroy);
+
             //Make sure Entities cant run through walls
             enemies.entrySet()
                     .stream()
@@ -111,13 +110,10 @@ public class World {
      */
     public static void render() {
         player.render();
-        for (int i = 0; i < player.projectiles.length; i++) {
-            if(player.projectiles[i] != null && player.projectiles[i].isActive){
-                if(player.projectiles[i].isActive) {
-                    player.projectiles[i].render();
-                }
-            }
-        }
+        Arrays.stream(player.projectiles)
+                .filter(Projectile.isProjectileActive)
+                .forEach(GameObject::render);
+
         enemies.entrySet()
                 .stream()
                 .filter(entity -> GameUtils.isInBounds(entity.getValue()))

@@ -7,6 +7,8 @@ import Poe.GameObjects.Item.Weapons.IAttackItems;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
 
+import java.util.function.Predicate;
+
 /**
  * Base Projectile Class
  */
@@ -60,4 +62,6 @@ public abstract class Projectile extends Item implements IAttackItems {
     public float getAngleOfProjection() {
         return MathUtils.getAngle(this.X, -this.Y, MouseInput.getWorldX(), MouseInput.getWorldY());
     }
+
+    public static Predicate<Projectile> isProjectileActive = projectile -> projectile != null && projectile.isActive;
 }
