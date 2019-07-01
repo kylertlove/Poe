@@ -1,6 +1,6 @@
 package Poe.World.Levels;
 
-public interface ILevelBuilder {
+public interface LevelBuilder {
 
     void init();
 

@@ -3,7 +3,7 @@ package Poe.GameObjects.Item.Weapons.Projectile;
 import Poe.Engine.GameLoop;
 import Poe.Engine.Input.MouseInput;
 import Poe.GameObjects.Item.Item;
-import Poe.GameObjects.Item.Weapons.IAttackItems;
+import Poe.GameObjects.Item.Weapons.AttackItems;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
 
@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 /**
  * Base Projectile Class
  */
-public abstract class Projectile extends Item implements IAttackItems {
+public abstract class Projectile extends Item implements AttackItems {
 
     public float angleOfProjection = 0;
     protected int defaultProjectileCooldown = 500;

@@ -3,7 +3,7 @@ package Poe.GameObjects.Item.Weapons;
 /**
  * Attackable Item Interface
  */
-public interface IAttackItems {
+public interface AttackItems {
 
     float getDamageAmount();
 

@@ -11,7 +11,7 @@ import Poe.GameObjects.Entities.Player;
 import Poe.GameObjects.GameObject;
 import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
 import Poe.GameObjects.Structures.Structure;
-import Poe.World.Levels.ILevelBuilder;
+import Poe.World.Levels.LevelBuilder;
 import Poe.World.Levels.Level1;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class World {
     public static Player player = null;
     public static Map<Long, Structure> walls;
     public static Map<Long, Entity> enemies;
-    public static ILevelBuilder currentLevel;
+    public static LevelBuilder currentLevel;
     public static boolean debug = true;
 
     /** Game Initialization */

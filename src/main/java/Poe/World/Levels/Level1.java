@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Level 1
  */
-public class Level1 implements ILevelBuilder {
+public class Level1 implements LevelBuilder {
 
     private static final Logger logger = Logger.getLogger(Level1.class.getName());
 

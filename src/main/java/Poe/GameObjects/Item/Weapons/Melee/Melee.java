@@ -4,11 +4,11 @@ import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Input.MouseInput;
 import Poe.GameObjects.Entities.Entity;
 import Poe.GameObjects.Item.Item;
-import Poe.GameObjects.Item.Weapons.IAttackItems;
+import Poe.GameObjects.Item.Weapons.AttackItems;
 import Poe.Engine.Utlities.MathUtils;
 import Poe.World.World;
 
-public abstract class Melee extends Item implements IAttackItems {
+public abstract class Melee extends Item implements AttackItems {
 
     public float strikingDistance = 0.5f;
     public float angleOfProjection = 0.0f;
