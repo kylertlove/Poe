@@ -63,5 +63,8 @@ public abstract class Projectile extends Item implements AttackItems {
         return MathUtils.getAngle(this.X, -this.Y, MouseInput.getWorldX(), MouseInput.getWorldY());
     }
 
+    /**
+     * isActive Stream Predicate
+     */
     public static Predicate<Projectile> isProjectileActive = projectile -> projectile != null && projectile.isActive;
 }
