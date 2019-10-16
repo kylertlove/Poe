@@ -1,5 +1,6 @@
 package Poe.World.Levels;
 
+import Poe.GameObjects.Entities.Captain;
 import Poe.GameObjects.Entities.Grunt;
 import Poe.GameObjects.Structures.Wall;
 import Poe.Engine.Utlities.StructureUtils;
@@ -8,6 +9,8 @@ import Poe.World.World;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Level 1
@@ -59,6 +62,15 @@ public class Level1 implements LevelBuilder {
                     MathUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
             World.enemies.put(g.id, g);
         }
+
+        IntStream.range(0, 10).forEach(value -> {
+            logger.info("generating a captain");
+            Captain captain = new Captain(
+                    generateId(),
+                    MathUtils.getRandomNumberFromRange((int)maxWidth/2*(-1), (int)maxWidth/2),
+                    MathUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
+            World.enemies.put(captain.id, captain);
+        });
     }
 
     @Override
