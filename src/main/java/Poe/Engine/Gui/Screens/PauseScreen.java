@@ -5,7 +5,6 @@ import Poe.Engine.EventListener;
 import Poe.Engine.GameLoop;
 import Poe.Engine.Gui.Elements.RectangleGui;
 import Poe.Engine.Renderer;
-import Poe.World.World;
 
 import java.util.logging.Logger;
 
