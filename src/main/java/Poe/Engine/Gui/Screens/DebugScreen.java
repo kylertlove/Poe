@@ -1,13 +1,19 @@
-package Poe.Engine.Gui;
+package Poe.Engine.Gui.Screens;
 
 import Poe.Engine.GameLoop;
 import Poe.Engine.Renderer;
 import Poe.Engine.Utlities.DebuggerUtils;
 import Poe.World.World;
 
-public class DebugScreen {
+public class DebugScreen implements AbstractScreenHandler {
 
-	public static void writeToScreen() {
+	@Override
+	public void renderBackground() {
+
+	}
+
+	@Override
+	public void renderForeground() {
 		if(World.player.isMeleeAttacking()) {
 			World.player.activeMeleeWeapon.render();
 		}

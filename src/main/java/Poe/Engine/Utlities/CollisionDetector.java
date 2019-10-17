@@ -2,6 +2,7 @@ package Poe.Engine.Utlities;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiPredicate;
 
 import Poe.GameObjects.GameObject;
 import Poe.GameObjects.Entities.Entity;
@@ -30,6 +31,11 @@ public class CollisionDetector {
                 (a.Y - a.height/2) < (b.Y + b.height/2) &&
                 (a.Y + a.height/2) > (b.Y - b.height/2);
     }
+
+    /**
+     * Stream use of isCollided
+     */
+    public static BiPredicate<GameObject, GameObject> hasCollided = CollisionDetector::isCollided;
 
     /**
      * Used for procedually generated objects.  *Not for runtime functional use.. Too slow*

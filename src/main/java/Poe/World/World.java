@@ -1,8 +1,9 @@
 package Poe.World;
 
 import Poe.Engine.GameLoop;
-import Poe.Engine.Gui.DebugScreen;
-import Poe.Engine.Gui.PauseMenu;
+import Poe.Engine.Gui.GuiManager;
+import Poe.Engine.Gui.Screens.DebugScreen;
+import Poe.Engine.Gui.Screens.PauseScreen;
 import Poe.Engine.Renderer;
 import Poe.Engine.Utlities.CollisionDetector;
 import Poe.Engine.Utlities.GameUtils;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 public class World {
 
-    public static Player player = null;
+    public static Player player;
     public static Map<Long, Structure> walls;
     public static Map<Long, Entity> enemies;
     public static LevelBuilder currentLevel;
@@ -60,6 +61,7 @@ public class World {
                     .forEach(entry -> player.activeMeleeWeapon.attack(entry.getValue()));
             player.activeMeleeWeapon.isActive = false;
         }
+
         enemies.forEach((index, entity) -> {
             entity.update();
             if(GameUtils.entityNearEntity(player, entity, entity.viewDistance)) {
@@ -74,9 +76,10 @@ public class World {
             } else {
                 entity.isAttackingEntity = false;
             }
+            //projectiles hurt entities
             Arrays.stream(player.projectiles)
                     .filter(Projectile.isProjectileActive)
-                    .filter(projectile -> CollisionDetector.isCollided(projectile, entity))
+                    .filter(projectile -> CollisionDetector.hasCollided.test(projectile, entity))
                     .forEach(projectile -> {
                         projectile.destroy();
                         entity.recieveHit(projectile.getDamageAmount());
@@ -86,20 +89,17 @@ public class World {
             if(CollisionDetector.isCollided(player, structure)) {
                 player.objectsCollidedWith.add(structure);
             }
+            //projectiles dont go through walls
             Arrays.stream(player.projectiles)
                     .filter(Projectile.isProjectileActive)
-                    .filter(projectile -> CollisionDetector.isCollided(projectile, structure))
+                    .filter(projectile -> CollisionDetector.hasCollided.test(projectile, structure))
                     .forEach(Projectile::destroy);
 
             //Make sure Entities cant run through walls
-            enemies.entrySet()
-                    .stream()
-                    .filter(set -> set.getValue().isTrackingEntity)
-                    .forEach(trackingEntity -> {
-                        if(CollisionDetector.isCollided(trackingEntity.getValue(), structure)) {
-                            CollisionDetector.updateMoveableSingle(trackingEntity.getValue(), structure);
-                        }
-                    });
+            enemies.values().stream()
+                    .filter(entity -> entity.isTrackingEntity)
+                    .filter(entity -> CollisionDetector.hasCollided.test(entity, structure))
+                    .forEach(entity -> CollisionDetector.updateMoveableSingle(entity, structure));
         });
         CollisionDetector.updateMoveable(player, player.objectsCollidedWith);
         player.objectsCollidedWith = new ArrayList<>();
@@ -128,10 +128,10 @@ public class World {
             structure.render();
         });
         if(debug) {
-            DebugScreen.writeToScreen();
+            GuiManager.debugScreen.openGui();
         }
         if(GameLoop.paused) {
-            PauseMenu.renderPauseMenu();
+            GuiManager.pauseScreen.openGui();
         }
     }
 }

@@ -2,11 +2,14 @@ package Poe.GameObjects.Item.Weapons.Projectile;
 
 import Poe.Engine.GameLoop;
 import Poe.Engine.Input.MouseInput;
+import Poe.Engine.Utlities.CollisionDetector;
+import Poe.GameObjects.GameObject;
 import Poe.GameObjects.Item.Item;
 import Poe.GameObjects.Item.Weapons.AttackItems;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
 
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /**

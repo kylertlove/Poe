@@ -6,20 +6,16 @@ import Poe.Drawable.Drawable;
 import java.util.logging.Logger;
 
 /**
- * Base Object for everything on the board.  Parent class of Entity, Structures, And Item
+ * Base Object for Interactable object on board.  Parent class of Entity, Structures, And Item
  */
-public class GameObject {
+public class GameObject extends ScreenElement {
 
     private static final Logger logger = Logger.getLogger(GameObject.class.getName());
 
-    public float X = 0;
     public long id = 0;
-    public float Y = 0;
     public float velocity = 0;
     public boolean isActive = false;
     public float[] objectColor = new float[]{1, 1, 1, 1};
-    public float width = 0;
-    public float height = 0;
     public int health = 0;
 
     public float rotation = 0;

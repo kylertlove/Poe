@@ -58,17 +58,16 @@ public class Level1 implements LevelBuilder {
         World.enemies = new ConcurrentHashMap<>();
         for(int i = 0; i < 50; i++) {
             Grunt g = new Grunt(generateId(),
-                    MathUtils.getRandomNumberFromRange((int)maxWidth/2*(-1), (int)maxWidth/2),
-                    MathUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
+                    MathUtils.getRandomNumberFromRange((int)(maxWidth - 10)/2*(-1), (int)(maxWidth - 10)/2),
+                    MathUtils.getRandomNumberFromRange((int)(maxHeight - 10)/2*(-1), (int)(maxHeight - 10)/2));
             World.enemies.put(g.id, g);
         }
 
         IntStream.range(0, 10).forEach(value -> {
-            logger.info("generating a captain");
             Captain captain = new Captain(
                     generateId(),
-                    MathUtils.getRandomNumberFromRange((int)maxWidth/2*(-1), (int)maxWidth/2),
-                    MathUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
+                    MathUtils.getRandomNumberFromRange((int)(maxWidth - 10)/2*(-1), (int)(maxWidth - 10)/2),
+                    MathUtils.getRandomNumberFromRange((int)(maxHeight - 10)/2*(-1), (int)(maxHeight - 10)/2));
             World.enemies.put(captain.id, captain);
         });
     }

@@ -4,6 +4,9 @@ import Poe.Drawable.Animation;
 import Poe.ResourceManager.ImageResource;
 import Poe.World.World;
 
+/**
+ * tier 2 enemy
+ */
 public class Captain extends Entity {
 
 	public Captain(long id, int x, int y) {
