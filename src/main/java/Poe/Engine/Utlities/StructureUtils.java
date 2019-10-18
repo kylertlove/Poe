@@ -1,5 +1,6 @@
 package Poe.Engine.Utlities;
 
+import Poe.Engine.Detection.CollisionDetector;
 import Poe.GameObjects.Structures.Building;
 import Poe.GameObjects.Structures.Wall;
 import Poe.World.World;

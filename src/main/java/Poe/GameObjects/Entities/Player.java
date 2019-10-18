@@ -4,12 +4,13 @@ import Poe.Drawable.Animation;
 import Poe.Engine.GameLoop;
 import Poe.Engine.Input.KeyInput;
 import Poe.Engine.Input.MouseInput;
-import Poe.GameObjects.Item.Weapons.Melee.Melee;
-import Poe.GameObjects.Item.Weapons.Melee.ShortSword;
-import Poe.GameObjects.Item.Weapons.Projectile.Bow;
-import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
-import Poe.GameObjects.Item.Weapons.Projectile.ThrowingStar;
-import Poe.ResourceManager.ImageResource;
+import Poe.GameObjects.Entities.IntelligentEntities.IntelligentEntity;
+import Poe.GameObjects.Entities.Items.Weapons.Melee.Melee;
+import Poe.GameObjects.Entities.Items.Weapons.Melee.ShortSword;
+import Poe.GameObjects.Entities.Items.Weapons.Projectile.Bow;
+import Poe.GameObjects.Entities.Items.Weapons.Projectile.Projectile;
+import Poe.GameObjects.Entities.Items.Weapons.Projectile.ThrowingStar;
+import Poe.Drawable.ImageResource;
 import Poe.Engine.Utlities.GameUtils;
 import Poe.Engine.Utlities.MathUtils;
 import Poe.World.World;
@@ -17,7 +18,7 @@ import com.jogamp.newt.event.KeyEvent;
 
 import java.util.logging.Logger;
 
-public class Player extends Entity {
+public class Player extends IntelligentEntity {
 
     private static final Logger logger = Logger.getLogger(Player.class.getName());
 
@@ -32,16 +33,34 @@ public class Player extends Entity {
     private Projectile[] rangeWeapons = new Projectile[2];
 
     public Player() {
-        this.width = 1.5f;
-        this.height = 1.5f;
+        super(World.currentLevel.generateId(),
+                0, 0,
+                1.5f, 1.5f);
         this.velocity = 6;
         this.health = 50;
         this.id = World.currentLevel.generateId();
-        this.buildPlayerAnimation();
         rangeWeapons[0] = new ThrowingStar();
         rangeWeapons[1] = new Bow();
         activeRangeWeapon = rangeWeapons[0];
         this.activeMeleeWeapon = new ShortSword();
+    }
+
+    @Override
+    protected Animation[] animationBuilder() {
+        animations = new Animation[1];
+        Animation walking = new Animation();
+        walking.frames = new ImageResource[4];
+        walking.fps = 6;
+        String uri1 =  "/Images/Poe_test_1.png";
+        String uri2 =  "/Images/Poe_test_2.png";
+        String uri3 =  "/Images/Poe_test_3.png";
+        String uri4 =  "/Images/Poe_test_4.png";
+        walking.frames[0] = new ImageResource(this.getClass().getResourceAsStream(uri1));
+        walking.frames[1] = new ImageResource(this.getClass().getResourceAsStream(uri2));
+        walking.frames[2] = new ImageResource(this.getClass().getResourceAsStream(uri3));
+        walking.frames[3] = new ImageResource(this.getClass().getResourceAsStream(uri4));
+        animations[0] = walking;
+        return animations;
     }
 
     @Override
@@ -134,22 +153,5 @@ public class Player extends Entity {
             logger.info("GAME OVER");
         }
     }
-
-    private void buildPlayerAnimation() {
-        animations = new Animation[1];
-        Animation walking = new Animation();
-        walking.frames = new ImageResource[4];
-        walking.fps = 6;
-        String uri1 =  "/Images/Poe_test_1.png";
-        String uri2 =  "/Images/Poe_test_2.png";
-        String uri3 =  "/Images/Poe_test_3.png";
-        String uri4 =  "/Images/Poe_test_4.png";
-        walking.frames[0] = new ImageResource(this.getClass().getResourceAsStream(uri1));
-        walking.frames[1] = new ImageResource(this.getClass().getResourceAsStream(uri2));
-        walking.frames[2] = new ImageResource(this.getClass().getResourceAsStream(uri3));
-        walking.frames[3] = new ImageResource(this.getClass().getResourceAsStream(uri4));
-        animations[0] = walking;
-    }
-
 }
 

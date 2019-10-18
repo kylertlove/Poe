@@ -1,4 +1,4 @@
-package Poe.ResourceManager;
+package Poe.Drawable;
 
 import Poe.Engine.Renderer;
 import com.jogamp.opengl.util.texture.Texture;

@@ -1,12 +1,8 @@
 package Poe.Drawable;
 
 import Poe.Engine.EventListener;
-import Poe.ResourceManager.ImageResource;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.texture.Texture;
-
-import java.awt.*;
-import java.awt.font.FontRenderContext;
 
 
 public class Drawable {

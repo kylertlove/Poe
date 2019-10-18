@@ -1,7 +1,7 @@
 package Poe.World.Levels;
 
-import Poe.GameObjects.Entities.Captain;
-import Poe.GameObjects.Entities.Grunt;
+import Poe.GameObjects.Entities.IntelligentEntities.Captain;
+import Poe.GameObjects.Entities.IntelligentEntities.Grunt;
 import Poe.GameObjects.Structures.Wall;
 import Poe.Engine.Utlities.StructureUtils;
 import Poe.Engine.Utlities.MathUtils;
@@ -10,7 +10,6 @@ import Poe.World.World;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Level 1

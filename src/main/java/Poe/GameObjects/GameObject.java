@@ -3,17 +3,17 @@ package Poe.GameObjects;
 import Poe.Drawable.Animation;
 import Poe.Drawable.Drawable;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- * Base Object for Interactable object on board.  Parent class of Entity, Structures, And Item
+ * Base Object for Interactable object on board.  Parent class of Entity, Structures, And Items
  */
 public class GameObject extends ScreenElement {
 
     private static final Logger logger = Logger.getLogger(GameObject.class.getName());
 
     public long id = 0;
-    public float velocity = 0;
     public boolean isActive = false;
     public float[] objectColor = new float[]{1, 1, 1, 1};
     public int health = 0;
@@ -21,6 +21,11 @@ public class GameObject extends ScreenElement {
     public float rotation = 0;
     public Animation[] animations = null;
     public int currentAnimation = 0;
+
+    public GameObject(long id, float x, float y, float w, float h) {
+        super(x, y, w, h);
+        this.id = id;
+    }
 
     public void update() {
         throw new Error(this.getClass().getName() + " Needs to implement Update Method");
@@ -48,5 +53,9 @@ public class GameObject extends ScreenElement {
         if(this.health <= 0) {
             this.destroy();
         }
+    }
+
+    protected Animation[] animationBuilder() {
+        return null;
     }
 }

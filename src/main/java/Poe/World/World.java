@@ -1,16 +1,15 @@
 package Poe.World;
 
+import Poe.Engine.Detection.PlayerDetector;
 import Poe.Engine.GameLoop;
 import Poe.Engine.Gui.GuiManager;
-import Poe.Engine.Gui.Screens.DebugScreen;
-import Poe.Engine.Gui.Screens.PauseScreen;
 import Poe.Engine.Renderer;
-import Poe.Engine.Utlities.CollisionDetector;
+import Poe.Engine.Detection.CollisionDetector;
 import Poe.Engine.Utlities.GameUtils;
-import Poe.GameObjects.Entities.Entity;
+import Poe.GameObjects.Entities.IntelligentEntities.IntelligentEntity;
 import Poe.GameObjects.Entities.Player;
 import Poe.GameObjects.GameObject;
-import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
+import Poe.GameObjects.Entities.Items.Weapons.Projectile.Projectile;
 import Poe.GameObjects.Structures.Structure;
 import Poe.World.Levels.LevelBuilder;
 import Poe.World.Levels.Level1;
@@ -23,7 +22,7 @@ public class World {
 
     public static Player player;
     public static Map<Long, Structure> walls;
-    public static Map<Long, Entity> enemies;
+    public static Map<Long, IntelligentEntity> enemies;
     public static LevelBuilder currentLevel;
     public static boolean debug = true;
 
@@ -64,7 +63,7 @@ public class World {
 
         enemies.forEach((index, entity) -> {
             entity.update();
-            if(GameUtils.entityNearEntity(player, entity, entity.viewDistance)) {
+            if(PlayerDetector.entityNearEntity(player, entity, entity.getViewDistance())) {
                 entity.isTrackingEntity = true;
                 entity.trackingTarget(player);
             } else {

@@ -26,16 +26,6 @@ public class GameUtils {
     }
 
     /**
-     * @param Entity A
-     * @param Entity B
-     * @param float radius 
-     * @return will check if Entity A is within passed radius of Entity B
-     */
-    public static boolean entityNearEntity(Entity A, Entity B, float radius) {
-        return MathUtils.getDistanceBetweenObjects(A, B) < radius;
-    }
-
-    /**
      * Timeout function
      * @param Runnable runnable
      * @param int delay

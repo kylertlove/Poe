@@ -1,7 +1,5 @@
 package Poe.Drawable;
 
-import Poe.ResourceManager.ImageResource;
-
 public class Animation {
 
     public ImageResource[] frames;
