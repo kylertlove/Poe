@@ -1,5 +1,6 @@
 package Poe.World.Levels;
 
+import Poe.Engine.Detection.LightSource;
 import Poe.GameObjects.Entities.IntelligentEntities.Captain;
 import Poe.GameObjects.Entities.IntelligentEntities.Grunt;
 import Poe.GameObjects.Structures.Wall;
@@ -30,6 +31,7 @@ public class Level1 implements LevelBuilder {
     public void init() {
         createEnemies();
         createWalls();
+        createLightSources();
     }
 
     @Override
@@ -69,6 +71,10 @@ public class Level1 implements LevelBuilder {
                     MathUtils.getRandomNumberFromRange((int)(maxHeight - 10)/2*(-1), (int)(maxHeight - 10)/2));
             World.enemies.put(captain.id, captain);
         });
+    }
+
+    public void createLightSources() {
+        World.lightSource = new LightSource(0, 0, 2.0f, 0.9f);
     }
 
     @Override

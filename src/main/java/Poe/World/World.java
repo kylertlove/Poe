@@ -1,5 +1,7 @@
 package Poe.World;
 
+import Poe.Drawable.Drawable;
+import Poe.Engine.Detection.LightSource;
 import Poe.Engine.Detection.PlayerDetector;
 import Poe.Engine.GameLoop;
 import Poe.Engine.Gui.GuiManager;
@@ -22,6 +24,8 @@ public class World {
 
     public static Player player;
     public static Map<Long, Structure> walls;
+    //temp location
+    public static LightSource lightSource;
     public static Map<Long, IntelligentEntity> enemies;
     public static LevelBuilder currentLevel;
     public static boolean debug = true;
@@ -56,7 +60,7 @@ public class World {
         }
         if(player.activeMeleeWeapon.isActive) {
             enemies.entrySet().stream()
-                    .filter(set -> set.getValue().isTrackingEntity)
+                    .filter(set -> set.getValue().isTrackingPlayerEntity)
                     .forEach(entry -> player.activeMeleeWeapon.attack(entry.getValue()));
             player.activeMeleeWeapon.isActive = false;
         }
@@ -64,10 +68,10 @@ public class World {
         enemies.forEach((index, entity) -> {
             entity.update();
             if(PlayerDetector.entityNearEntity(player, entity, entity.getViewDistance())) {
-                entity.isTrackingEntity = true;
+                entity.isTrackingPlayerEntity = true;
                 entity.trackingTarget(player);
             } else {
-                entity.isTrackingEntity = false;
+                entity.isTrackingPlayerEntity = false;
             }
             if(CollisionDetector.isCollided(player, entity)) {
                 player.objectsCollidedWith.add(entity);
@@ -96,7 +100,7 @@ public class World {
 
             //Make sure Entities cant run through walls
             enemies.values().stream()
-                    .filter(entity -> entity.isTrackingEntity)
+                    .filter(entity -> entity.isTrackingPlayerEntity)
                     .filter(entity -> CollisionDetector.hasCollided.test(entity, structure))
                     .forEach(entity -> CollisionDetector.updateMoveableSingle(entity, structure));
         });
@@ -108,6 +112,7 @@ public class World {
      * Game Render Function
      */
     public static void render() {
+        lightSource.render();
         player.render();
         Arrays.stream(player.projectiles)
                 .filter(Projectile.isProjectileActive)

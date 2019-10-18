@@ -30,6 +30,26 @@ public class Drawable {
         gl.glTranslatef(-x, -y, 0);
     }
 
+    public static void fillPolygon(float x, float y, float angles, float sides) {
+        GL2 gl = EventListener.gl;
+        gl.glTranslatef(x, y, 0);
+        gl.glRotatef(rotation, 0,0,1);
+        gl.glColor4f(0.3f, 0.3f, 0.3f, 0.6f);
+        gl.glBegin(GL2.GL_POLYGON);
+        gl.glVertex3f(0f, angles,0f);
+        gl.glVertex3f(-angles,sides,0f);
+        gl.glVertex3f(-angles,-sides,0f);
+        gl.glVertex3f(0f,-angles,0f);
+        gl.glVertex3f(0f, angles,0f);
+        gl.glVertex3f(angles,sides,0f);
+        gl.glVertex3f(angles,-sides,0f);
+        gl.glVertex3f(0f,-angles,0f);
+        gl.glEnd();
+        gl.glFlush();
+        gl.glRotatef(-rotation, 0, 0, 1);
+        gl.glTranslatef(-x, -y, 0);
+    }
+
     public static void drawVector(float startX, float startY, float endX, float endY) {
         GL2 gl = EventListener.gl;
         gl.glBegin(GL2.GL_LINES);

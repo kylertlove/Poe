@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class IntelligentEntity extends Entity implements DetectableEntity {
 
 	public List<GameObject> objectsCollidedWith = new ArrayList<>();
-	public boolean isTrackingEntity = false;
+	public boolean isTrackingPlayerEntity = false;
 	protected float destinationX = 0;
 	protected float destinationY = 0;
 	public boolean canMoveUp = true;
@@ -28,14 +28,13 @@ public abstract class IntelligentEntity extends Entity implements DetectableEnti
 	}
 
 	/**
-	 * Overridden Update from Gameobject.  used for movement tracking
+	 * Overridden Update from Gameobject.  used for movement tracking.
 	 */
 	@Override
 	public void update() {
-		if(this.isTrackingEntity) {
+		if(this.isTrackingPlayerEntity) {
 			float xVal = 0;
 			float yVal = 0;
-
 			if(this.destinationX < X && canMoveLeft) {
 				xVal -= this.velocity;
 			}
@@ -48,17 +47,10 @@ public abstract class IntelligentEntity extends Entity implements DetectableEnti
 			if(this.destinationY > Y && canMoveUp){
 				yVal += this.velocity;
 			}
-
 			X += xVal * GameLoop.getDelta();
 			Y += yVal * GameLoop.getDelta();
 			rotation = MathUtils.getAngle(this.destinationX, this.destinationY, X, Y);
-			if((!canMoveDown || !canMoveLeft || !canMoveRight || !canMoveUp)
-					&& isAttackingEntity
-					&& attackCooldownFinished) {
-				attackCooldownFinished = false;
-				World.player.recieveHit(this.attackDamage);
-				GameUtils.setTimeout(() -> attackCooldownFinished = true, 1200);
-			}
+			attackPlayerEntity();
 		}
 		canMoveLeft = true;
 		canMoveUp = true;
@@ -73,6 +65,16 @@ public abstract class IntelligentEntity extends Entity implements DetectableEnti
 	public void trackingTarget(Entity entityToTrack) {
 		this.destinationX = entityToTrack.X;
 		this.destinationY = entityToTrack.Y;
+	}
+
+	private void attackPlayerEntity() {
+		if((!canMoveDown || !canMoveLeft || !canMoveRight || !canMoveUp)
+				&& isAttackingEntity
+				&& attackCooldownFinished) {
+			attackCooldownFinished = false;
+			World.player.recieveHit(this.attackDamage);
+			GameUtils.setTimeout(() -> attackCooldownFinished = true, 1200);
+		}
 	}
 
 	@Override

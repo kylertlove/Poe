@@ -33,9 +33,7 @@ public class Player extends IntelligentEntity {
     private Projectile[] rangeWeapons = new Projectile[2];
 
     public Player() {
-        super(World.currentLevel.generateId(),
-                0, 0,
-                1.5f, 1.5f);
+        super(World.currentLevel.generateId(), 0, 0, 1.5f, 1.5f);
         this.velocity = 6;
         this.health = 50;
         this.id = World.currentLevel.generateId();
