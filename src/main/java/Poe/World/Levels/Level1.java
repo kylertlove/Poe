@@ -19,7 +19,6 @@ public class Level1 implements LevelBuilder {
 
     private static final Logger logger = Logger.getLogger(Level1.class.getName());
 
-    private static final String levelName = "Levels 1";
     private static final float maxWidth = 100;
     private static final float maxHeight = 100;
     private static long objectId = 0;
@@ -57,14 +56,16 @@ public class Level1 implements LevelBuilder {
     @Override
     public void createEnemies() {
         World.enemies = new ConcurrentHashMap<>();
-        for(int i = 0; i < 50; i++) {
-            Grunt g = new Grunt(generateId(),
-                    MathUtils.getRandomNumberFromRange((int)(maxWidth - 10)/2*(-1), (int)(maxWidth - 10)/2),
-                    MathUtils.getRandomNumberFromRange((int)(maxHeight - 10)/2*(-1), (int)(maxHeight - 10)/2));
-            World.enemies.put(g.id, g);
-        }
+        IntStream.range(0, getNumberOfGrunts())
+                .forEach(grunt -> {
+                    Grunt g = new Grunt(generateId(),
+                            MathUtils.getRandomNumberFromRange((int)(maxWidth - 10)/2*(-1), (int)(maxWidth - 10)/2),
+                            MathUtils.getRandomNumberFromRange((int)(maxHeight - 10)/2*(-1), (int)(maxHeight - 10)/2)
+                                        );
+                    World.enemies.put(g.id, g);
+                });
 
-        IntStream.range(0, 10).forEach(value -> {
+        IntStream.range(0, getNumberOfCaptains()).forEach(value -> {
             Captain captain = new Captain(
                     generateId(),
                     MathUtils.getRandomNumberFromRange((int)(maxWidth - 10)/2*(-1), (int)(maxWidth - 10)/2),
@@ -84,6 +85,16 @@ public class Level1 implements LevelBuilder {
 
     @Override
     public String getLevel() {
-        return levelName;
+        return "Levels 1";
+    }
+
+    @Override
+    public int getNumberOfGrunts() {
+        return 50;
+    }
+
+    @Override
+    public int getNumberOfCaptains() {
+        return 15;
     }
 }

@@ -14,4 +14,7 @@ public interface LevelBuilder {
 
     String getLevel();
 
+    int getNumberOfGrunts();
+    int getNumberOfCaptains();
+
 }
