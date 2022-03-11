@@ -14,6 +14,11 @@ public abstract class Melee extends Item implements AttackItems {
     public float angleOfProjection = 0.0f;
     protected int meleeActionCooldown = 150;
 
+    public Melee(float strikeDistance, int meleeActionCooldown) {
+        this.strikingDistance = strikeDistance;
+        this.meleeActionCooldown = meleeActionCooldown;
+    }
+
     public void attack(Entity entity) {
         if(CollisionDetector.isCollided(this, entity)) {
             entity.recieveHit(this.getDamageAmount());

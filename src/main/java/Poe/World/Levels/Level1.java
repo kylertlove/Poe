@@ -19,7 +19,7 @@ public class Level1 implements LevelBuilder {
 
     private static final Logger logger = Logger.getLogger(Level1.class.getName());
 
-    private static final String levelName = "Levels 1";
+    private static final String levelName = "Level 1";
     private static final float maxWidth = 100;
     private static final float maxHeight = 100;
     private static long objectId = 0;
