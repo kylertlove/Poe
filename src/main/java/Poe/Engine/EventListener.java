@@ -1,6 +1,5 @@
 package Poe.Engine;
 
-import Poe.Engine.Gui.PauseMenu;
 import Poe.World.World;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;

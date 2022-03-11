@@ -1,8 +1,10 @@
-package Poe.Engine.Utlities;
+package Poe.Engine.Detection;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiPredicate;
 
+import Poe.GameObjects.Entities.IntelligentEntities.IntelligentEntity;
 import Poe.GameObjects.GameObject;
 import Poe.GameObjects.Entities.Entity;
 import Poe.GameObjects.Structures.Structure;
@@ -32,6 +34,11 @@ public class CollisionDetector {
     }
 
     /**
+     * Stream use of isCollided
+     */
+    public static BiPredicate<GameObject, GameObject> hasCollided = CollisionDetector::isCollided;
+
+    /**
      * Used for procedually generated objects.  *Not for runtime functional use.. Too slow*
      * @param GameObject a
      * @param Map<Long,Structure> list
@@ -46,29 +53,29 @@ public class CollisionDetector {
      * @param Entity
      * @param GameObject
      */
-    public static void updateMoveableSingle(Entity object1, GameObject object2) {
+    public static void updateMoveableSingle(IntelligentEntity object1, GameObject object2) {
         if(leftSideCollision(object1, object2)) {
             object1.canMoveLeft = false;
-            if(object2 instanceof Entity) {
-                ((Entity) object2).canMoveRight = false;
+            if(object2 instanceof IntelligentEntity) {
+                ((IntelligentEntity) object2).canMoveRight = false;
             }
         }
         if(rightSideCollision(object1, object2)) {
             object1.canMoveRight = false;
-            if(object2 instanceof Entity) {
-                ((Entity) object2).canMoveLeft = false;
+            if(object2 instanceof IntelligentEntity) {
+                ((IntelligentEntity) object2).canMoveLeft = false;
             }
         }
         if(topCollision(object1, object2)) {
             object1.canMoveUp = false;
-            if(object2 instanceof Entity) {
-                ((Entity) object2).canMoveDown = false;
+            if(object2 instanceof IntelligentEntity) {
+                ((IntelligentEntity) object2).canMoveDown = false;
             }
         }
         if(bottomCollision(object1, object2)) {
             object1.canMoveDown = false;
-            if(object2 instanceof Entity) {
-                ((Entity) object2).canMoveUp = false;
+            if(object2 instanceof IntelligentEntity) {
+                ((IntelligentEntity) object2).canMoveUp = false;
             }
         }
     }
@@ -78,7 +85,7 @@ public class CollisionDetector {
      * @param updateObject
      * @param collidedObjects
      */
-    public static void updateMoveable(Entity updateObject, List<GameObject> collidedObjects) {
+    public static void updateMoveable(IntelligentEntity updateObject, List<GameObject> collidedObjects) {
         collidedObjects.forEach((collidedObject) -> {
             updateMoveableSingle(updateObject, collidedObject);
         });

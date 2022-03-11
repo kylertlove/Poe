@@ -1,7 +1,7 @@
-package Poe.GameObjects.Item.Weapons;
+package Poe.GameObjects.Entities.Items.Weapons;
 
 /**
- * Attackable Item Interface
+ * Attackable Items Interface
  */
 public interface AttackItems {
 

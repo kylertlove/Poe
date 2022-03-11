@@ -1,15 +1,17 @@
 package Poe.World;
 
+import Poe.Drawable.Drawable;
+import Poe.Engine.Detection.LightSource;
+import Poe.Engine.Detection.PlayerDetector;
 import Poe.Engine.GameLoop;
-import Poe.Engine.Gui.DebugScreen;
-import Poe.Engine.Gui.PauseMenu;
+import Poe.Engine.Gui.GuiManager;
 import Poe.Engine.Renderer;
-import Poe.Engine.Utlities.CollisionDetector;
+import Poe.Engine.Detection.CollisionDetector;
 import Poe.Engine.Utlities.GameUtils;
-import Poe.GameObjects.Entities.Entity;
+import Poe.GameObjects.Entities.IntelligentEntities.IntelligentEntity;
 import Poe.GameObjects.Entities.Player;
 import Poe.GameObjects.GameObject;
-import Poe.GameObjects.Item.Weapons.Projectile.Projectile;
+import Poe.GameObjects.Entities.Items.Weapons.Projectile.Projectile;
 import Poe.GameObjects.Structures.Structure;
 import Poe.World.Levels.LevelBuilder;
 import Poe.World.Levels.Level1;
@@ -20,9 +22,11 @@ import java.util.Map;
 
 public class World {
 
-    public static Player player = null;
+    public static Player player;
     public static Map<Long, Structure> walls;
-    public static Map<Long, Entity> enemies;
+    //temp location
+    public static LightSource lightSource;
+    public static Map<Long, IntelligentEntity> enemies;
     public static LevelBuilder currentLevel;
     public static boolean debug = true;
 
@@ -56,17 +60,18 @@ public class World {
         }
         if(player.activeMeleeWeapon.isActive) {
             enemies.entrySet().stream()
-                    .filter(set -> set.getValue().isTrackingEntity)
+                    .filter(set -> set.getValue().isTrackingPlayerEntity)
                     .forEach(entry -> player.activeMeleeWeapon.attack(entry.getValue()));
             player.activeMeleeWeapon.isActive = false;
         }
+
         enemies.forEach((index, entity) -> {
             entity.update();
-            if(GameUtils.entityNearEntity(player, entity, entity.viewDistance)) {
-                entity.isTrackingEntity = true;
+            if(PlayerDetector.entityNearEntity(player, entity, entity.getViewDistance())) {
+                entity.isTrackingPlayerEntity = true;
                 entity.trackingTarget(player);
             } else {
-                entity.isTrackingEntity = false;
+                entity.isTrackingPlayerEntity = false;
             }
             if(CollisionDetector.isCollided(player, entity)) {
                 player.objectsCollidedWith.add(entity);
@@ -74,9 +79,10 @@ public class World {
             } else {
                 entity.isAttackingEntity = false;
             }
+            //projectiles hurt entities
             Arrays.stream(player.projectiles)
                     .filter(Projectile.isProjectileActive)
-                    .filter(projectile -> CollisionDetector.isCollided(projectile, entity))
+                    .filter(projectile -> CollisionDetector.hasCollided.test(projectile, entity))
                     .forEach(projectile -> {
                         projectile.destroy();
                         entity.recieveHit(projectile.getDamageAmount());
@@ -86,20 +92,17 @@ public class World {
             if(CollisionDetector.isCollided(player, structure)) {
                 player.objectsCollidedWith.add(structure);
             }
+            //projectiles dont go through walls
             Arrays.stream(player.projectiles)
                     .filter(Projectile.isProjectileActive)
-                    .filter(projectile -> CollisionDetector.isCollided(projectile, structure))
+                    .filter(projectile -> CollisionDetector.hasCollided.test(projectile, structure))
                     .forEach(Projectile::destroy);
 
             //Make sure Entities cant run through walls
-            enemies.entrySet()
-                    .stream()
-                    .filter(set -> set.getValue().isTrackingEntity)
-                    .forEach(trackingEntity -> {
-                        if(CollisionDetector.isCollided(trackingEntity.getValue(), structure)) {
-                            CollisionDetector.updateMoveableSingle(trackingEntity.getValue(), structure);
-                        }
-                    });
+            enemies.values().stream()
+                    .filter(entity -> entity.isTrackingPlayerEntity)
+                    .filter(entity -> CollisionDetector.hasCollided.test(entity, structure))
+                    .forEach(entity -> CollisionDetector.updateMoveableSingle(entity, structure));
         });
         CollisionDetector.updateMoveable(player, player.objectsCollidedWith);
         player.objectsCollidedWith = new ArrayList<>();
@@ -109,6 +112,7 @@ public class World {
      * Game Render Function
      */
     public static void render() {
+        lightSource.render();
         player.render();
         Arrays.stream(player.projectiles)
                 .filter(Projectile.isProjectileActive)
@@ -128,10 +132,10 @@ public class World {
             structure.render();
         });
         if(debug) {
-            DebugScreen.writeToScreen();
+            GuiManager.debugScreen.openGui();
         }
         if(GameLoop.paused) {
-            PauseMenu.renderPauseMenu();
+            GuiManager.pauseScreen.openGui();
         }
     }
 }

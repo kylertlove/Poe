@@ -8,8 +8,13 @@ public interface LevelBuilder {
 
     void createEnemies();
 
+    void createLightSources();
+
     long generateId();
 
     String getLevel();
+
+    int getNumberOfGrunts();
+    int getNumberOfCaptains();
 
 }

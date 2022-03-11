@@ -1,7 +1,8 @@
 package Poe.World.Levels;
 
-import Poe.GameObjects.Entities.Captain;
-import Poe.GameObjects.Entities.Grunt;
+import Poe.Engine.Detection.LightSource;
+import Poe.GameObjects.Entities.IntelligentEntities.Captain;
+import Poe.GameObjects.Entities.IntelligentEntities.Grunt;
 import Poe.GameObjects.Structures.Wall;
 import Poe.Engine.Utlities.StructureUtils;
 import Poe.Engine.Utlities.MathUtils;
@@ -10,7 +11,6 @@ import Poe.World.World;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Level 1
@@ -31,6 +31,7 @@ public class Level1 implements LevelBuilder {
     public void init() {
         createEnemies();
         createWalls();
+        createLightSources();
     }
 
     @Override
@@ -56,21 +57,26 @@ public class Level1 implements LevelBuilder {
     @Override
     public void createEnemies() {
         World.enemies = new ConcurrentHashMap<>();
-        for(int i = 0; i < 50; i++) {
-            Grunt g = new Grunt(generateId(),
-                    MathUtils.getRandomNumberFromRange((int)maxWidth/2*(-1), (int)maxWidth/2),
-                    MathUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
-            World.enemies.put(g.id, g);
-        }
+        IntStream.range(0, getNumberOfGrunts())
+                .forEach(grunt -> {
+                    Grunt g = new Grunt(generateId(),
+                            MathUtils.getRandomNumberFromRange((int)(maxWidth - 10)/2*(-1), (int)(maxWidth - 10)/2),
+                            MathUtils.getRandomNumberFromRange((int)(maxHeight - 10)/2*(-1), (int)(maxHeight - 10)/2)
+                                        );
+                    World.enemies.put(g.id, g);
+                });
 
-        IntStream.range(0, 10).forEach(value -> {
-            logger.info("generating a captain");
+        IntStream.range(0, getNumberOfCaptains()).forEach(value -> {
             Captain captain = new Captain(
                     generateId(),
-                    MathUtils.getRandomNumberFromRange((int)maxWidth/2*(-1), (int)maxWidth/2),
-                    MathUtils.getRandomNumberFromRange((int)maxHeight/2*(-1), (int)maxHeight/2));
+                    MathUtils.getRandomNumberFromRange((int)(maxWidth - 10)/2*(-1), (int)(maxWidth - 10)/2),
+                    MathUtils.getRandomNumberFromRange((int)(maxHeight - 10)/2*(-1), (int)(maxHeight - 10)/2));
             World.enemies.put(captain.id, captain);
         });
+    }
+
+    public void createLightSources() {
+        World.lightSource = new LightSource(0, 0, 2.0f, 0.9f);
     }
 
     @Override
@@ -80,6 +86,16 @@ public class Level1 implements LevelBuilder {
 
     @Override
     public String getLevel() {
-        return levelName;
+        return "Levels 1";
+    }
+
+    @Override
+    public int getNumberOfGrunts() {
+        return 50;
+    }
+
+    @Override
+    public int getNumberOfCaptains() {
+        return 15;
     }
 }

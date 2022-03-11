@@ -6,10 +6,7 @@ public class Building extends Structure {
 
 
     public Building(float x, float y, float w, float h) {
-        this.X = x;
-        this.Y = y;
-        this.width = w;
-        this.height = h;
+        super(0, x, y, w, h);
         this.setObjectColor(0, 0, 0, 1);
     }
 
