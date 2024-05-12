@@ -9,7 +9,8 @@
             "name": "Debug Poe",
             "request": "launch",
             "mainClass": "Poe.Engine.Main",
-            "projectName": "poe"
+            "projectName": "poe",
+            "vmArgs": "-Djogl.disable.openglcore=false"
         }
     ]
 }
